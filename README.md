@@ -6,7 +6,7 @@
 
 Веб-интерфейс для SoftTrack - сервиса для отслеживания софт-скиллов людей в любой организации.
 
-Проект работает с помощью [Vite](https://vite.dev) и [React](https://react.dev) в связке с [SoftTrakApp/backend](https://github.com/SoftTrackApp/backend).
+Проект работает с помощью [Vite](https://vite.dev) и [React](https://react.dev) в связке с [SoftTrackApp/backend](https://github.com/SoftTrackApp/backend).
 
 Главный мейнтейнер - Кирилл Сиухин (GitHub: [@eliva1e](https://github.com/eliva1e), Telegram: [@zorreth](https://t.me/zorreth))
 
