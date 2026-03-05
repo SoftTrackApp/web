@@ -17,6 +17,7 @@ export function SigninForm() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
@@ -29,6 +30,7 @@ export function SigninForm() {
       queryClient.invalidateQueries({ queryKey: ['currentUser'] });
       navigate({ to: '/' });
     },
+    onError: (error) => setError('root', error),
   });
 
   return (
@@ -49,11 +51,10 @@ export function SigninForm() {
         {errors.login && <span className="text-sm">{errors.login.message}</span>}
       </div>
 
-      <div className="mb-6">
+      <div className="mb-3">
         <Input
           type="password"
           placeholder="Пароль"
-          className="mb-10"
           autoComplete="current-password"
           icon={<Lock />}
           {...register('password')}
@@ -61,6 +62,8 @@ export function SigninForm() {
 
         {errors.password && <span className="text-sm">{errors.password.message}</span>}
       </div>
+
+      {errors.root && <span className="mb-3">{errors.root.message}</span>}
 
       <Button>Войти</Button>
     </form>
