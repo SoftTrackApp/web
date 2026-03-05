@@ -1,7 +1,10 @@
 import { Button, Input } from '@/shared/ui';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from '@tanstack/react-router';
 import { User, Lock } from 'lucide-react';
 import { useForm } from 'react-hook-form';
+import { signin } from '../api/signin';
 import * as yup from 'yup';
 
 // TODO: add more validation parameters
@@ -17,10 +20,22 @@ export function SigninForm() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { mutate: mutateSignin } = useMutation({
+    mutationFn: signin,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+      navigate({ to: '/' });
+    },
+  });
 
   return (
-    <form className="flex flex-col max-w-120 w-full" onSubmit={onSubmit}>
+    <form
+      className="flex flex-col max-w-120 w-full"
+      onSubmit={handleSubmit((data) => mutateSignin(data))}
+    >
       <div className="mb-6">
         <Input
           type="text"
