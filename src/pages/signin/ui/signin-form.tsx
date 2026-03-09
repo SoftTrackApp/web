@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
 import { User, Lock } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { signin } from '../api/signin';
+import { signin } from '@/entities/user';
 import * as yup from 'yup';
 
 // TODO: add more validation parameters
