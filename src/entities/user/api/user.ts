@@ -10,5 +10,9 @@ export async function fetchCurrentUser(): Promise<CurrentUser> {
   return {
     id: 1,
     username: 'username',
+    canCreateBoards: true,
+    canViewStats: true,
+    canManageSkills: true,
+    canManageUsers: true,
   };
 }

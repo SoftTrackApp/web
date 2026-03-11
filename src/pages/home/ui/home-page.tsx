@@ -1,11 +1,47 @@
+import { ChartBar, Plus, Settings2, User } from 'lucide-react';
+import { ActionCard } from './action-card';
 import { useCurrentUser } from '@/entities/user';
-import { Link } from '@tanstack/react-router';
 
 export function HomePage() {
-  const { user, isPending, error } = useCurrentUser();
+  const { user } = useCurrentUser();
 
-  if (isPending) return <span>Loading...</span>;
-  if (error) return <span>Error: {error.message}</span>;
+  return (
+    <div className="flex items-center justify-center h-full flex-col gap-8">
+      <h1 className="font-semibold text-2xl">Главная страница</h1>
 
-  return user ? <span>Welcome, {user.username}!</span> : <Link to="/signin">Sign in</Link>;
+      <div className="grid grid-cols-2 gap-6 justify-center">
+        {user?.canCreateBoards && (
+          <ActionCard
+            title="Создать доску оценивания"
+            description="Начните отмечать soft skills учеников"
+            icon={<Plus size={64} />}
+          />
+        )}
+
+        {user?.canViewStats && (
+          <ActionCard
+            title="Посмотреть статистику"
+            description="Оценки и прогресс учеников"
+            icon={<ChartBar size={64} />}
+          />
+        )}
+
+        {user?.canManageSkills && (
+          <ActionCard
+            title="Настройка навыков"
+            description="Добавляйте и редактируйте список навыков"
+            icon={<Settings2 size={64} />}
+          />
+        )}
+
+        {user?.canManageUsers && (
+          <ActionCard
+            title="Управление пользователями"
+            description="Добавляйте преподавателей и учеников"
+            icon={<User size={64} />}
+          />
+        )}
+      </div>
+    </div>
+  );
 }
