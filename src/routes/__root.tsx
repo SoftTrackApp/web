@@ -1,16 +1,6 @@
-import * as React from 'react';
-import { Outlet, createRootRoute } from '@tanstack/react-router';
+import { createRootRoute } from '@tanstack/react-router';
+import { Layout } from '@/shared/ui';
 
 export const Route = createRootRoute({
-  component: RootComponent,
+  component: Layout,
 });
-
-function RootComponent() {
-  return (
-    <React.Fragment>
-      <main>
-        <Outlet />
-      </main>
-    </React.Fragment>
-  );
-}

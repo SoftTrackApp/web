@@ -1,5 +1,11 @@
 @import 'tailwindcss';
 
+body,
+html,
+#root {
+  height: 100%;
+}
+
 @theme {
   --font-sans: 'Inter Variable', sans-serif;
 }
