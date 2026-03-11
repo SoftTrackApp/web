@@ -10,7 +10,7 @@ export function Layout() {
   if (!user) return <Navigate to="/signin" replace />;
 
   return (
-    <div className="flex h-full p-8">
+    <div className="flex h-full">
       <Outlet />
     </div>
   );

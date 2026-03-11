@@ -10,11 +10,25 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SigninRouteImport } from './routes/signin'
+import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as BoardRouteImport } from './routes/board'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ManageUsersRouteImport } from './routes/manage/users'
+import { Route as ManageSkillsRouteImport } from './routes/manage/skills'
 
 const SigninRoute = SigninRouteImport.update({
   id: '/signin',
   path: '/signin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BoardRoute = BoardRouteImport.update({
+  id: '/board',
+  path: '/board',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -22,31 +36,76 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ManageUsersRoute = ManageUsersRouteImport.update({
+  id: '/manage/users',
+  path: '/manage/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ManageSkillsRoute = ManageSkillsRouteImport.update({
+  id: '/manage/skills',
+  path: '/manage/skills',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/board': typeof BoardRoute
+  '/dashboard': typeof DashboardRoute
   '/signin': typeof SigninRoute
+  '/manage/skills': typeof ManageSkillsRoute
+  '/manage/users': typeof ManageUsersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/board': typeof BoardRoute
+  '/dashboard': typeof DashboardRoute
   '/signin': typeof SigninRoute
+  '/manage/skills': typeof ManageSkillsRoute
+  '/manage/users': typeof ManageUsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/board': typeof BoardRoute
+  '/dashboard': typeof DashboardRoute
   '/signin': typeof SigninRoute
+  '/manage/skills': typeof ManageSkillsRoute
+  '/manage/users': typeof ManageUsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/signin'
+  fullPaths:
+    | '/'
+    | '/board'
+    | '/dashboard'
+    | '/signin'
+    | '/manage/skills'
+    | '/manage/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/signin'
-  id: '__root__' | '/' | '/signin'
+  to:
+    | '/'
+    | '/board'
+    | '/dashboard'
+    | '/signin'
+    | '/manage/skills'
+    | '/manage/users'
+  id:
+    | '__root__'
+    | '/'
+    | '/board'
+    | '/dashboard'
+    | '/signin'
+    | '/manage/skills'
+    | '/manage/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BoardRoute: typeof BoardRoute
+  DashboardRoute: typeof DashboardRoute
   SigninRoute: typeof SigninRoute
+  ManageSkillsRoute: typeof ManageSkillsRoute
+  ManageUsersRoute: typeof ManageUsersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +117,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SigninRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/board': {
+      id: '/board'
+      path: '/board'
+      fullPath: '/board'
+      preLoaderRoute: typeof BoardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -65,12 +138,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/manage/users': {
+      id: '/manage/users'
+      path: '/manage/users'
+      fullPath: '/manage/users'
+      preLoaderRoute: typeof ManageUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/manage/skills': {
+      id: '/manage/skills'
+      path: '/manage/skills'
+      fullPath: '/manage/skills'
+      preLoaderRoute: typeof ManageSkillsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BoardRoute: BoardRoute,
+  DashboardRoute: DashboardRoute,
   SigninRoute: SigninRoute,
+  ManageSkillsRoute: ManageSkillsRoute,
+  ManageUsersRoute: ManageUsersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
