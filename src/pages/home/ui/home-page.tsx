@@ -6,10 +6,10 @@ export function HomePage() {
   const { user } = useCurrentUser();
 
   return (
-    <div className="flex items-center justify-center h-full flex-col gap-8">
+    <div className="flex items-center xl:justify-center mx-auto h-full flex-col gap-16">
       <h1 className="font-semibold text-2xl">Главная страница</h1>
 
-      <div className="grid grid-cols-2 gap-6 justify-center">
+      <div className="grid xl:grid-cols-2 gap-6 justify-center">
         {user?.canCreateBoards && (
           <ActionCard
             title="Создать доску оценивания"
