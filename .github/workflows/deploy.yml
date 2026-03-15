@@ -32,3 +32,4 @@ jobs:
           source: "dist/*"
           target: "/var/www/softtrack"
           rm: true
+          debug: true
