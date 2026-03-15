@@ -22,20 +22,15 @@ jobs:
 
       - name: Build
         run: bun run build
-
-      - name: Deploy with rsync
-        uses: appleboy/ssh-action@v1
+        
+      - name: Deploy to VPS via SCP
+        uses: appleboy/scp-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USERNAME }}
           password: ${{ secrets.VPS_PASSWORD }}
           port: ${{ secrets.VPS_PORT }}
-          script: |
-            echo "🧹 Cleaning old files..."
-            rm -rf /var/www/softtrack/*
-            
-            echo "📤 Copying new build..."
-            rsync -av --delete dist/ /var/www/softtrack/
-            
-            echo "✅ Deployment done! Files now on server:"
-            ls -la /var/www/softtrack/
+          source: "dist/*"
+          target: "/var/www/softtrack"
+          rm: true
+          debug: true
