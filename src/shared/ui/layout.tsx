@@ -16,9 +16,11 @@ export function Layout() {
 
   if (!user) return <Navigate to="/signin" replace />;
 
+  const logout = () => {};
+
   return (
     <div>
-      <header className="flex justify-between py-4 px-32 border-b border-gray-200">
+      <header className="flex justify-between py-4 px-8 xl:px-32 border-b border-gray-200">
         <nav className="flex gap-10">
           <NavBarLink to="/">Главная</NavBarLink>
 
@@ -28,7 +30,9 @@ export function Layout() {
           {user.canManageUsers && <NavBarLink to="/manage/users">Пользователи</NavBarLink>}
         </nav>
 
-        <a>Выйти</a>
+        <span className="cursor-pointer" onClick={logout}>
+          Выйти
+        </span>
       </header>
 
       <Outlet />
