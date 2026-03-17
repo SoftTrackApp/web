@@ -10,102 +10,105 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SigninRouteImport } from './routes/signin'
-import { Route as DashboardRouteImport } from './routes/dashboard'
-import { Route as BoardRouteImport } from './routes/board'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as ManageUsersRouteImport } from './routes/manage/users'
-import { Route as ManageSkillsRouteImport } from './routes/manage/skills'
+import { Route as AppRouteImport } from './routes/_app'
+import { Route as AppIndexRouteImport } from './routes/_app/index'
+import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
+import { Route as AppBoardRouteImport } from './routes/_app/board'
+import { Route as AppManageUsersRouteImport } from './routes/_app/manage/users'
+import { Route as AppManageSkillsRouteImport } from './routes/_app/manage/skills'
 
 const SigninRoute = SigninRouteImport.update({
   id: '/signin',
   path: '/signin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DashboardRoute = DashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BoardRoute = BoardRouteImport.update({
-  id: '/board',
-  path: '/board',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
+const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
-const ManageUsersRoute = ManageUsersRouteImport.update({
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBoardRoute = AppBoardRouteImport.update({
+  id: '/board',
+  path: '/board',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppManageUsersRoute = AppManageUsersRouteImport.update({
   id: '/manage/users',
   path: '/manage/users',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
-const ManageSkillsRoute = ManageSkillsRouteImport.update({
+const AppManageSkillsRoute = AppManageSkillsRouteImport.update({
   id: '/manage/skills',
   path: '/manage/skills',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/board': typeof BoardRoute
-  '/dashboard': typeof DashboardRoute
+  '/': typeof AppIndexRoute
   '/signin': typeof SigninRoute
-  '/manage/skills': typeof ManageSkillsRoute
-  '/manage/users': typeof ManageUsersRoute
+  '/board': typeof AppBoardRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/manage/skills': typeof AppManageSkillsRoute
+  '/manage/users': typeof AppManageUsersRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/board': typeof BoardRoute
-  '/dashboard': typeof DashboardRoute
   '/signin': typeof SigninRoute
-  '/manage/skills': typeof ManageSkillsRoute
-  '/manage/users': typeof ManageUsersRoute
+  '/board': typeof AppBoardRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/': typeof AppIndexRoute
+  '/manage/skills': typeof AppManageSkillsRoute
+  '/manage/users': typeof AppManageUsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/board': typeof BoardRoute
-  '/dashboard': typeof DashboardRoute
+  '/_app': typeof AppRouteWithChildren
   '/signin': typeof SigninRoute
-  '/manage/skills': typeof ManageSkillsRoute
-  '/manage/users': typeof ManageUsersRoute
+  '/_app/board': typeof AppBoardRoute
+  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/': typeof AppIndexRoute
+  '/_app/manage/skills': typeof AppManageSkillsRoute
+  '/_app/manage/users': typeof AppManageUsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/signin'
     | '/board'
     | '/dashboard'
-    | '/signin'
     | '/manage/skills'
     | '/manage/users'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
+    | '/signin'
     | '/board'
     | '/dashboard'
-    | '/signin'
+    | '/'
     | '/manage/skills'
     | '/manage/users'
   id:
     | '__root__'
-    | '/'
-    | '/board'
-    | '/dashboard'
+    | '/_app'
     | '/signin'
-    | '/manage/skills'
-    | '/manage/users'
+    | '/_app/board'
+    | '/_app/dashboard'
+    | '/_app/'
+    | '/_app/manage/skills'
+    | '/_app/manage/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  BoardRoute: typeof BoardRoute
-  DashboardRoute: typeof DashboardRoute
+  AppRoute: typeof AppRouteWithChildren
   SigninRoute: typeof SigninRoute
-  ManageSkillsRoute: typeof ManageSkillsRoute
-  ManageUsersRoute: typeof ManageUsersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -117,51 +120,72 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SigninRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/dashboard': {
-      id: '/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof DashboardRouteImport
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/board': {
-      id: '/board'
-      path: '/board'
-      fullPath: '/board'
-      preLoaderRoute: typeof BoardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
+    '/_app/': {
+      id: '/_app/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/manage/users': {
-      id: '/manage/users'
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/board': {
+      id: '/_app/board'
+      path: '/board'
+      fullPath: '/board'
+      preLoaderRoute: typeof AppBoardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/manage/users': {
+      id: '/_app/manage/users'
       path: '/manage/users'
       fullPath: '/manage/users'
-      preLoaderRoute: typeof ManageUsersRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppManageUsersRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/manage/skills': {
-      id: '/manage/skills'
+    '/_app/manage/skills': {
+      id: '/_app/manage/skills'
       path: '/manage/skills'
       fullPath: '/manage/skills'
-      preLoaderRoute: typeof ManageSkillsRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AppManageSkillsRouteImport
+      parentRoute: typeof AppRoute
     }
   }
 }
 
+interface AppRouteChildren {
+  AppBoardRoute: typeof AppBoardRoute
+  AppDashboardRoute: typeof AppDashboardRoute
+  AppIndexRoute: typeof AppIndexRoute
+  AppManageSkillsRoute: typeof AppManageSkillsRoute
+  AppManageUsersRoute: typeof AppManageUsersRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppBoardRoute: AppBoardRoute,
+  AppDashboardRoute: AppDashboardRoute,
+  AppIndexRoute: AppIndexRoute,
+  AppManageSkillsRoute: AppManageSkillsRoute,
+  AppManageUsersRoute: AppManageUsersRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  BoardRoute: BoardRoute,
-  DashboardRoute: DashboardRoute,
+  AppRoute: AppRouteWithChildren,
   SigninRoute: SigninRoute,
-  ManageSkillsRoute: ManageSkillsRoute,
-  ManageUsersRoute: ManageUsersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
