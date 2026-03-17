@@ -1,5 +1,12 @@
 import { useCurrentUser } from '@/entities/user';
-import { Link, Navigate, Outlet } from '@tanstack/react-router';
+import { Link, Navigate, Outlet, useLocation, type LinkProps } from '@tanstack/react-router';
+import clsx from 'clsx';
+
+function NavBarLink(props: LinkProps) {
+  const { pathname } = useLocation();
+
+  return <Link className={clsx(pathname === props.to && 'font-semibold')} {...props} />;
+}
 
 export function Layout() {
   const { user, isPending, error } = useCurrentUser();
@@ -13,12 +20,12 @@ export function Layout() {
     <div>
       <header className="flex justify-between py-4 px-32 border-b border-gray-200">
         <nav className="flex gap-10">
-          <Link to="/">Главная</Link>
+          <NavBarLink to="/">Главная</NavBarLink>
 
-          {user.canCreateBoards && <Link to="/board">Доска оценивания</Link>}
-          {user.canViewStats && <Link to="/dashboard">Статистика</Link>}
-          {user.canManageSkills && <Link to="/manage/skills">Навыки</Link>}
-          {user.canManageUsers && <Link to="/manage/users">Пользователи</Link>}
+          {user.canCreateBoards && <NavBarLink to="/board">Доска оценивания</NavBarLink>}
+          {user.canViewStats && <NavBarLink to="/dashboard">Статистика</NavBarLink>}
+          {user.canManageSkills && <NavBarLink to="/manage/skills">Навыки</NavBarLink>}
+          {user.canManageUsers && <NavBarLink to="/manage/users">Пользователи</NavBarLink>}
         </nav>
 
         <a>Выйти</a>
