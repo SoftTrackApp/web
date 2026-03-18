@@ -1,4 +1,4 @@
-import { signOut, useCurrentUser } from '@/entities/user';
+import { signOut, useCurrentUser } from '@/features/auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   Link,

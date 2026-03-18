@@ -1,6 +1,6 @@
 import { ChartBar, Plus, Settings2, User } from 'lucide-react';
 import { ActionCard } from './action-card';
-import { useCurrentUser } from '@/entities/user';
+import { useCurrentUser } from '@/features/auth';
 import { Link } from '@tanstack/react-router';
 
 export function HomePage() {
