@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
 import { User, Lock } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { signin } from '@/entities/user';
+import { signIn } from '@/entities/user';
 import * as yup from 'yup';
 
 // TODO: add more validation parameters
@@ -25,10 +25,10 @@ export function SigninForm() {
   const queryClient = useQueryClient();
 
   const { mutate: mutateSignin } = useMutation({
-    mutationFn: signin,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-      navigate({ to: '/' });
+    mutationFn: signIn,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+      await navigate({ to: '/' });
     },
     onError: (error) => setError('root', error),
   });
