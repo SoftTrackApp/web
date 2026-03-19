@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-import { useAppDispatch } from '@/app/store';
-import { useCurrentUser } from '@/features/auth';
+import { useAppDispatch, useAppSelector } from '@/app/store';
 import { Link, Navigate, Outlet, useLocation, type LinkProps } from '@tanstack/react-router';
 import clsx from 'clsx';
 
@@ -11,7 +10,7 @@ function NavBarLink(props: LinkProps) {
 }
 
 export function Layout() {
-  const { user, loading } = useCurrentUser();
+  const { user, loading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
