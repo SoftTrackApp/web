@@ -19,9 +19,6 @@ export async function signIn(data: { username: string; password?: string }): Pro
 
 export async function signOut(): Promise<void> {
   // TODO: send request to the API
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(), 1000);
-  });
 }
 
 export async function fetchCurrentUser(): Promise<CurrentUser | null> {

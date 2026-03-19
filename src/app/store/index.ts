@@ -1,7 +1,6 @@
+import { authReducer, authSaga } from '@/features/auth';
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
-import { authSaga } from './auth/authSaga';
-import authReducer from './auth/authSlice';
 import createSagaMiddleware from 'redux-saga';
 
 const sagaMiddleware = createSagaMiddleware();
