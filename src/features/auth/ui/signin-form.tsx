@@ -22,10 +22,9 @@ export function SigninForm() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const navigate = useNavigate();
+  
   const dispatch = useAppDispatch();
-
-  const error = useAppSelector((state) => state.auth.error);
-  const user = useAppSelector((state) => state.auth.user);
+  const { user, error } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     if (error) {
