@@ -17,9 +17,19 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    userFetchSucceeded: (state, action: PayloadAction<{ user: CurrentUser }>) => {
+      state.user = action.payload.user;
+      state.loading = false;
+    },
+
+    userFetchFailed: (state, action: PayloadAction<{ message: string }>) => {
+      state.error = action.payload.message;
+      state.loading = false;
+    },
+
     signInRequested: (state) => {
-      state.loading = true;
       state.error = null;
+      state.loading = true;
     },
 
     signInSucceeded: (state, action: PayloadAction<{ user: CurrentUser }>) => {
@@ -28,8 +38,8 @@ const authSlice = createSlice({
     },
 
     signInFailed: (state, action: PayloadAction<{ message: string }>) => {
-      state.loading = false;
       state.error = action.payload.message;
+      state.loading = false;
     },
 
     signOutSucceeded(state) {
@@ -38,6 +48,12 @@ const authSlice = createSlice({
   },
 });
 
-export const { signInRequested, signInSucceeded, signInFailed, signOutSucceeded } =
-  authSlice.actions;
+export const {
+  userFetchSucceeded,
+  userFetchFailed,
+  signInRequested,
+  signInSucceeded,
+  signInFailed,
+  signOutSucceeded,
+} = authSlice.actions;
 export default authSlice.reducer;

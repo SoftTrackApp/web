@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useAppDispatch } from '@/app/store';
 import { useCurrentUser } from '@/features/auth';
 import { Link, Navigate, Outlet, useLocation, type LinkProps } from '@tanstack/react-router';
@@ -10,14 +11,19 @@ function NavBarLink(props: LinkProps) {
 }
 
 export function Layout() {
-  const { user, error } = useCurrentUser();
+  const { user, loading } = useCurrentUser();
   const dispatch = useAppDispatch();
 
-  if (error || !user) return <Navigate to="/signin" replace />;
+  useEffect(() => {
+    dispatch({ type: 'USER_FETCH_REQUESTED' });
+  }, [dispatch]);
 
   const signOutHandler = () => {
     dispatch({ type: 'USER_SIGNOUT_REQUESTED' });
   };
+
+  if (loading) return <span>Loading...</span>;
+  if (!user) return <Navigate to="/signin" replace />;
 
   return (
     <div>
