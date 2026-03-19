@@ -23,9 +23,9 @@ export function Layout() {
 
   const { mutate: mutateLogOut } = useMutation({
     mutationFn: signOut,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-      await navigate({ to: '/signin' });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+      navigate({ to: '/signin' });
     },
   });
 

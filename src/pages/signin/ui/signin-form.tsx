@@ -26,11 +26,11 @@ export function SigninForm() {
 
   const { mutate: mutateSignin } = useMutation({
     mutationFn: signIn,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-      await navigate({ to: '/' });
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+      navigate({ to: '/' });
     },
-    onError: (error) => setError('root', error),
+    onError: (error) => setError('root', { message: error.message }),
   });
 
   return (
