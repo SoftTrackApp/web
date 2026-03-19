@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { signInSaga, signOutSaga } from './auth/authSagas';
+import { useDispatch, useSelector } from 'react-redux';
+import { authSaga } from './auth/authSaga';
 import authReducer from './auth/authSlice';
 import createSagaMiddleware from 'redux-saga';
-import { useDispatch, useSelector } from 'react-redux';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -13,8 +13,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });
 
-sagaMiddleware.run(signInSaga);
-sagaMiddleware.run(signOutSaga);
+sagaMiddleware.run(authSaga);
 
 export type AppStore = typeof store;
 export type RootState = ReturnType<AppStore['getState']>;

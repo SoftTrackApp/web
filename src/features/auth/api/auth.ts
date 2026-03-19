@@ -11,7 +11,6 @@ const testUser = {
 
 export async function signIn(data: { username: string; password?: string }) {
   // TODO: send request to the API
-  throw new Error('gqegeq');
   console.log(data);
   return testUser;
 }

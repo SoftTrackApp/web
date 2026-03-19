@@ -1,13 +1,6 @@
-import { signOut, useCurrentUser } from '@/features/auth';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-  Link,
-  Navigate,
-  Outlet,
-  useLocation,
-  useNavigate,
-  type LinkProps,
-} from '@tanstack/react-router';
+import { useAppDispatch } from '@/app/store';
+import { useCurrentUser } from '@/features/auth';
+import { Link, Navigate, Outlet, useLocation, type LinkProps } from '@tanstack/react-router';
 import clsx from 'clsx';
 
 function NavBarLink(props: LinkProps) {
@@ -17,20 +10,14 @@ function NavBarLink(props: LinkProps) {
 }
 
 export function Layout() {
-  const { user, isPending, error } = useCurrentUser();
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  const { user, error } = useCurrentUser();
+  const dispatch = useAppDispatch();
 
-  const { mutate: mutateLogOut } = useMutation({
-    mutationFn: signOut,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-      await navigate({ to: '/signin' });
-    },
-  });
-
-  if (isPending) return <span>Loading...</span>;
   if (error || !user) return <Navigate to="/signin" replace />;
+
+  const signOutHandler = () => {
+    dispatch({ type: 'USER_SIGNOUT_REQUESTED' });
+  };
 
   return (
     <div>
@@ -44,7 +31,7 @@ export function Layout() {
           {user.canManageUsers && <NavBarLink to="/manage/users">Пользователи</NavBarLink>}
         </nav>
 
-        <span className="cursor-pointer" onClick={() => mutateLogOut()}>
+        <span className="cursor-pointer" onClick={signOutHandler}>
           Выйти
         </span>
       </header>
