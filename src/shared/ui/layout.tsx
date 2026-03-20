@@ -1,13 +1,7 @@
-import { signOut, useCurrentUser } from '@/entities/user';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import {
-  Link,
-  Navigate,
-  Outlet,
-  useLocation,
-  useNavigate,
-  type LinkProps,
-} from '@tanstack/react-router';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@/app/store';
+import { Link, Navigate, Outlet, useLocation, type LinkProps } from '@tanstack/react-router';
+import { AuthFeature } from '@/features/auth';
 import clsx from 'clsx';
 
 function NavBarLink(props: LinkProps) {
@@ -17,20 +11,19 @@ function NavBarLink(props: LinkProps) {
 }
 
 export function Layout() {
-  const { user, isPending, error } = useCurrentUser();
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  const { user, loading } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
 
-  const { mutate: mutateLogOut } = useMutation({
-    mutationFn: signOut,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
-      navigate({ to: '/signin' });
-    },
-  });
+  useEffect(() => {
+    dispatch(AuthFeature.actions.requestUserFetch());
+  }, [dispatch]);
 
-  if (isPending) return <span>Loading...</span>;
-  if (error || !user) return <Navigate to="/signin" replace />;
+  const signOutHandler = () => {
+    dispatch(AuthFeature.actions.requestSignOut());
+  };
+
+  if (loading) return <span>Loading...</span>;
+  if (!user) return <Navigate to="/signin" replace />;
 
   return (
     <div>
@@ -44,7 +37,7 @@ export function Layout() {
           {user.canManageUsers && <NavBarLink to="/manage/users">Пользователи</NavBarLink>}
         </nav>
 
-        <span className="cursor-pointer" onClick={() => mutateLogOut()}>
+        <span className="cursor-pointer" onClick={signOutHandler}>
           Выйти
         </span>
       </header>

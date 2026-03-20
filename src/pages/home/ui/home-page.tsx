@@ -1,10 +1,10 @@
 import { ChartBar, Plus, Settings2, User } from 'lucide-react';
 import { ActionCard } from './action-card';
-import { useCurrentUser } from '@/entities/user';
 import { Link } from '@tanstack/react-router';
+import { useAppSelector } from '@/app/store';
 
 export function HomePage() {
-  const { user } = useCurrentUser();
+  const { user } = useAppSelector((state) => state.auth);
 
   return (
     <div className="flex items-center xl:justify-center mx-auto h-full flex-col gap-16 mt-38">

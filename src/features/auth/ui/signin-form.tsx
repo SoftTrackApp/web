@@ -1,15 +1,16 @@
+import { useAppDispatch, useAppSelector } from '@/app/store';
 import { Button, Input } from '@/shared/ui';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
 import { User, Lock } from 'lucide-react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { signIn } from '@/entities/user';
+import { actions } from '../model/slice';
 import * as yup from 'yup';
 
 // TODO: add more validation parameters
 const schema = yup.object({
-  login: yup.string().required(),
+  username: yup.string().required(),
   password: yup.string(),
 });
 
@@ -22,22 +23,28 @@ export function SigninForm() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
-  const { mutate: mutateSignin } = useMutation({
-    mutationFn: signIn,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['currentUser'] });
+  const dispatch = useAppDispatch();
+  const { user, error } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (error) {
+      setError('root', { message: error });
+    }
+  }, [error, setError]);
+
+  useEffect(() => {
+    if (user) {
       navigate({ to: '/' });
-    },
-    onError: (error) => setError('root', { message: error.message }),
+    }
+  }, [user, navigate]);
+
+  const onSubmit = handleSubmit((data) => {
+    dispatch(actions.requestSignIn(data));
   });
 
   return (
-    <form
-      className="flex flex-col max-w-120 w-full"
-      onSubmit={handleSubmit((data) => mutateSignin(data))}
-    >
+    <form className="flex flex-col max-w-120 w-full" onSubmit={onSubmit}>
       <div className="mb-6">
         <Input
           type="text"
@@ -45,10 +52,10 @@ export function SigninForm() {
           autoComplete="username"
           icon={<User />}
           autoFocus
-          {...register('login')}
+          {...register('username')}
         />
 
-        {errors.login && <span className="text-sm">{errors.login.message}</span>}
+        {errors.username && <span className="text-sm">{errors.username.message}</span>}
       </div>
 
       <div className="mb-3">
