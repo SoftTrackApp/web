@@ -1,5 +1,14 @@
-export * from './api/auth';
-export * from './model/user';
-export * from './model/authSlice';
-export * from './model/authSagas';
+import { authSaga } from './model/sagas';
+import { actions, name, reducer } from './model/slice';
+import { selectors } from './selectors';
+
 export * from './ui/signin-form';
+
+export const AuthFeature = {
+  sagas: {
+    init: authSaga,
+  },
+  reducer: { [name]: reducer },
+  actions,
+  selectors,
+};

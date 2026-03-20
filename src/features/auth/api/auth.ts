@@ -1,4 +1,4 @@
-import type { CurrentUser } from '../model/user';
+import type { CurrentUser } from '../model/types';
 
 const testUser: CurrentUser = {
   id: 1,

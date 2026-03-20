@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { Link, Navigate, Outlet, useLocation, type LinkProps } from '@tanstack/react-router';
+import { AuthFeature } from '@/features/auth';
 import clsx from 'clsx';
 
 function NavBarLink(props: LinkProps) {
@@ -14,11 +15,11 @@ export function Layout() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'USER_FETCH_REQUESTED' });
+    dispatch(AuthFeature.actions.requestUserFetch());
   }, [dispatch]);
 
   const signOutHandler = () => {
-    dispatch({ type: 'USER_SIGNOUT_REQUESTED' });
+    dispatch(AuthFeature.actions.requestSignOut());
   };
 
   if (loading) return <span>Loading...</span>;

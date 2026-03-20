@@ -5,6 +5,7 @@ import { useNavigate } from '@tanstack/react-router';
 import { User, Lock } from 'lucide-react';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { actions } from '../model/slice';
 import * as yup from 'yup';
 
 // TODO: add more validation parameters
@@ -22,7 +23,7 @@ export function SigninForm() {
   } = useForm({ resolver: yupResolver(schema) });
 
   const navigate = useNavigate();
-  
+
   const dispatch = useAppDispatch();
   const { user, error } = useAppSelector((state) => state.auth);
 
@@ -39,7 +40,7 @@ export function SigninForm() {
   }, [user, navigate]);
 
   const onSubmit = handleSubmit((data) => {
-    dispatch({ type: 'USER_SIGNIN_REQUESTED', payload: data });
+    dispatch(actions.requestSignIn(data));
   });
 
   return (
