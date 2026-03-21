@@ -9,21 +9,23 @@ const testUser: CurrentUser = {
   canManageUsers: true,
 };
 
-export async function signIn(data: { username: string; password?: string }): Promise<CurrentUser> {
-  // TODO: send request to the API
-  console.log(data);
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(testUser), 1000);
-  });
-}
+export const AuthApi = {
+  async signIn(data: { username: string; password?: string }): Promise<CurrentUser> {
+    // TODO: send request to the API
+    console.log(data);
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(testUser), 1000);
+    });
+  },
 
-export async function signOut(): Promise<void> {
-  // TODO: send request to the API
-}
+  async signOut(): Promise<void> {
+    // TODO: send request to the API
+  },
 
-export async function fetchCurrentUser(): Promise<CurrentUser | null> {
-  // TODO: send request to the API
-  return new Promise((resolve) => {
-    setTimeout(() => resolve(testUser), 1000);
-  });
-}
+  async fetchCurrentUser(): Promise<CurrentUser | null> {
+    // TODO: send request to the API
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(testUser), 1000);
+    });
+  },
+};
