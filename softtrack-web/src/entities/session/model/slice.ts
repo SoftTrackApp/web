@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { Session, SessionState } from './types';
+import type { Session, SessionState, Credentials } from './types';
 
 const initialState: SessionState = {
   session: null,
@@ -17,7 +17,7 @@ export const { actions, reducer } = createSlice({
       state.error = null;
     },
 
-    logIn: (state) => {
+    logIn: (state, _action: PayloadAction<Credentials>) => {
       state.session = null;
       state.loading = true;
       state.error = null;

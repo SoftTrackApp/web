@@ -8,3 +8,8 @@ export interface SessionState {
   loading: boolean;
   error: string | null;
 }
+
+export interface Credentials {
+  username: string;
+  password: string;
+}

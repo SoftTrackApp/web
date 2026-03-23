@@ -1,4 +1,6 @@
 import classes from './login-page.module.css';
+import { useAppDispatch } from '@/app/store';
+import { SessionModel } from '@/entities/session';
 import { useForm } from 'react-hook-form';
 
 const defaultValues = {
@@ -13,7 +15,11 @@ export function LoginPage() {
     formState: { errors },
   } = useForm({ defaultValues });
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const dispatch = useAppDispatch();
+
+  const onSubmit = handleSubmit((data) => {
+    dispatch(SessionModel.actions.logIn(data));
+  });
 
   return (
     <div className={classes.container}>
@@ -24,7 +30,7 @@ export function LoginPage() {
           <label className={classes.label} htmlFor="username">
             Логин
           </label>
-          
+
           <input
             className={classes.input}
             type="text"
@@ -33,7 +39,9 @@ export function LoginPage() {
             {...register('username', { required: 'Введите логин' })}
           />
 
-          {errors.username && <span className={classes.errorMessage}>{errors.username.message}</span>}
+          {errors.username && (
+            <span className={classes.errorMessage}>{errors.username.message}</span>
+          )}
         </div>
 
         <div className={classes.passwordField}>
@@ -49,7 +57,9 @@ export function LoginPage() {
             {...register('password', { required: 'Введите пароль' })}
           />
 
-          {errors.password && <span className={classes.errorMessage}>{errors.password.message}</span>}
+          {errors.password && (
+            <span className={classes.errorMessage}>{errors.password.message}</span>
+          )}
         </div>
 
         <button className={classes.button} type="submit">

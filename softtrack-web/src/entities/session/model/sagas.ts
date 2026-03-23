@@ -1,7 +1,8 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { SessionApi } from '../api/session';
 import { actions } from './slice';
-import type { Session } from './types';
+import type { Credentials, Session } from './types';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
 function* fetchSession() {
   try {
@@ -16,9 +17,9 @@ function* fetchSession() {
   }
 }
 
-function* logIn() {
+function* logIn(action: PayloadAction<Credentials>) {
   try {
-    const session: Session = yield call(SessionApi.logIn);
+    const session: Session = yield call(SessionApi.logIn, action.payload);
     yield put(actions.setSession(session));
   } catch (e) {
     if (e instanceof Error) {
