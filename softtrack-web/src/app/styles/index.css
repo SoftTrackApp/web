@@ -1,0 +1,21 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+:root {
+  --c-white: hsla(0, 0%, 100%, 1);
+  --c-black: hsla(0, 0%, 0%, 1);
+
+  --c-gray-200: hsla(0, 0%, 73%, 1);
+  --c-gray-400: hsla(0, 0%, 17%, 1);
+  --c-gray-600: hsla(0, 0%, 17%, 1);
+}
+
+body {
+  background-color: var(--c-white);
+  color: var(--c-black);
+  font-family: 'Inter Variable', sans-serif;
+  margin: 0;
+}
