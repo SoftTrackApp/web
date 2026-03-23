@@ -7,3 +7,9 @@ export type CurrentUser = {
   canManageSkills: boolean;
   canManageUsers: boolean;
 };
+
+export interface AuthState {
+  user: CurrentUser | null;
+  loading: boolean;
+  error: string | null;
+}

@@ -1,12 +1,12 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import type { CurrentUser } from './types';
-import { fetchCurrentUser, signIn, signOut } from '../api/auth';
+import { AuthApi } from '../api/auth';
 import { actions } from './slice';
 
 function* handleUserFetch() {
   try {
-    const user: CurrentUser = yield call(fetchCurrentUser);
+    const user: CurrentUser = yield call(AuthApi.fetchCurrentUser);
     yield put(actions.setUser(user));
   } catch (e) {
     if (e instanceof Error) {
@@ -17,7 +17,7 @@ function* handleUserFetch() {
 
 function* handleSignIn(action: PayloadAction<{ username: string; password?: string }>) {
   try {
-    const user: CurrentUser = yield call(signIn, action.payload);
+    const user: CurrentUser = yield call(AuthApi.signIn, action.payload);
     yield put(actions.setUser(user));
   } catch (e) {
     if (e instanceof Error) {
@@ -27,7 +27,7 @@ function* handleSignIn(action: PayloadAction<{ username: string; password?: stri
 }
 
 function* handleSignOut() {
-  yield call(signOut);
+  yield call(AuthApi.signOut);
   yield put(actions.setUser(null));
 }
 
