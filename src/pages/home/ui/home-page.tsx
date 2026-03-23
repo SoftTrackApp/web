@@ -1,9 +1,8 @@
-import { ChartBar, Plus, Settings2, User } from 'lucide-react';
+import { ChartBar, Settings2, User } from 'lucide-react';
 import { ActionCard } from './action-card';
 import { Link } from '@tanstack/react-router';
 import { useAppSelector } from '@/app/store';
-import { Dialog } from '@/shared/ui/dialog';
-import { Button, Input } from '@/shared/ui';
+import { CreateBoardCard } from './create-board-card';
 
 export function HomePage() {
   const user = useAppSelector((state) => state.auth.user);
@@ -13,28 +12,7 @@ export function HomePage() {
       <h1 className="font-semibold text-2xl">Главная страница</h1>
 
       <div className="grid xl:grid-cols-2 gap-6 justify-center mx-8">
-        {user?.canCreateBoards && (
-          <Dialog
-            trigger={
-              <ActionCard
-                title="Создать доску оценивания"
-                description="Начните отмечать soft skills учеников"
-                icon={<Plus size={64} />}
-              />
-            }
-          >
-            <h1 className="mb-6 text-center font-semibold text-2xl">
-              Создание доски оценивания
-            </h1>
-
-            <form className="flex flex-col gap-4">
-              <Input placeholder="Название" />
-              <Input placeholder="Группа" />
-              <Input placeholder="Набор поведений" />
-              <Button type="submit">Создать</Button>
-            </form>
-          </Dialog>
-        )}
+        {user?.canCreateBoards && <CreateBoardCard />}
 
         {user?.canViewStats && (
           <Link to="/dashboard">

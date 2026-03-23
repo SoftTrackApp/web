@@ -1,14 +1,14 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { name } from './model/slice';
-import type { AuthState } from './model/types';
+import type { BoardState } from './model/types';
 
 interface State {
-  [name]: AuthState;
+  [name]: BoardState;
 }
 
 const root = (state: State) => state[name];
 
-const selectData = createSelector(root, (rootData) => rootData.user);
+const selectData = createSelector(root, (rootData) => rootData.board);
 
 export const selectors = {
   selectData,

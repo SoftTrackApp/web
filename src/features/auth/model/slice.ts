@@ -1,12 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { CurrentUser } from './types';
-
-// del export
-export interface AuthState {
-  user: CurrentUser | null;
-  loading: boolean;
-  error: string | null;
-}
+import type { AuthState, CurrentUser } from './types';
 
 const initialState: AuthState = {
   user: null,
