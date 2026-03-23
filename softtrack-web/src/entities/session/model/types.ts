@@ -5,4 +5,6 @@ export interface Session {
 
 export interface SessionState {
   session: Session | null;
+  loading: boolean;
+  error: string | null;
 }
