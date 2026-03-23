@@ -1,7 +1,9 @@
 import classes from './login-page.module.css';
-import { useAppDispatch } from '@/app/store';
-import { SessionModel } from '@/entities/session';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useAppDispatch, useAppSelector } from '@/app/store';
+import { SessionModel } from '@/entities/session';
+import { useNavigate } from '@tanstack/react-router';
 
 const defaultValues = {
   username: '',
@@ -12,14 +14,28 @@ export function LoginPage() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm({ defaultValues });
-
   const dispatch = useAppDispatch();
+  const { session, error } = useAppSelector((state) => state.session);
+  const navigate = useNavigate();
 
   const onSubmit = handleSubmit((data) => {
     dispatch(SessionModel.actions.logIn(data));
   });
+
+  useEffect(() => {
+    if (error) {
+      setError('root', { message: error });
+    }
+  }, [error, setError]);
+
+  useEffect(() => {
+    if (session) {
+      navigate({ to: '/' });
+    }
+  }, [navigate, session]);
 
   return (
     <div className={classes.container}>
@@ -61,6 +77,8 @@ export function LoginPage() {
             <span className={classes.errorMessage}>{errors.password.message}</span>
           )}
         </div>
+
+        {errors.root && <span className={classes.errorMessage}>{errors.root.message}</span>}
 
         <button className={classes.button} type="submit">
           Войти
