@@ -5,7 +5,7 @@ const initialState: SessionState = {
   session: null,
 };
 
-export const userSlice = createSlice({
+export const sessionSlice = createSlice({
   name: 'session',
   initialState,
   reducers: {},
