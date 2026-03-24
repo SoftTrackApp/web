@@ -12,6 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as AppRouteImport } from './routes/_app'
 import { Route as AppIndexRouteImport } from './routes/_app/index'
+import { Route as AppDashboardRouteImport } from './routes/_app/dashboard'
+import { Route as AppBoardRouteImport } from './routes/_app/board'
+import { Route as AppManageUsersRouteImport } from './routes/_app/manage/users'
+import { Route as AppManageSkillsRouteImport } from './routes/_app/manage/skills'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
@@ -27,27 +31,79 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppBoardRoute = AppBoardRouteImport.update({
+  id: '/board',
+  path: '/board',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppManageUsersRoute = AppManageUsersRouteImport.update({
+  id: '/manage/users',
+  path: '/manage/users',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppManageSkillsRoute = AppManageSkillsRouteImport.update({
+  id: '/manage/skills',
+  path: '/manage/skills',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof AppIndexRoute
   '/login': typeof LoginRoute
+  '/board': typeof AppBoardRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/manage/skills': typeof AppManageSkillsRoute
+  '/manage/users': typeof AppManageUsersRoute
 }
 export interface FileRoutesByTo {
   '/login': typeof LoginRoute
+  '/board': typeof AppBoardRoute
+  '/dashboard': typeof AppDashboardRoute
   '/': typeof AppIndexRoute
+  '/manage/skills': typeof AppManageSkillsRoute
+  '/manage/users': typeof AppManageUsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
+  '/_app/board': typeof AppBoardRoute
+  '/_app/dashboard': typeof AppDashboardRoute
   '/_app/': typeof AppIndexRoute
+  '/_app/manage/skills': typeof AppManageSkillsRoute
+  '/_app/manage/users': typeof AppManageUsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/board'
+    | '/dashboard'
+    | '/manage/skills'
+    | '/manage/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/'
-  id: '__root__' | '/_app' | '/login' | '/_app/'
+  to:
+    | '/login'
+    | '/board'
+    | '/dashboard'
+    | '/'
+    | '/manage/skills'
+    | '/manage/users'
+  id:
+    | '__root__'
+    | '/_app'
+    | '/login'
+    | '/_app/board'
+    | '/_app/dashboard'
+    | '/_app/'
+    | '/_app/manage/skills'
+    | '/_app/manage/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -78,15 +134,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/board': {
+      id: '/_app/board'
+      path: '/board'
+      fullPath: '/board'
+      preLoaderRoute: typeof AppBoardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/manage/users': {
+      id: '/_app/manage/users'
+      path: '/manage/users'
+      fullPath: '/manage/users'
+      preLoaderRoute: typeof AppManageUsersRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/manage/skills': {
+      id: '/_app/manage/skills'
+      path: '/manage/skills'
+      fullPath: '/manage/skills'
+      preLoaderRoute: typeof AppManageSkillsRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
 interface AppRouteChildren {
+  AppBoardRoute: typeof AppBoardRoute
+  AppDashboardRoute: typeof AppDashboardRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppManageSkillsRoute: typeof AppManageSkillsRoute
+  AppManageUsersRoute: typeof AppManageUsersRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppBoardRoute: AppBoardRoute,
+  AppDashboardRoute: AppDashboardRoute,
   AppIndexRoute: AppIndexRoute,
+  AppManageSkillsRoute: AppManageSkillsRoute,
+  AppManageUsersRoute: AppManageUsersRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)

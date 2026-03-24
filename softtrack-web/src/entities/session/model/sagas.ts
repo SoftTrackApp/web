@@ -33,7 +33,7 @@ function* logIn(action: PayloadAction<Credentials>) {
 function* logOut() {
   try {
     yield call(SessionApi.logOut);
-    yield put(actions.logOut());
+    yield put(actions.setSession(null));
   } catch (e) {
     if (e instanceof Error) {
       yield put(actions.setError(e.message));

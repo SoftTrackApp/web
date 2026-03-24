@@ -29,7 +29,7 @@ export const { actions, reducer } = createSlice({
       state.error = null;
     },
 
-    setSession: (state, action: PayloadAction<Session>) => {
+    setSession: (state, action: PayloadAction<Session | null>) => {
       state.session = action.payload;
       state.loading = false;
       state.error = null;

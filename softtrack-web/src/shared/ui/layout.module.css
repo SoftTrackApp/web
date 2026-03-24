@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  padding: 0 121px;
+  border-bottom: 1px solid var(--c-gray-100);
+}
+
+@media screen and (max-width: 1000px) {
+  .header {
+    padding: 0 24px;
+  }
+}
+
+.nav {
+  display: flex;
+  gap: 40px;
+}
+
+.navBarLink {
+  color: var(--c-gray-600);
+  text-decoration: none;
+}
+
+.selectedLink {
+  font-weight: 600;
+}
+
+.logOut {
+  color: var(--c-gray-200);
+  cursor: pointer;
+}
