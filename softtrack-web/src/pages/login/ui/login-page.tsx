@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { SessionModel } from '@/entities/session';
 import { useNavigate } from '@tanstack/react-router';
+import { Button } from '@/shared/ui';
 
 const defaultValues = {
   username: '',
@@ -82,9 +83,7 @@ export function LoginPage() {
 
         {errors.root && <span className={classes.errorMessage}>{errors.root.message}</span>}
 
-        <button className={classes.button} type="submit">
-          Войти
-        </button>
+        <Button type="submit">Войти</Button>
       </form>
     </div>
   );

@@ -1,6 +1,6 @@
 import classes from './board-page.module.css';
 import { useForm } from 'react-hook-form';
-import { Dialog } from '@/shared/ui';
+import { Button, Dialog } from '@/shared/ui';
 import { useNavigate } from '@tanstack/react-router';
 
 const defaultValues = {
@@ -50,9 +50,9 @@ export function BoardPage() {
             <input className={classes.input} type="text" id="skillset" {...register('skillset')} />
           </div>
 
-          <button className={classes.button} type="submit">
+          <Button type="submit">
             Создать
-          </button>
+          </Button>
         </form>
       </Dialog>
     </div>
