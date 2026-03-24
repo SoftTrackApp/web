@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { SessionModel } from '@/entities/session';
 import { useNavigate } from '@tanstack/react-router';
-import { Button } from '@/shared/ui';
+import { Button, Input } from '@/shared/ui';
 
 const defaultValues = {
   username: '',
@@ -50,8 +50,7 @@ export function LoginPage() {
             Логин
           </label>
 
-          <input
-            className={classes.input}
+          <Input
             type="text"
             id="username"
             autoComplete="username"
@@ -68,8 +67,7 @@ export function LoginPage() {
             Пароль
           </label>
 
-          <input
-            className={classes.input}
+          <Input
             type="password"
             id="password"
             autoComplete="current-password"

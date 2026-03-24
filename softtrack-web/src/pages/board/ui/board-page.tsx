@@ -1,6 +1,6 @@
 import classes from './board-page.module.css';
 import { useForm } from 'react-hook-form';
-import { Button, Dialog } from '@/shared/ui';
+import { Button, Dialog, Input } from '@/shared/ui';
 import { useNavigate } from '@tanstack/react-router';
 
 const defaultValues = {
@@ -31,7 +31,7 @@ export function BoardPage() {
               Название
             </label>
 
-            <input className={classes.input} type="text" id="name" {...register('name')} />
+            <Input className={classes.input} type="text" id="name" {...register('name')} />
           </div>
 
           <div className={classes.field}>
@@ -39,7 +39,7 @@ export function BoardPage() {
               Группа
             </label>
 
-            <input className={classes.input} type="text" id="group" {...register('group')} />
+            <Input className={classes.input} type="text" id="group" {...register('group')} />
           </div>
 
           <div className={classes.lastField}>
@@ -47,12 +47,10 @@ export function BoardPage() {
               Набор поведений
             </label>
 
-            <input className={classes.input} type="text" id="skillset" {...register('skillset')} />
+            <Input className={classes.input} type="text" id="skillset" {...register('skillset')} />
           </div>
 
-          <Button type="submit">
-            Создать
-          </Button>
+          <Button type="submit">Создать</Button>
         </form>
       </Dialog>
     </div>
