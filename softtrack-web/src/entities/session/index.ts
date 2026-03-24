@@ -1,8 +1,8 @@
-import { sessionSaga } from './model/sagas';
+import { saga } from './model/sagas';
 import { actions, reducer } from './model/slice';
 
 export const SessionModel = {
-  saga: sessionSaga,
+  saga,
   actions,
   reducer,
 };

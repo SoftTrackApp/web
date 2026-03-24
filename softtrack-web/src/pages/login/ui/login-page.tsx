@@ -17,9 +17,11 @@ export function LoginPage() {
     setError,
     formState: { errors },
   } = useForm({ defaultValues });
+
+  const navigate = useNavigate();
+
   const dispatch = useAppDispatch();
   const { session, error } = useAppSelector((state) => state.session);
-  const navigate = useNavigate();
 
   const onSubmit = handleSubmit((data) => {
     dispatch(SessionModel.actions.logIn(data));

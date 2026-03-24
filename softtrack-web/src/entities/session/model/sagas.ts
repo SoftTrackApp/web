@@ -43,7 +43,7 @@ function* logOut() {
   }
 }
 
-export function* sessionSaga() {
+export function* saga() {
   yield takeLatest(actions.fetchSession.type, fetchSession);
   yield takeLatest(actions.logIn.type, logIn);
   yield takeLatest(actions.logOut.type, logOut);

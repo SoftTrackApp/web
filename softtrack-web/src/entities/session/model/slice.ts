@@ -3,7 +3,7 @@ import type { Session, SessionState, Credentials } from './types';
 
 const initialState: SessionState = {
   session: null,
-  loading: false,
+  loading: true,
   error: null,
 };
 
