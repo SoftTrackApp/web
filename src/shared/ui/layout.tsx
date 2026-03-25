@@ -32,7 +32,7 @@ export function Layout() {
   if (!session) return <Navigate to="/login" replace />;
 
   return (
-    <div>
+    <>
       <header className={classes.header}>
         <nav className={classes.nav}>
           <NavBarLink to="/">Главная</NavBarLink>
@@ -46,6 +46,6 @@ export function Layout() {
       </header>
 
       <Outlet />
-    </div>
+    </>
   );
 }
