@@ -7,7 +7,7 @@ export const SessionApi = {
       username: 'i24s0000',
     };
   },
-  logIn: async (credentials: Credentials): Promise<Session> => {
+  logIn: async (_credentials: Credentials): Promise<Session> => {
     return {
       id: 1,
       username: 'i24s0000',
