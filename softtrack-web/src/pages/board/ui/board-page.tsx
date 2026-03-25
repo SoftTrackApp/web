@@ -1,12 +1,12 @@
 import classes from './board-page.module.css';
 import { useForm } from 'react-hook-form';
-import { Button, Dialog, Input } from '@/shared/ui';
+import { Button, Dialog, Input, Select } from '@/shared/ui';
 import { useNavigate } from '@tanstack/react-router';
 
 const defaultValues = {
   name: '',
-  group: '',
-  skillset: '',
+  group: '24-11',
+  skillset: '1',
 };
 
 export function BoardPage() {
@@ -39,7 +39,12 @@ export function BoardPage() {
               Группа
             </label>
 
-            <Input className={classes.input} type="text" id="group" {...register('group')} />
+            <Select id="group" {...register('group')}>
+              <option value="24-11">ИТ24-11</option>
+              <option value="24-12">ИТ24-12</option>
+              <option value="24-13">ИТ24-13</option>
+              <option value="24-14">ИТ24-14</option>
+            </Select>
           </div>
 
           <div className={classes.lastField}>
@@ -47,7 +52,12 @@ export function BoardPage() {
               Набор поведений
             </label>
 
-            <Input className={classes.input} type="text" id="skillset" {...register('skillset')} />
+            <Select id="skillset" {...register('skillset')}>
+              <option value="1">Набор #1</option>
+              <option value="2">Набор #2</option>
+              <option value="3">Набор #3</option>
+              <option value="4">Набор #4</option>
+            </Select>
           </div>
 
           <Button type="submit">Создать</Button>
