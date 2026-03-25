@@ -1,45 +1,48 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@/app/store';
 import { Link, Navigate, Outlet, useLocation, type LinkProps } from '@tanstack/react-router';
-import { AuthFeature } from '@/features/auth';
+import { useAppDispatch, useAppSelector } from '@/app/store';
+import { SessionModel } from '@/entities/session';
+import classes from './layout.module.css';
 import clsx from 'clsx';
 
 function NavBarLink(props: LinkProps) {
   const { pathname } = useLocation();
 
-  return <Link className={clsx(pathname === props.to && 'font-semibold')} {...props} />;
+  return (
+    <Link
+      className={clsx(classes.navBarLink, pathname === props.to && classes.selectedLink)}
+      {...props}
+    />
+  );
 }
 
 export function Layout() {
-  const { user, loading } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const { session, loading } = useAppSelector((state) => state.session);
 
   useEffect(() => {
-    dispatch(AuthFeature.actions.requestUserFetch());
+    dispatch(SessionModel.actions.fetchSession());
   }, [dispatch]);
 
-  const signOutHandler = () => {
-    dispatch(AuthFeature.actions.requestSignOut());
+  const handleLogOut = () => {
+    dispatch(SessionModel.actions.logOut());
   };
 
-  if (loading) return <span>Loading...</span>;
-  if (!user) return <Navigate to="/signin" replace />;
+  if (loading) return <span>Загрузка...</span>;
+  if (!session) return <Navigate to="/login" replace />;
 
   return (
     <div>
-      <header className="flex justify-between py-4 px-8 xl:px-32 border-b border-gray-200">
-        <nav className="flex gap-10">
+      <header className={classes.header}>
+        <nav className={classes.nav}>
           <NavBarLink to="/">Главная</NavBarLink>
-
-          {user.canCreateBoards && <NavBarLink to="/board">Доска оценивания</NavBarLink>}
-          {user.canViewStats && <NavBarLink to="/dashboard">Статистика</NavBarLink>}
-          {user.canManageSkills && <NavBarLink to="/manage/skills">Навыки</NavBarLink>}
-          {user.canManageUsers && <NavBarLink to="/manage/users">Пользователи</NavBarLink>}
+          <NavBarLink to="/board">Доска оценивания</NavBarLink>
+          <NavBarLink to="/dashboard">Статистика</NavBarLink>
+          <NavBarLink to="/manage/skills">Навыки</NavBarLink>
+          <NavBarLink to="/manage/users">Пользователи</NavBarLink>
         </nav>
 
-        <span className="cursor-pointer" onClick={signOutHandler}>
-          Выйти
-        </span>
+        <span className={classes.logOut} onClick={handleLogOut}>Выйти</span>
       </header>
 
       <Outlet />
