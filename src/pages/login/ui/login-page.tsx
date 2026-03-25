@@ -2,7 +2,7 @@ import classes from './login-page.module.css';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAppDispatch, useAppSelector } from '@/app/store';
-import { SessionModel } from '@/entities/session';
+import { SessionEntity } from '@/entities/session';
 import { useNavigate } from '@tanstack/react-router';
 import { Button, Input } from '@/shared/ui';
 
@@ -25,7 +25,7 @@ export function LoginPage() {
   const { session, error } = useAppSelector((state) => state.session);
 
   const onSubmit = handleSubmit((data) => {
-    dispatch(SessionModel.actions.logIn(data));
+    dispatch(SessionEntity.actions.logIn(data));
   });
 
   useEffect(() => {
