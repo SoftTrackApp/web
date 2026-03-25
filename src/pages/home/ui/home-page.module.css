@@ -1,0 +1,24 @@
+.container {
+  margin: 154px 12px;
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 64px;
+}
+
+.actionButtons {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: auto auto;
+  padding-bottom: 32px;
+  gap: 24px;
+}
+
+@media screen and (max-width: 1250px) {
+  .actionButtons {
+    grid-template-columns: auto;
+  }
+}

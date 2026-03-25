@@ -1,6 +1,6 @@
-import { AuthFeature } from '@/features/auth';
+import { SessionModel } from '@/entities/session';
 import { all, fork } from 'redux-saga/effects';
 
 export function* rootSaga() {
-  yield all([fork(AuthFeature.sagas.init)]);
+  yield all([fork(SessionModel.saga)]);
 }

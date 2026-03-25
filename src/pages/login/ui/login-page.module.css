@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0 12px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.form {
+  max-width: 486px;
+  width: 100%;
+}
+
+.label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--c-gray-600);
+}
+
+.errorMessage {
+  display: block;
+  margin: 8px 0;
+}
+
+.loginField {
+  margin-bottom: 16px;
+}
+
+.passwordField {
+  margin-bottom: 64px;
+}

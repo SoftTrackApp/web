@@ -1,8 +1,6 @@
-export function Button(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
-  return (
-    <button
-      className="p-4 bg bg-neutral-700 text-white font-semibold hover:cursor-pointer hover:bg-neutral-800"
-      {...props}
-    />
-  );
+import clsx from 'clsx';
+import classes from './button.module.css';
+
+export function Button({ className, ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  return <button className={clsx(classes.button, className)} {...props} />;
 }

@@ -1,0 +1,31 @@
+.dialogTitle {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.form {
+  max-width: 486px;
+  width: 100%;
+}
+
+.label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 8px;
+  color: var(--c-gray-600);
+}
+
+.field {
+  margin-bottom: 24px;
+}
+
+.lastField {
+  margin-bottom: 40px;
+}
+
+.errorMessage {
+  display: block;
+  margin: 8px 0;
+}

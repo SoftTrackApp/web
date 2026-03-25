@@ -79,4 +79,6 @@
   position: absolute;
   top: 32px;
   right: 32px;
+  background-color: transparent;
+  border: none;
 }

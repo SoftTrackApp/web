@@ -4,16 +4,15 @@ import { X } from 'lucide-react';
 import classes from './dialog.module.css';
 import clsx from 'clsx';
 
-export function Dialog({
-  trigger,
-  children,
-  className,
-}: {
-  trigger: React.ReactNode;
+interface DialogProps {
+  trigger?: React.ReactNode;
   children?: React.ReactNode;
-  className?: string;
-}) {
-  const [show, setShow] = useState(false);
+  onClose?: () => void;
+  initialShow?: boolean;
+}
+
+export function Dialog({ trigger, children, onClose, initialShow = false }: DialogProps) {
+  const [show, setShow] = useState(initialShow);
   const router = useRouter();
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -39,6 +38,12 @@ export function Dialog({
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
+  useEffect(() => {
+    if (!show && onClose) {
+      onClose()
+    }
+  }, [show, onClose]);
+
   return (
     <>
       <div onClick={() => setShow(!show)}>{trigger}</div>
@@ -46,13 +51,12 @@ export function Dialog({
       <div
         className={clsx(classes.wrapper, show ? classes.show : classes.hide)}
         onClick={handleClick}
-        id="dialog-wrapper"
         role="dialog"
         aria-modal="true"
       >
-        <div className={clsx(classes.dialog, className)}>
+        <div className={classes.dialog}>
           <button className={classes.closeButton} onClick={() => setShow(false)}>
-            <X size={16} />
+            <X size={24} color="var(--c-gray-200)" />
           </button>
 
           {children}
