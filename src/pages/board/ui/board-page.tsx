@@ -1,7 +1,6 @@
 import classes from './board-page.module.css';
 import { useForm } from 'react-hook-form';
-import { Button, Dialog, Input, Select } from '@/shared/ui';
-import { useRouter } from '@tanstack/react-router';
+import { Button, Input, Select } from '@/shared/ui';
 
 const defaultValues = {
   name: '',
@@ -16,68 +15,58 @@ export function BoardPage() {
     formState: { errors },
   } = useForm({ defaultValues });
 
-  const router = useRouter();
-
-  const handleDialogClose = () => {
-    if (router.history.canGoBack()) {
-      router.history.back();
-    } else {
-      router.navigate({ to: '/' });
-    }
-  };
-
   const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
-    <div>
-      <Dialog onClose={handleDialogClose} initialShow>
-        <h1 className={classes.dialogTitle}>Создание доски оценивания</h1>
+    <div className={classes.container}>
+      <h1 className={classes.dialogTitle}>Создание доски оценивания</h1>
 
-        <form onSubmit={onSubmit}>
-          <div className={classes.field}>
-            <label className={classes.label} htmlFor="name">
-              Название
-            </label>
+      <form onSubmit={onSubmit}>
+        <div className={classes.field}>
+          <label className={classes.label} htmlFor="name">
+            Название
+          </label>
 
-            <Input
-              className={classes.input}
-              type="text"
-              id="name"
-              {...register('name', { required: 'Введите название' })}
-            />
+          <Input
+            className={classes.input}
+            type="text"
+            id="name"
+            {...register('name', { required: 'Введите название' })}
+          />
 
-            {errors.name && <span className={classes.errorMessage}>{errors.name.message}</span>}
-          </div>
+          {errors.name && <span className={classes.errorMessage}>{errors.name.message}</span>}
+        </div>
 
-          <div className={classes.field}>
-            <label className={classes.label} htmlFor="group">
-              Группа
-            </label>
+        <div className={classes.field}>
+          <label className={classes.label} htmlFor="group">
+            Группа
+          </label>
 
-            <Select id="group" {...register('group')}>
-              <option value="24-11">ИТ24-11</option>
-              <option value="24-12">ИТ24-12</option>
-              <option value="24-13">ИТ24-13</option>
-              <option value="24-14">ИТ24-14</option>
-            </Select>
-          </div>
+          <Select id="group" {...register('group')}>
+            <option value="24-11">ИТ24-11</option>
+            <option value="24-12">ИТ24-12</option>
+            <option value="24-13">ИТ24-13</option>
+            <option value="24-14">ИТ24-14</option>
+          </Select>
+        </div>
 
-          <div className={classes.lastField}>
-            <label className={classes.label} htmlFor="skillset">
-              Набор поведений
-            </label>
+        <div className={classes.lastField}>
+          <label className={classes.label} htmlFor="skillset">
+            Набор поведений
+          </label>
 
-            <Select id="skillset" {...register('skillset')}>
-              <option value="1">Набор #1</option>
-              <option value="2">Набор #2</option>
-              <option value="3">Набор #3</option>
-              <option value="4">Набор #4</option>
-            </Select>
-          </div>
+          <Select id="skillset" {...register('skillset')}>
+            <option value="1">Набор #1</option>
+            <option value="2">Набор #2</option>
+            <option value="3">Набор #3</option>
+            <option value="4">Набор #4</option>
+          </Select>
+        </div>
 
-          <Button type="submit">Создать</Button>
-        </form>
-      </Dialog>
+        <Button type="submit">
+          Создать
+        </Button>
+      </form>
     </div>
   );
 }
