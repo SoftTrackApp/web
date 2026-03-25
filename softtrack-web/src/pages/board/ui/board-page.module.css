@@ -24,3 +24,8 @@
 .lastField {
   margin-bottom: 40px;
 }
+
+.errorMessage {
+  display: block;
+  margin: 8px 0;
+}

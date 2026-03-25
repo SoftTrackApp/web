@@ -10,7 +10,11 @@ const defaultValues = {
 };
 
 export function BoardPage() {
-  const { register, handleSubmit } = useForm({ defaultValues });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ defaultValues });
 
   const navigate = useNavigate();
 
@@ -31,7 +35,14 @@ export function BoardPage() {
               Название
             </label>
 
-            <Input className={classes.input} type="text" id="name" {...register('name')} />
+            <Input
+              className={classes.input}
+              type="text"
+              id="name"
+              {...register('name', { required: 'Введите название' })}
+            />
+
+            {errors.name && <span className={classes.errorMessage}>{errors.name.message}</span>}
           </div>
 
           <div className={classes.field}>
