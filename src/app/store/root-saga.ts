@@ -1,6 +1,6 @@
-import { SessionModel } from '@/entities/session';
+import { SessionEntity } from '@/entities/session';
 import { all, fork } from 'redux-saga/effects';
 
 export function* rootSaga() {
-  yield all([fork(SessionModel.saga)]);
+  yield all([fork(SessionEntity.saga)]);
 }

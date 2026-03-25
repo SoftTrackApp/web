@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link, Navigate, Outlet, useLocation, type LinkProps } from '@tanstack/react-router';
 import { useAppDispatch, useAppSelector } from '@/app/store';
-import { SessionModel } from '@/entities/session';
+import { SessionEntity } from '@/entities/session';
 import classes from './layout.module.css';
 import clsx from 'clsx';
 
@@ -21,11 +21,11 @@ export function Layout() {
   const { session, loading } = useAppSelector((state) => state.session);
 
   useEffect(() => {
-    dispatch(SessionModel.actions.fetchSession());
+    dispatch(SessionEntity.actions.fetchSession());
   }, [dispatch]);
 
   const handleLogOut = () => {
-    dispatch(SessionModel.actions.logOut());
+    dispatch(SessionEntity.actions.logOut());
   };
 
   if (loading) return <span>Загрузка...</span>;
