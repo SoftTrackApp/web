@@ -1,5 +1,6 @@
 import { SessionEntity } from '@/entities/session';
 import { BoardEntity } from '@/entities/board';
+import { UserEntity } from '@/entities/user';
 import { configureStore } from '@reduxjs/toolkit';
 import { rootSaga } from './root-saga';
 import createSagaMiddleware from 'redux-saga';
@@ -10,6 +11,7 @@ export const store = configureStore({
   reducer: {
     session: SessionEntity.reducer,
     board: BoardEntity.reducer,
+    users: UserEntity.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });
