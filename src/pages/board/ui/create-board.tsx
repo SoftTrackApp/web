@@ -1,8 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { Button, Input, Select } from '@/shared/ui';
 import { BoardEntity } from '@/entities/board';
-import { useAppDispatch } from '@/app/store';
+import { useAppDispatch, useAppSelector } from '@/app/store';
 import classes from './create-board.module.css';
+import { useEffect } from 'react';
+import { GroupEntity } from '@/entities/group';
 
 const defaultValues = {
   name: '',
@@ -18,10 +20,17 @@ export function CreateBoard() {
   } = useForm({ defaultValues });
 
   const dispatch = useAppDispatch();
+  const groupsState = useAppSelector((state) => state.groups);
+
+  useEffect(() => {
+    dispatch(GroupEntity.actions.fetchGroups());
+  }, [dispatch]);
 
   const onSubmit = handleSubmit((data) => {
     dispatch(BoardEntity.actions.setBoard(data));
   });
+
+  if (groupsState.loading || !groupsState.groups) return null;
 
   return (
     <div className={classes.container}>
@@ -49,10 +58,11 @@ export function CreateBoard() {
           </label>
 
           <Select id="group" {...register('group')}>
-            <option value="24-11">ИТ24-11</option>
-            <option value="24-12">ИТ24-12</option>
-            <option value="24-13">ИТ24-13</option>
-            <option value="24-14">ИТ24-14</option>
+            {groupsState.groups.map((group) => (
+              <option key={group.id} value={group.name}>
+                {group.name}
+              </option>
+            ))}
           </Select>
         </div>
 
