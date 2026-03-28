@@ -61,13 +61,15 @@ export function CreateBoard() {
             Группа
           </label>
 
-          <Select id="group" {...register('group')}>
+          <Select id="group" {...register('group', { required: 'Выберите группу' })}>
             {groupsState.groups.map((group) => (
               <option key={group.id} value={group.name}>
                 {group.name}
               </option>
             ))}
           </Select>
+
+          {errors.group && <span className={classes.errorMessage}>{errors.group.message}</span>}
         </div>
 
         <div className={classes.lastField}>
@@ -75,13 +77,17 @@ export function CreateBoard() {
             Набор поведений
           </label>
 
-          <Select id="skillset" {...register('skillset')}>
+          <Select id="skillset" {...register('skillset', { required: 'Выберите набор поведений' })}>
             {skillsetsState.skillsets.map((skillset) => (
               <option key={skillset.id} value={skillset.name}>
                 {skillset.name}
               </option>
             ))}
           </Select>
+
+          {errors.skillset && (
+            <span className={classes.errorMessage}>{errors.skillset.message}</span>
+          )}
         </div>
 
         <Button type="submit">Создать</Button>
