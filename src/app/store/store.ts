@@ -5,6 +5,7 @@ import { GroupEntity } from '@/entities/group';
 import { SessionEntity } from '@/entities/session';
 import { BoardEntity } from '@/entities/board';
 import { UserEntity } from '@/entities/user';
+import { SkillsetEntity } from '@/entities/skillset';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -14,6 +15,7 @@ export const store = configureStore({
     board: BoardEntity.reducer,
     users: UserEntity.reducer,
     groups: GroupEntity.reducer,
+    skillsets: SkillsetEntity.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });

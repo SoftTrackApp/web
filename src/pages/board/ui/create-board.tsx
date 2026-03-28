@@ -1,15 +1,16 @@
+import classes from './create-board.module.css';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Input, Select } from '@/shared/ui';
 import { BoardEntity } from '@/entities/board';
 import { useAppDispatch, useAppSelector } from '@/app/store';
-import classes from './create-board.module.css';
-import { useEffect } from 'react';
 import { GroupEntity } from '@/entities/group';
+import { SkillsetEntity } from '@/entities/skillset';
 
 const defaultValues = {
   name: '',
-  group: '24-11',
-  skillset: '1',
+  group: '',
+  skillset: '',
 };
 
 export function CreateBoard() {
@@ -21,9 +22,11 @@ export function CreateBoard() {
 
   const dispatch = useAppDispatch();
   const groupsState = useAppSelector((state) => state.groups);
+  const skillsetsState = useAppSelector((state) => state.skillsets);
 
   useEffect(() => {
     dispatch(GroupEntity.actions.fetchGroups());
+    dispatch(SkillsetEntity.actions.fetchSkillsets());
   }, [dispatch]);
 
   const onSubmit = handleSubmit((data) => {
@@ -31,6 +34,7 @@ export function CreateBoard() {
   });
 
   if (groupsState.loading || !groupsState.groups) return null;
+  if (skillsetsState.loading || !skillsetsState.skillsets) return null;
 
   return (
     <div className={classes.container}>
@@ -72,10 +76,11 @@ export function CreateBoard() {
           </label>
 
           <Select id="skillset" {...register('skillset')}>
-            <option value="1">Набор #1</option>
-            <option value="2">Набор #2</option>
-            <option value="3">Набор #3</option>
-            <option value="4">Набор #4</option>
+            {skillsetsState.skillsets.map((skillset) => (
+              <option key={skillset.id} value={skillset.name}>
+                {skillset.name}
+              </option>
+            ))}
           </Select>
         </div>
 
