@@ -1,13 +1,16 @@
+import classes from './create-board.module.css';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Input, Select } from '@/shared/ui';
 import { BoardEntity } from '@/entities/board';
-import { useAppDispatch } from '@/app/store';
-import classes from './create-board.module.css';
+import { useAppDispatch, useAppSelector } from '@/app/store';
+import { GroupEntity } from '@/entities/group';
+import { SkillsetEntity } from '@/entities/skillset';
 
 const defaultValues = {
   name: '',
-  group: '24-11',
-  skillset: '1',
+  group: '',
+  skillset: '',
 };
 
 export function CreateBoard() {
@@ -18,10 +21,20 @@ export function CreateBoard() {
   } = useForm({ defaultValues });
 
   const dispatch = useAppDispatch();
+  const groupsState = useAppSelector((state) => state.groups);
+  const skillsetsState = useAppSelector((state) => state.skillsets);
+
+  useEffect(() => {
+    dispatch(GroupEntity.actions.fetchGroups());
+    dispatch(SkillsetEntity.actions.fetchSkillsets());
+  }, [dispatch]);
 
   const onSubmit = handleSubmit((data) => {
     dispatch(BoardEntity.actions.setBoard(data));
   });
+
+  if (groupsState.loading || !groupsState.groups) return null;
+  if (skillsetsState.loading || !skillsetsState.skillsets) return null;
 
   return (
     <div className={classes.container}>
@@ -49,10 +62,11 @@ export function CreateBoard() {
           </label>
 
           <Select id="group" {...register('group')}>
-            <option value="24-11">ИТ24-11</option>
-            <option value="24-12">ИТ24-12</option>
-            <option value="24-13">ИТ24-13</option>
-            <option value="24-14">ИТ24-14</option>
+            {groupsState.groups.map((group) => (
+              <option key={group.id} value={group.name}>
+                {group.name}
+              </option>
+            ))}
           </Select>
         </div>
 
@@ -62,10 +76,11 @@ export function CreateBoard() {
           </label>
 
           <Select id="skillset" {...register('skillset')}>
-            <option value="1">Набор #1</option>
-            <option value="2">Набор #2</option>
-            <option value="3">Набор #3</option>
-            <option value="4">Набор #4</option>
+            {skillsetsState.skillsets.map((skillset) => (
+              <option key={skillset.id} value={skillset.name}>
+                {skillset.name}
+              </option>
+            ))}
           </Select>
         </div>
 
