@@ -16,8 +16,8 @@ export function ControlBoard() {
 
     const query = searchText.toLowerCase();
 
-    return users.filter(
-      (u) => u.name.toLowerCase().includes(query) || u.surname.toLowerCase().includes(query),
+    return users.filter((u) =>
+      (u.name.toLowerCase() + ' ' + u.surname.toLowerCase()).includes(query),
     );
   }, [users, searchText]);
 
