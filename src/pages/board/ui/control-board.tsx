@@ -1,5 +1,6 @@
 import classes from './control-board.module.css';
 import { useEffect, useMemo, useState } from 'react';
+import { Search } from 'lucide-react';
 import { Input } from '@/shared/ui';
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { UserEntity } from '@/entities/user';
@@ -32,6 +33,7 @@ export function ControlBoard() {
             type="text"
             placeholder="Найти..."
             role="search"
+            icon={<Search size={16} />}
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
           />
