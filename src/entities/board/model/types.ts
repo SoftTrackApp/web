@@ -1,7 +1,7 @@
 export interface Board {
   name: string;
   group: string;
-  skillset: string;
+  behaviorSet: string;
 }
 
 export interface BoardState {
