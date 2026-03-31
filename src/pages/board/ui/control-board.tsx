@@ -27,7 +27,7 @@ export function ControlBoard() {
 
   return (
     <div className={classes.container}>
-      <section className={classes.usersSection}>
+      <section className={classes.section}>
         <div className={classes.search}>
           <Input
             type="text"
@@ -52,6 +52,19 @@ export function ControlBoard() {
             ))}
           </div>
         )}
+      </section>
+
+      <section className={classes.section}>
+        <div className={classes.behaviorsHeader}>
+          <h1 className={classes.behaviorsTitle}>Набор поведений</h1>
+          <h2 className={classes.behaviorsName}>Базовый набор</h2>
+        </div>
+
+        <div className={classes.behaviorList}>
+          <div className={classes.behaviorCard}>Поведение 1</div>
+          <div className={classes.behaviorCard}>Поведение 2</div>
+          <div className={classes.behaviorCard}>Поведение 3</div>
+        </div>
       </section>
     </div>
   );
