@@ -12,13 +12,12 @@
   justify-content: center;
 
   color: var(--c-gray-200);
-  margin-left: 16px;
+  margin: 0 16px;
 }
 
 .input {
   width: 100%;
   font-size: 14px;
-  padding: 0 16px;
   border: none;
 }
 .input:focus {
