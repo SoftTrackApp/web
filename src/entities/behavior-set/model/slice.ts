@@ -1,29 +1,29 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { Skillset, SkillsetsState } from './types';
+import type { BehaviorSet, BehaviorSetState } from './types';
 
-const initialState: SkillsetsState = {
-  skillsets: null,
+const initialState: BehaviorSetState = {
+  behaviorSets: null,
   loading: false,
   error: null,
 };
 
 export const { actions, reducer } = createSlice({
-  name: 'groups',
+  name: 'behaviorSets',
   initialState,
   reducers: {
-    fetchSkillsets: (state) => {
+    fetchBehaviorSets: (state) => {
       state.loading = true;
       state.error = null;
     },
 
-    setSkillsets(state, action: PayloadAction<Skillset[]>) {
-      state.skillsets = action.payload;
+    setBehaviorSets(state, action: PayloadAction<BehaviorSet[]>) {
+      state.behaviorSets = action.payload;
       state.loading = false;
       state.error = null;
     },
 
     setError: (state, action: PayloadAction<string>) => {
-      state.skillsets = null;
+      state.behaviorSets = null;
       state.loading = false;
       state.error = action.payload;
     },

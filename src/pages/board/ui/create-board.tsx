@@ -5,12 +5,12 @@ import { Button, Input, Select } from '@/shared/ui';
 import { BoardEntity } from '@/entities/board';
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { GroupEntity } from '@/entities/group';
-import { SkillsetEntity } from '@/entities/skillset';
+import { BehaviorSetEntity } from '@/entities/behavior-set';
 
 const defaultValues = {
   name: '',
   group: '',
-  skillset: '',
+  behaviorSet: '',
 };
 
 export function CreateBoard() {
@@ -22,11 +22,11 @@ export function CreateBoard() {
 
   const dispatch = useAppDispatch();
   const groupsState = useAppSelector((state) => state.groups);
-  const skillsetsState = useAppSelector((state) => state.skillsets);
+  const behaviorSetsState = useAppSelector((state) => state.behaviorSets);
 
   useEffect(() => {
     dispatch(GroupEntity.actions.fetchGroups());
-    dispatch(SkillsetEntity.actions.fetchSkillsets());
+    dispatch(BehaviorSetEntity.actions.fetchBehaviorSets());
   }, [dispatch]);
 
   const onSubmit = handleSubmit((data) => {
@@ -34,7 +34,7 @@ export function CreateBoard() {
   });
 
   if (groupsState.loading || !groupsState.groups) return null;
-  if (skillsetsState.loading || !skillsetsState.skillsets) return null;
+  if (behaviorSetsState.loading || !behaviorSetsState.behaviorSets) return null;
 
   return (
     <div className={classes.container}>
@@ -73,20 +73,23 @@ export function CreateBoard() {
         </div>
 
         <div className={classes.lastField}>
-          <label className={classes.label} htmlFor="skillset">
+          <label className={classes.label} htmlFor="behavior-set">
             Набор поведений
           </label>
 
-          <Select id="skillset" {...register('skillset', { required: 'Выберите набор поведений' })}>
-            {skillsetsState.skillsets.map((skillset) => (
-              <option key={skillset.id} value={skillset.name}>
-                {skillset.name}
+          <Select
+            id="behavior-set"
+            {...register('behaviorSet', { required: 'Выберите набор поведений' })}
+          >
+            {behaviorSetsState.behaviorSets.map((behaviorSet) => (
+              <option key={behaviorSet.id} value={behaviorSet.name}>
+                {behaviorSet.name}
               </option>
             ))}
           </Select>
 
-          {errors.skillset && (
-            <span className={classes.errorMessage}>{errors.skillset.message}</span>
+          {errors.behaviorSet && (
+            <span className={classes.errorMessage}>{errors.behaviorSet.message}</span>
           )}
         </div>
 
