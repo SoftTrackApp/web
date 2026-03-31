@@ -62,4 +62,6 @@
   justify-content: center;
   border: 2px solid var(--c-gray-100);
   min-height: 64px;
+  text-align: center;
+  padding: 0 8px;
 }
