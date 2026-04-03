@@ -10,8 +10,8 @@ export function Board() {
 
   const { board } = useAppSelector((state) => state.board);
   const { behaviorSets } = useAppSelector((state) => state.behaviorSets);
-
   const { users, loading, error } = useAppSelector((state) => state.users);
+
   const dispatch = useAppDispatch();
 
   const filteredUsers = useMemo(() => {
@@ -32,7 +32,7 @@ export function Board() {
     return null;
   }
 
-  const behaviorSet = behaviorSets.find((bs) => bs.name === board.behaviorSet);
+  const behaviorSet = behaviorSets.find((bs) => bs.id === board.behaviorSetId);
 
   if (!behaviorSet) {
     return <span>Набор поведений не найден!</span>;
@@ -67,10 +67,14 @@ export function Board() {
         )}
       </section>
 
+      <section>
+        <h1></h1>
+      </section>
+
       <section className={classes.section}>
         <div className={classes.behaviorsHeader}>
           <h1 className={classes.behaviorsTitle}>Набор поведений</h1>
-          <h2 className={classes.behaviorsName}>{board.behaviorSet}</h2>
+          <h2 className={classes.behaviorsName}>{behaviorSet.name}</h2>
         </div>
 
         <div className={classes.behaviorList}>

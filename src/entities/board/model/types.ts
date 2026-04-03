@@ -1,7 +1,7 @@
 export interface Board {
   name: string;
   group: string;
-  behaviorSet: string;
+  behaviorSetId: number;
 }
 
 export interface BoardState {
