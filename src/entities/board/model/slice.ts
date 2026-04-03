@@ -12,5 +12,11 @@ export const { actions, reducer } = createSlice({
     setBoard: (state, action: PayloadAction<Board | null>) => {
       state.board = action.payload;
     },
+
+    setSelectedUserId: (state, action: PayloadAction<number>) => {
+      if (state.board) {
+        state.board.selectedUserId = action.payload;
+      }
+    },
   },
 });

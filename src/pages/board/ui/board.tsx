@@ -4,6 +4,8 @@ import { Search } from 'lucide-react';
 import { Input } from '@/shared/ui';
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { UserEntity } from '@/entities/user';
+import { BoardEntity } from '@/entities/board';
+import clsx from 'clsx';
 
 export function Board() {
   const [searchText, setSearchText] = useState('');
@@ -28,11 +30,12 @@ export function Board() {
     dispatch(UserEntity.actions.fetchUsers());
   }, [dispatch]);
 
-  if (!behaviorSets || !board) {
+  if (!behaviorSets || !board || !users) {
     return null;
   }
 
   const behaviorSet = behaviorSets.find((bs) => bs.id === board.behaviorSetId);
+  const selectedUser = users.find((u) => u.id === board.selectedUserId);
 
   if (!behaviorSet) {
     return <span>Набор поведений не найден!</span>;
@@ -57,9 +60,17 @@ export function Board() {
         ) : error ? (
           <span>{error}</span>
         ) : (
-          <div className={classes.userList}>
+          <div className={classes.userList} role="list">
             {filteredUsers.map((user) => (
-              <div key={user.id} className={classes.userCard}>
+              <div
+                key={user.id}
+                className={clsx(
+                  classes.userCard,
+                  user.id === board.selectedUserId && classes.selectedUser,
+                )}
+                onClick={() => dispatch(BoardEntity.actions.setSelectedUserId(user.id))}
+                role="listitem"
+              >
                 {user.name} {user.surname}
               </div>
             ))}
@@ -67,8 +78,21 @@ export function Board() {
         )}
       </section>
 
-      <section>
-        <h1></h1>
+      <section className={classes.middleSection}>
+        <div className={classes.middleHeader}>
+          {!selectedUser ? (
+            <span>Выберите пользователя</span>
+          ) : (
+            <>
+              <h1 className={classes.name}>
+                {selectedUser.name} {selectedUser.surname}
+              </h1>
+              <span className={classes.description}>
+                Группа {board.group} &bull; {board.name}
+              </span>
+            </>
+          )}
+        </div>
       </section>
 
       <section className={classes.section}>
@@ -77,9 +101,9 @@ export function Board() {
           <h2 className={classes.behaviorsName}>{behaviorSet.name}</h2>
         </div>
 
-        <div className={classes.behaviorList}>
+        <div className={classes.behaviorList} role="list">
           {behaviorSet.behaviors.map((b, i) => (
-            <div key={i} className={classes.behaviorCard}>
+            <div key={i} className={classes.behaviorCard} role="listitem">
               {b.name}
             </div>
           ))}

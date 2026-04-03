@@ -5,6 +5,7 @@
   height: calc(100% - 50px);
   padding: 24px;
   box-sizing: border-box;
+  margin: 0 96px;
 }
 
 .section {
@@ -27,6 +28,11 @@
 .userCard {
   padding: 14px 20px;
   border-bottom: 1px solid var(--c-gray-100);
+  cursor: pointer;
+}
+.userCard:hover,
+.selectedUser {
+  background-color: var(--c-gray-100);
 }
 
 .behaviorsHeader {
@@ -64,4 +70,28 @@
   min-height: 64px;
   text-align: center;
   padding: 0 8px;
+}
+
+.middleSection {
+  flex: 1;
+  flex-direction: column;
+  border: 2px solid var(--c-gray-200);
+}
+
+.middleHeader {
+  display: flex;
+  flex-direction: column;
+  padding: 34px;
+  text-align: center;
+  border-bottom: 1px solid var(--c-gray-100);
+}
+
+.name {
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.description {
+  font-size: 12px;
 }
