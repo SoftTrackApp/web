@@ -34,6 +34,7 @@ export function CreateBoard() {
       BoardEntity.actions.setBoard({
         ...data,
         behaviorSetId: Number(data.behaviorSetId),
+        selectedUserId: 0,
       }),
     );
   });
