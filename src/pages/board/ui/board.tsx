@@ -1,11 +1,11 @@
-import classes from './control-board.module.css';
+import classes from './board.module.css';
 import { useEffect, useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
 import { Input } from '@/shared/ui';
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { UserEntity } from '@/entities/user';
 
-export function ControlBoard() {
+export function Board() {
   const [searchText, setSearchText] = useState('');
 
   const { board } = useAppSelector((state) => state.board);
