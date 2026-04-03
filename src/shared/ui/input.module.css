@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   align-items: center;
-  border: 1px solid var(--c-gray-200);
+  border: 2px solid var(--c-gray-200);
   box-sizing: border-box;
   height: 40px;
 }

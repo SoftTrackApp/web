@@ -10,7 +10,7 @@ import { BehaviorSetEntity } from '@/entities/behavior-set';
 const defaultValues = {
   name: '',
   group: '',
-  behaviorSet: '',
+  behaviorSetId: '',
 };
 
 export function CreateBoard() {
@@ -30,7 +30,12 @@ export function CreateBoard() {
   }, [dispatch]);
 
   const onSubmit = handleSubmit((data) => {
-    dispatch(BoardEntity.actions.setBoard(data));
+    dispatch(
+      BoardEntity.actions.setBoard({
+        ...data,
+        behaviorSetId: Number(data.behaviorSetId),
+      }),
+    );
   });
 
   if (groupsState.loading || !groupsState.groups) return null;
@@ -79,17 +84,17 @@ export function CreateBoard() {
 
           <Select
             id="behavior-set"
-            {...register('behaviorSet', { required: 'Выберите набор поведений' })}
+            {...register('behaviorSetId', { required: 'Выберите набор поведений' })}
           >
             {behaviorSetsState.behaviorSets.map((behaviorSet) => (
-              <option key={behaviorSet.id} value={behaviorSet.name}>
+              <option key={behaviorSet.id} value={behaviorSet.id}>
                 {behaviorSet.name}
               </option>
             ))}
           </Select>
 
-          {errors.behaviorSet && (
-            <span className={classes.errorMessage}>{errors.behaviorSet.message}</span>
+          {errors.behaviorSetId && (
+            <span className={classes.errorMessage}>{errors.behaviorSetId.message}</span>
           )}
         </div>
 
