@@ -70,15 +70,20 @@
   min-height: 64px;
   text-align: center;
   padding: 0 8px;
+  cursor: pointer;
+}
+.behaviorCard:hover {
+  background-color: var(--c-gray-100);
 }
 
-.middleSection {
+.overviewSection {
+  display: flex;
   flex: 1;
   flex-direction: column;
   border: 2px solid var(--c-gray-200);
 }
 
-.middleHeader {
+.overviewHeader {
   display: flex;
   flex-direction: column;
   padding: 34px;
@@ -94,4 +99,18 @@
 
 .description {
   font-size: 12px;
+}
+
+.overviewBehaviors {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow-y: auto;
+  gap: 16px;
+  margin: 32px;
+}
+
+.overviewBehaviorCard {
+  padding: 20px;
+  border: 1px solid var(--c-gray-200);
 }

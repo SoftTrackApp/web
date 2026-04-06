@@ -17,8 +17,6 @@ export function Board() {
   const dispatch = useAppDispatch();
 
   const filteredUsers = useMemo(() => {
-    if (!users) return [];
-
     const query = searchText.toLowerCase();
 
     return users.filter((u) =>
@@ -27,15 +25,23 @@ export function Board() {
   }, [users, searchText]);
 
   useEffect(() => {
-    dispatch(UserEntity.actions.fetchUsers());
-  }, [dispatch]);
+    if (users.length === 0) {
+      dispatch(UserEntity.actions.fetchUsers());
+    }
+  }, [dispatch, users.length]);
 
-  if (!behaviorSets || !board || !users) {
+  if (!behaviorSets || !board) {
     return null;
   }
 
   const behaviorSet = behaviorSets.find((bs) => bs.id === board.behaviorSetId);
   const selectedUser = users.find((u) => u.id === board.selectedUserId);
+
+  const addUserRecord = (behaviorName: string) => {
+    if (!selectedUser) return;
+
+    dispatch(UserEntity.actions.addUserRecord({ userId: selectedUser.id, behaviorName }));
+  };
 
   if (!behaviorSet) {
     return <span>Набор поведений не найден!</span>;
@@ -78,21 +84,27 @@ export function Board() {
         )}
       </section>
 
-      <section className={classes.middleSection}>
-        <div className={classes.middleHeader}>
-          {!selectedUser ? (
-            <span>Выберите пользователя</span>
-          ) : (
-            <>
+      <section className={classes.overviewSection}>
+        {selectedUser && (
+          <>
+            <div className={classes.overviewHeader}>
               <h1 className={classes.name}>
                 {selectedUser.name} {selectedUser.surname}
               </h1>
               <span className={classes.description}>
                 Группа {board.group} &bull; {board.name}
               </span>
-            </>
-          )}
-        </div>
+            </div>
+
+            <div className={classes.overviewBehaviors} role="list">
+              {selectedUser.records.map((record) => (
+                <div key={record.id} className={classes.overviewBehaviorCard} role="listitem">
+                  {record.behaviorName}
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </section>
 
       <section className={classes.section}>
@@ -103,7 +115,12 @@ export function Board() {
 
         <div className={classes.behaviorList} role="list">
           {behaviorSet.behaviors.map((b, i) => (
-            <div key={i} className={classes.behaviorCard} role="listitem">
+            <div
+              key={i}
+              className={classes.behaviorCard}
+              onClick={() => addUserRecord(b.name)}
+              role="listitem"
+            >
               {b.name}
             </div>
           ))}
