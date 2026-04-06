@@ -11,4 +11,5 @@ const exampleUsers: User[] = [
 
 export const UserApi = {
   fetchUsers: async (): Promise<User[]> => exampleUsers,
+  createRecord: async () => {},
 };
