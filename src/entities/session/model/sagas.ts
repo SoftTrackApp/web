@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { SessionApi } from '../api/session';
+import { SessionApi } from '../api';
 import { actions } from './slice';
 import type { Credentials, Session } from './types';
 import type { PayloadAction } from '@reduxjs/toolkit';
