@@ -1,10 +1,11 @@
 import classes from './board.module.css';
 import { useEffect, useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
-import { Input } from '@/shared/ui';
+import { Input, Dialog, Button } from '@/shared/ui';
 import { useAppDispatch, useAppSelector } from '@/app/store';
 import { UserEntity } from '@/entities/user';
 import { BoardEntity } from '@/entities/board';
+import { MessageCircle } from 'lucide-react';
 import clsx from 'clsx';
 
 export function Board() {
@@ -99,7 +100,20 @@ export function Board() {
             <div className={classes.overviewBehaviors} role="list">
               {selectedUser.records.map((record) => (
                 <div key={record.id} className={classes.overviewBehaviorCard} role="listitem">
-                  {record.behaviorName}
+                  <span>{record.behaviorName}</span>
+
+                  <Dialog
+                    title="Комментарии"
+                    description={record.behaviorName}
+                    trigger={
+                      <button className={classes.commentButton}>
+                        <MessageCircle color="white" />
+                      </button>
+                    }
+                  >
+                    
+                    <Button>Добавить новый</Button>
+                  </Dialog>
                 </div>
               ))}
             </div>
