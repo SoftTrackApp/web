@@ -8,7 +8,7 @@ export interface BehaviorSet {
   behaviors: Behavior[];
 }
 
-export interface BehaviorSetState {
+export interface BehaviorSetsState {
   behaviorSets: BehaviorSet[] | null;
   loading: boolean;
   error: string | null;

@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { BehaviorSet, BehaviorSetState } from './types';
+import type { BehaviorSet, BehaviorSetsState } from './types';
 
-const initialState: BehaviorSetState = {
+const initialState: BehaviorSetsState = {
   behaviorSets: null,
   loading: false,
   error: null,
