@@ -129,3 +129,15 @@
   height: 32px;
   cursor: pointer;
 }
+
+.commentList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.commentCard {
+  padding: 14px 12px;
+  border: 1px solid var(--c-gray-200);
+}

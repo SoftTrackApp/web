@@ -111,6 +111,10 @@ export function Board() {
                       </button>
                     }
                   >
+                    <div className={classes.commentList} role="list">
+                      <div className={classes.commentCard} role="listitem">Example Comment 1</div>
+                      <div className={classes.commentCard} role="listitem">Example Comment 2</div>
+                    </div>
                     
                     <Button>Добавить новый</Button>
                   </Dialog>
