@@ -7,7 +7,7 @@ const initialState: BehaviorSetsState = {
   error: null,
 };
 
-export const { actions, reducer } = createSlice({
+export const { name, actions, reducer } = createSlice({
   name: 'behaviorSets',
   initialState,
   reducers: {

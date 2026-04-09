@@ -7,7 +7,7 @@ const initialState: UsersState = {
   error: null,
 };
 
-export const { actions, reducer } = createSlice({
+export const { name, actions, reducer } = createSlice({
   name: 'users',
   initialState,
   reducers: {

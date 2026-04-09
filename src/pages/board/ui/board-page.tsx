@@ -1,9 +1,10 @@
-import { useAppSelector } from '@/app/store';
 import { CreateBoard } from './create-board';
 import { Board } from './board';
+import { useSelector } from 'react-redux';
+import { BoardFeature } from '@/features/board';
 
 export function BoardPage() {
-  const board = useAppSelector((state) => state.board.board);
+  const board = useSelector(BoardFeature.selectors.selectBoard);
 
   return !board ? <CreateBoard /> : <Board />;
 }
