@@ -3,9 +3,9 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Input, Select } from '@/shared/ui';
 import { BoardEntity } from '@/entities/board';
-import { useAppDispatch, useAppSelector } from '@/app/store';
 import { GroupEntity } from '@/entities/group';
 import { BehaviorSetEntity } from '@/entities/behavior-set';
+import { useDispatch, useSelector } from 'react-redux';
 
 const defaultValues = {
   name: '',
@@ -20,9 +20,9 @@ export function CreateBoard() {
     formState: { errors },
   } = useForm({ defaultValues });
 
-  const dispatch = useAppDispatch();
-  const groupsState = useAppSelector((state) => state.groups);
-  const behaviorSetsState = useAppSelector((state) => state.behaviorSets);
+  const dispatch = useDispatch();
+  const groupsState = useSelector(GroupEntity.selectors.selectGroups);
+  const behaviorSetsState = useSelector(BehaviorSetEntity.selectors.selectBehaviorSets);
 
   useEffect(() => {
     dispatch(GroupEntity.actions.fetchGroups());

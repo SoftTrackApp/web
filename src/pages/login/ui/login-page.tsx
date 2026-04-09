@@ -1,10 +1,10 @@
 import classes from './login-page.module.css';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useAppDispatch, useAppSelector } from '@/app/store';
 import { SessionEntity } from '@/entities/session';
 import { useNavigate } from '@tanstack/react-router';
 import { Button, Input } from '@/shared/ui';
+import { useDispatch, useSelector } from 'react-redux';
 
 const defaultValues = {
   username: '',
@@ -21,8 +21,8 @@ export function LoginPage() {
 
   const navigate = useNavigate();
 
-  const dispatch = useAppDispatch();
-  const { session, error } = useAppSelector((state) => state.session);
+  const dispatch = useDispatch();
+  const { session, error } = useSelector(SessionEntity.selectors.selectSession);
 
   const onSubmit = handleSubmit((data) => {
     dispatch(SessionEntity.actions.logIn(data));

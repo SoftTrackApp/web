@@ -5,7 +5,7 @@ const initialState: BoardState = {
   board: null,
 };
 
-export const { actions, reducer } = createSlice({
+export const { name, actions, reducer } = createSlice({
   name: 'board',
   initialState,
   reducers: {

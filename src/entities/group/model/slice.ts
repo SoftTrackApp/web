@@ -7,7 +7,7 @@ const initialState: GroupsState = {
   error: null,
 };
 
-export const { actions, reducer } = createSlice({
+export const { name, actions, reducer } = createSlice({
   name: 'groups',
   initialState,
   reducers: {
