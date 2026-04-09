@@ -1,7 +1,7 @@
 import classes from './board.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo, useState } from 'react';
-import { Search } from 'lucide-react';
+import { ChevronUp, Search } from 'lucide-react';
 import { Input, Dialog, Button } from '@/shared/ui';
 import { UserFeature } from '@/features/user';
 import { BoardFeature } from '@/features/board';
@@ -11,6 +11,7 @@ import clsx from 'clsx';
 
 export function Board() {
   const [searchText, setSearchText] = useState('');
+  const [comment, setComment] = useState('');
 
   const board = useSelector(BoardFeature.selectors.selectBoard);
   const { behaviorSets } = useSelector(BehaviorSetFeature.selectors.selectBehaviorSets);
@@ -43,6 +44,17 @@ export function Board() {
     if (!selectedUser) return;
 
     dispatch(UserFeature.actions.addUserRecord({ userId: selectedUser.id, behaviorName }));
+  };
+
+  const addRecordComment = (e: React.SubmitEvent, id: number) => {
+    e.preventDefault();
+
+    if (!comment.trim()) {
+      return;
+    }
+
+    dispatch(UserFeature.actions.addRecordComment({ recordId: id, comment }));
+    setComment('');
   };
 
   if (!behaviorSet) {
@@ -113,11 +125,30 @@ export function Board() {
                     }
                   >
                     <div className={classes.commentList} role="list">
-                      <div className={classes.commentCard} role="listitem">Example Comment 1</div>
-                      <div className={classes.commentCard} role="listitem">Example Comment 2</div>
+                      {record.comments.map((c, i) => (
+                        <div key={i} className={classes.commentCard} role="listitem">
+                          {c}
+                        </div>
+                      ))}
                     </div>
-                    
-                    <Button>Добавить новый</Button>
+
+                    <form
+                      className={classes.commentForm}
+                      onSubmit={(e) => addRecordComment(e, record.id)}
+                    >
+                      <Input
+                        type="text"
+                        placeholder="Введите комментарий"
+                        className={classes.commentInput}
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        required
+                      />
+
+                      <Button className={classes.createCommentButton}>
+                        <ChevronUp />
+                      </Button>
+                    </form>
                   </Dialog>
                 </div>
               ))}
