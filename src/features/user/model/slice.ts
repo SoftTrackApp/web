@@ -40,5 +40,15 @@ export const { name, actions, reducer } = createSlice({
         comments: [],
       });
     },
+
+    addRecordComment: (state, action: PayloadAction<{ recordId: number; comment: string }>) => {
+      for (const user of state.users) {
+        for (const record of user.records) {
+          if (record.id === action.payload.recordId) {
+            record.comments.push(action.payload.comment);
+          }
+        }
+      }
+    },
   },
 });

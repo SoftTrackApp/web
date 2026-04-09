@@ -135,9 +135,24 @@
   flex-direction: column;
   gap: 16px;
   margin-bottom: 48px;
+  overflow-y: auto;
+  max-height: 400px;
 }
 
 .commentCard {
   padding: 14px 12px;
   border: 1px solid var(--c-gray-200);
+}
+
+.commentForm {
+  display: flex;
+  gap: 8px;
+}
+
+.commentInput {
+  flex: 1;
+}
+
+.createCommentButton {
+  width: fit-content;
 }
