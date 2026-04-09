@@ -1,7 +1,7 @@
 import classes from './login-page.module.css';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { SessionEntity } from '@/entities/session';
+import { SessionFeature } from '@/features/session';
 import { useNavigate } from '@tanstack/react-router';
 import { Button, Input } from '@/shared/ui';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,10 +22,10 @@ export function LoginPage() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { session, error } = useSelector(SessionEntity.selectors.selectSession);
+  const { session, error } = useSelector(SessionFeature.selectors.selectSession);
 
   const onSubmit = handleSubmit((data) => {
-    dispatch(SessionEntity.actions.logIn(data));
+    dispatch(SessionFeature.actions.logIn(data));
   });
 
   useEffect(() => {

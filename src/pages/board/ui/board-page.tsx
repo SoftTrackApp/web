@@ -1,10 +1,10 @@
 import { CreateBoard } from './create-board';
 import { Board } from './board';
 import { useSelector } from 'react-redux';
-import { BoardEntity } from '@/entities/board';
+import { BoardFeature } from '@/features/board';
 
 export function BoardPage() {
-  const board = useSelector(BoardEntity.selectors.selectBoard);
+  const board = useSelector(BoardFeature.selectors.selectBoard);
 
   return !board ? <CreateBoard /> : <Board />;
 }

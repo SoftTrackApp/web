@@ -2,9 +2,9 @@ import classes from './create-board.module.css';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button, Input, Select } from '@/shared/ui';
-import { BoardEntity } from '@/entities/board';
-import { GroupEntity } from '@/entities/group';
-import { BehaviorSetEntity } from '@/entities/behavior-set';
+import { BoardFeature } from '@/features/board';
+import { GroupFeature } from '@/features/group';
+import { BehaviorSetFeature } from '@/features/behavior-set';
 import { useDispatch, useSelector } from 'react-redux';
 
 const defaultValues = {
@@ -21,17 +21,17 @@ export function CreateBoard() {
   } = useForm({ defaultValues });
 
   const dispatch = useDispatch();
-  const groupsState = useSelector(GroupEntity.selectors.selectGroups);
-  const behaviorSetsState = useSelector(BehaviorSetEntity.selectors.selectBehaviorSets);
+  const groupsState = useSelector(GroupFeature.selectors.selectGroups);
+  const behaviorSetsState = useSelector(BehaviorSetFeature.selectors.selectBehaviorSets);
 
   useEffect(() => {
-    dispatch(GroupEntity.actions.fetchGroups());
-    dispatch(BehaviorSetEntity.actions.fetchBehaviorSets());
+    dispatch(GroupFeature.actions.fetchGroups());
+    dispatch(BehaviorSetFeature.actions.fetchBehaviorSets());
   }, [dispatch]);
 
   const onSubmit = handleSubmit((data) => {
     dispatch(
-      BoardEntity.actions.setBoard({
+      BoardFeature.actions.setBoard({
         ...data,
         behaviorSetId: Number(data.behaviorSetId),
         selectedUserId: 0,

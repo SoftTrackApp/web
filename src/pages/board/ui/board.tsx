@@ -3,18 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
 import { Input, Dialog, Button } from '@/shared/ui';
-import { UserEntity } from '@/entities/user';
-import { BoardEntity } from '@/entities/board';
-import { BehaviorSetEntity } from '@/entities/behavior-set';
+import { UserFeature } from '@/features/user';
+import { BoardFeature } from '@/features/board';
+import { BehaviorSetFeature } from '@/features/behavior-set';
 import { MessageCircle } from 'lucide-react';
 import clsx from 'clsx';
 
 export function Board() {
   const [searchText, setSearchText] = useState('');
 
-  const board = useSelector(BoardEntity.selectors.selectBoard);
-  const { behaviorSets } = useSelector(BehaviorSetEntity.selectors.selectBehaviorSets);
-  const { users, loading, error } = useSelector(UserEntity.selectors.selectUsers);
+  const board = useSelector(BoardFeature.selectors.selectBoard);
+  const { behaviorSets } = useSelector(BehaviorSetFeature.selectors.selectBehaviorSets);
+  const { users, loading, error } = useSelector(UserFeature.selectors.selectUsers);
 
   const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ export function Board() {
 
   useEffect(() => {
     if (users.length === 0) {
-      dispatch(UserEntity.actions.fetchUsers());
+      dispatch(UserFeature.actions.fetchUsers());
     }
   }, [dispatch, users.length]);
 
@@ -42,7 +42,7 @@ export function Board() {
   const addUserRecord = (behaviorName: string) => {
     if (!selectedUser) return;
 
-    dispatch(UserEntity.actions.addUserRecord({ userId: selectedUser.id, behaviorName }));
+    dispatch(UserFeature.actions.addUserRecord({ userId: selectedUser.id, behaviorName }));
   };
 
   if (!behaviorSet) {
@@ -76,7 +76,7 @@ export function Board() {
                   classes.userCard,
                   user.id === board.selectedUserId && classes.selectedUser,
                 )}
-                onClick={() => dispatch(BoardEntity.actions.setSelectedUserId(user.id))}
+                onClick={() => dispatch(BoardFeature.actions.setSelectedUserId(user.id))}
                 role="listitem"
               >
                 {user.name} {user.surname}

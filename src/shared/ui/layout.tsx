@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link, Navigate, Outlet, useLocation, type LinkProps } from '@tanstack/react-router';
-import { SessionEntity } from '@/entities/session';
+import { SessionFeature } from '@/features/session';
 import classes from './layout.module.css';
 import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,14 +18,14 @@ function NavBarLink(props: LinkProps) {
 
 export function Layout() {
   const dispatch = useDispatch();
-  const { session, loading } = useSelector(SessionEntity.selectors.selectSession);
+  const { session, loading } = useSelector(SessionFeature.selectors.selectSession);
 
   useEffect(() => {
-    dispatch(SessionEntity.actions.fetchSession());
+    dispatch(SessionFeature.actions.fetchSession());
   }, [dispatch]);
 
   const handleLogOut = () => {
-    dispatch(SessionEntity.actions.logOut());
+    dispatch(SessionFeature.actions.logOut());
   };
 
   if (loading) return <span>Загрузка...</span>;
