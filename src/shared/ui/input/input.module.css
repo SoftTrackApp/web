@@ -1,11 +1,35 @@
+.wrapper {
+  width: 100%;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.default {
+  outline: 1px solid var(--gray-300);
+}
+.default:focus-within {
+  outline: 2px solid var(--purple-500);
+}
+
+.error {
+  outline: 1px solid var(--red-300);
+}
+.error:focus-within {
+  outline-width: 2px;
+}
+
 .input {
   padding: 10px 14px;
   font-size: 16px;
   border-radius: 8px;
-  border: 1px solid var(--gray-300);
+  width: 100%;
+  border: none;
+  outline: none;
 }
 
-.input:focus {
-  border-color: var(--purple-500);
-  outline: 2px solid var(--purple-500);
+.errorIcon {
+  color: var(--red-500);
+  margin: 0 14px;
 }

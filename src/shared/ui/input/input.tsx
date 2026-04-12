@@ -1,6 +1,17 @@
 import clsx from 'clsx';
 import classes from './input.module.css';
+import { CircleAlert } from 'lucide-react';
 
-export function Input({ className, ...props }: React.InputHTMLAttributes<HTMLInputElement>) {
-  return <input className={clsx(className, classes.input)} {...props} />;
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  variant?: 'default' | 'error';
+}
+
+export function Input({ className, variant = 'default', ...props }: InputProps) {
+  return (
+    <label className={clsx(className, classes.wrapper, classes[variant])}>
+      <input className={classes.input} {...props} />
+
+      {variant === 'error' && <CircleAlert className={classes.errorIcon} />}
+    </label>
+  );
 }
