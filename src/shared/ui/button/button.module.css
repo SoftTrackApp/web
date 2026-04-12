@@ -1,0 +1,22 @@
+.button {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 12px 24px;
+  background-color: var(--purple-500);
+  color: var(--white);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--purple-600);
+}
+
+.button:active {
+  background-color: var(--purple-700);
+}
+
+.button:focus {
+  outline: 2px solid var(--purple-600);
+}
