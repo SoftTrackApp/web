@@ -6,6 +6,10 @@ import { Button } from '@/shared/ui/button';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { ErrorMessage } from '@/shared/ui/error-message';
 import { Field } from '@/shared/ui/field';
+import { useDispatch, useSelector } from 'react-redux';
+import { SessionFeature } from '@/features/session';
+import { useEffect } from 'react';
+import { useNavigate } from '@tanstack/react-router';
 
 type Inputs = {
   username: string;
@@ -16,10 +20,30 @@ export function SigninPage() {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const session = useSelector(SessionFeature.selectors.selectSession);
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    dispatch(SessionFeature.actions.logIn(data));
+  };
+
+  useEffect(() => {
+    if (session.error) {
+      setError('root', { message: session.error });
+    }
+  }, [session.error, setError]);
+
+  useEffect(() => {
+    if (session.data) {
+      navigate({ to: '/' });
+    }
+  }, [session.data, navigate]);
 
   return (
     <div className={classes.wrapper}>

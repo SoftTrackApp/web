@@ -1,21 +1,42 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 import { SessionApi } from '../api';
-import type { Session } from './types';
+import type { Credentials, Session } from './types';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
-export function* fetchSession() {
+function* fetchSession() {
+  yield put(actions.setError('Произошла ошибка!'));
   try {
     const session: Session = yield call(SessionApi.fetchSession);
     yield put(actions.setSession(session));
   } catch (err) {
-    if (err instanceof Error) {
-      yield put(actions.setError(err.message));
-    }
+    const message = err instanceof Error ? err.message : 'Произошла ошибка!';
+    yield put(actions.setError(message));
+  }
+}
 
-    yield put(actions.setError('Произошла ошибка!'));
+function* logIn(action: PayloadAction<Credentials>) {
+  try {
+    const session: Session = yield call(SessionApi.logIn, action.payload);
+    yield put(actions.setSession(session));
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Произошла ошибка!';
+    yield put(actions.setError(message));
+  }
+}
+
+function* logOut() {
+  try {
+    yield call(SessionApi.logOut);
+    yield put(actions.setSession(null));
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Произошла ошибка!';
+    yield put(actions.setError(message));
   }
 }
 
 export function* saga() {
   yield takeLatest(actions.fetchSession.type, fetchSession);
+  yield takeLatest(actions.logIn.type, logIn);
+  yield takeLatest(actions.logOut.type, logOut);
 }

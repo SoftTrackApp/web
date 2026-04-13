@@ -10,3 +10,8 @@ export interface SessionState {
   data: Session | null;
   error: string | null;
 }
+
+export interface Credentials {
+  username: string;
+  password: string;
+}

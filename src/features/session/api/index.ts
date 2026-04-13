@@ -1,4 +1,4 @@
-import type { Session } from '../model/types';
+import type { Credentials, Session } from '../model/types';
 
 const exampleSession: Session = {
   id: '1',
@@ -9,4 +9,7 @@ const exampleSession: Session = {
 
 export const SessionApi = {
   fetchSession: async (): Promise<Session> => exampleSession,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  logIn: async (_credentials: Credentials): Promise<Session> => exampleSession,
+  logOut: async () => {},
 };

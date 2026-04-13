@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { Session, SessionState } from './types';
+import type { Credentials, Session, SessionState } from './types';
 
 const initialState: SessionState = {
   data: null,
@@ -16,9 +16,25 @@ export const { name, reducer, actions } = createSlice({
       state.error = null;
     },
 
-    setSession: (state, action: PayloadAction<Session>) => {
+    logIn: {
+      reducer: (state) => {
+        state.isLoading = true;
+        state.error = null;
+      },
+      prepare: (credentials: Credentials) => ({
+        payload: credentials,
+      }),
+    },
+
+    logOut: (state) => {
+      state.isLoading = true;
+      state.error = null;
+    },
+
+    setSession: (state, action: PayloadAction<Session | null>) => {
       state.data = action.payload;
       state.isLoading = false;
+      state.error = null;
     },
 
     setError: (state, action: PayloadAction<string>) => {
