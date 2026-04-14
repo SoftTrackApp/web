@@ -3,6 +3,7 @@ import { Select } from '@/shared/ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserFeature } from '@/features/user';
 import { useEffect, useState } from 'react';
+import { SkillCard } from './skill-card';
 
 export function DashboardPage() {
   const dispatch = useDispatch();
@@ -28,7 +29,12 @@ export function DashboardPage() {
         ))}
       </Select>
 
-      {selectedUser?.name}
+      <div className={classes.skills}>
+        <SkillCard title="Коммуникация" rates={15} maxRates={15} />
+        <SkillCard title="Коммуникация" rates={8} maxRates={15} />
+        <SkillCard title="Коммуникация" rates={4} maxRates={15} />
+        <SkillCard title="Коммуникация" rates={2} maxRates={15} />
+      </div>
     </div>
   );
 }
