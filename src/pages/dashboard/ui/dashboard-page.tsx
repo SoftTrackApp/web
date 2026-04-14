@@ -11,11 +11,14 @@ export function DashboardPage() {
   const { users } = useSelector(UserFeature.selectors.selectUsers);
 
   const [userId, setUserId] = useState<number | null>(null);
-  const selectedUser = users.find((u) => u.id === userId) || users[0];
+
+  const selectedUser = users.find((u) => u.id === userId) || users[0] || null;
 
   useEffect(() => {
     dispatch(UserFeature.actions.fetchUsers());
   }, [dispatch]);
+
+  if (users.length === 0) return null;
 
   return (
     <div className={classes.wrapper}>
@@ -28,6 +31,10 @@ export function DashboardPage() {
           </option>
         ))}
       </Select>
+
+      <span>
+        Выбранный пользователь: {selectedUser.surname} {selectedUser.name}
+      </span>
 
       <div className={classes.skills}>
         <SkillCard title="Коммуникация" rates={15} maxRates={15} />
