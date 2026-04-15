@@ -5,7 +5,6 @@ import type { Credentials, Session } from './types';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 function* fetchSession() {
-  yield put(actions.setError('Произошла ошибка!'));
   try {
     const session: Session = yield call(SessionApi.fetchSession);
     yield put(actions.setSession(session));

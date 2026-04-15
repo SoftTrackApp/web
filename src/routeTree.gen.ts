@@ -10,42 +10,48 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SigninRouteImport } from './routes/signin'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as _appRouteImport } from './routes/__app'
+import { Route as _appIndexRouteImport } from './routes/__app/index'
 
 const SigninRoute = SigninRouteImport.update({
   id: '/signin',
   path: '/signin',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
+const _appRoute = _appRouteImport.update({
+  id: '/__app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const _appIndexRoute = _appIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => _appRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof _appIndexRoute
   '/signin': typeof SigninRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
   '/signin': typeof SigninRoute
+  '/': typeof _appIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/__app': typeof _appRouteWithChildren
   '/signin': typeof SigninRoute
+  '/__app/': typeof _appIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/' | '/signin'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/signin'
-  id: '__root__' | '/' | '/signin'
+  to: '/signin' | '/'
+  id: '__root__' | '/__app' | '/signin' | '/__app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  _appRoute: typeof _appRouteWithChildren
   SigninRoute: typeof SigninRoute
 }
 
@@ -58,18 +64,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SigninRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
+    '/__app': {
+      id: '/__app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof _appRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/__app/': {
+      id: '/__app/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof _appIndexRouteImport
+      parentRoute: typeof _appRoute
     }
   }
 }
 
+interface _appRouteChildren {
+  _appIndexRoute: typeof _appIndexRoute
+}
+
+const _appRouteChildren: _appRouteChildren = {
+  _appIndexRoute: _appIndexRoute,
+}
+
+const _appRouteWithChildren = _appRoute._addFileChildren(_appRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  _appRoute: _appRouteWithChildren,
   SigninRoute: SigninRoute,
 }
 export const routeTree = rootRouteImport
