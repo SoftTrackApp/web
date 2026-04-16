@@ -1,0 +1,25 @@
+.sidebar {
+  width: 354px;
+  border-left: 1px solid var(--c-gray-200);
+  margin-left: auto;
+  padding: 24px 20px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close {
+  color: var(--c-gray-200);
+  cursor: pointer;
+}
+.close:hover {
+  color: var(--c-gray-500);
+}

@@ -1,21 +1,27 @@
+import clsx from 'clsx';
 import classes from './skill-card.module.css';
+import type { Skill } from '../model/skill';
 
 interface SkillCardProps {
-  title: string;
-  rates: number;
+  skill: Skill;
   maxRates?: number;
+  selected?: boolean;
+  onClick?: (skillId: number) => void;
 }
 
-export function SkillCard({ title, rates, maxRates }: SkillCardProps) {
-  const barWidth = maxRates ? Math.floor((rates / maxRates) * 100) : 0;
+export function SkillCard({ skill, maxRates, selected = false, onClick }: SkillCardProps) {
+  const barWidth = maxRates ? Math.floor((skill.rates / maxRates) * 100) : 0;
 
   return (
-    <div className={classes.skillCard}>
+    <div
+      className={clsx(classes.skillCard, selected && classes.selected)}
+      onClick={() => onClick && onClick(skill.id)}
+    >
       <span className={classes.label}>Soft skill</span>
-      <h1 className={classes.title}>{title}</h1>
+      <h1 className={classes.title}>{skill.title}</h1>
 
       <div className={classes.rates}>
-        <span className={classes.ratesCount}>{rates}</span> отметок
+        <span className={classes.ratesCount}>{skill.rates}</span> отметок
       </div>
 
       <div className={classes.bar} style={{ width: `${barWidth}%` }} />
