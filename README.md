@@ -4,7 +4,7 @@
 
 [shields-fsd-white]: https://img.shields.io/badge/Feature--Sliced-Design?style=for-the-badge&labelColor=262224&color=F2F2F2&logoWidth=10&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAaCAYAAAC3g3x9AAAACXBIWXMAAALFAAACxQGJ1n/vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA/SURBVHgB7dKxCgAgCIThs/d/51JoNQIdDrxvqMXlR4FmFs92KDIX/wI7JSdDN+eHtkxIycnQvMNW8hN/crsDc5QgGX9NvT0AAAAASUVORK5CYII=
 
-Веб-интерфейс для SoftTrack - сервиса для отслеживания софт-скиллов людей в любой организации.
+Веб-интерфейс для SoftTrack - сервиса для отслеживания софт-скиллов людей в организации.
 
 Проект работает с помощью [Vite](https://vite.dev) и [React](https://react.dev) в связке с [SoftTrackApp/backend](https://github.com/SoftTrackApp/backend).
 
