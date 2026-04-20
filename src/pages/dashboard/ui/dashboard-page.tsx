@@ -4,15 +4,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UserFeature } from '@/features/user';
 import { useEffect, useMemo, useState } from 'react';
 import { SkillCard } from './skill-card';
-import type { Skill } from '../model/skill';
+import type { Comment, Skill } from '../model/skill';
 import { SkillSidebar } from './skill-sidebar';
 
 type Sort = 'alpha' | 'high-score' | 'low-score';
 
+const comments: Comment[] = [
+  { id: 1, author: 'Teacher 1', content: 'Comment 1', createdAt: new Date().toISOString() },
+  { id: 2, author: 'Teacher 2', content: 'Comment 2', createdAt: new Date().toISOString() },
+  { id: 3, author: 'Teacher 3', content: 'Comment 3', createdAt: new Date().toISOString() },
+  { id: 4, author: 'Teacher 4', content: 'Comment 4', createdAt: new Date().toISOString() },
+];
+
 const skills: Skill[] = [
-  { id: 1, title: 'Коммуникация', rates: 15 },
-  { id: 2, title: 'Работа в команде', rates: 10 },
-  { id: 3, title: 'Вербальная коммуникация', rates: 5 },
+  { id: 1, title: 'Коммуникация', rates: 15, comments: [comments[0], comments[1]] },
+  { id: 2, title: 'Работа в команде', rates: 10, comments: [comments[2], comments[3]] },
+  {
+    id: 3,
+    title: 'Вербальная коммуникация',
+    rates: 5,
+    comments: [comments[0], comments[2], comments[3]],
+  },
 ];
 
 export function DashboardPage() {
