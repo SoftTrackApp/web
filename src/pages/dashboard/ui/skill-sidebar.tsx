@@ -45,6 +45,24 @@ export function SkillSidebar({ skill, onClose }: SkillSidebarProps) {
         {tab === 'rates' ? (
           <>
             <h2 className={classes.subtitle}>Распределение поведений</h2>
+
+            <div className={classes.behavior}>
+              <div className={classes.behaviorHeader}>
+                <span>Слушал на уроке</span>
+                <span>15</span>
+              </div>
+
+              <div className={classes.bar} style={{ width: '100%' }} />
+            </div>
+
+            <div className={classes.behavior}>
+              <div className={classes.behaviorHeader}>
+                <span>Активно обсуждал</span>
+                <span>10</span>
+              </div>
+
+              <div className={classes.bar} style={{ width: '80%' }} />
+            </div>
           </>
         ) : (
           <>

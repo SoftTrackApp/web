@@ -69,3 +69,21 @@
   flex-direction: column;
   gap: 20px;
 }
+
+.behavior {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.behaviorHeader {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.bar {
+  height: 8px;
+  background-color: var(--c-gray-100);
+}
