@@ -10,7 +10,7 @@
 .title {
   font-size: 24px;
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .form {
@@ -20,7 +20,7 @@
 
 .label {
   display: block;
-  font-size: 16px;
+  font-size: 14px;
   margin-bottom: 8px;
   color: var(--c-gray-600);
 }
