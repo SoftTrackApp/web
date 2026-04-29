@@ -1,10 +1,11 @@
 import classes from './login-page.module.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { SessionFeature } from '@/features/session';
 import { useNavigate } from '@tanstack/react-router';
 import { Button, Input } from '@/shared/ui';
 import { useDispatch, useSelector } from 'react-redux';
+import { Eye, EyeOff } from 'lucide-react';
 
 const defaultValues = {
   username: '',
@@ -40,6 +41,8 @@ export function LoginPage() {
     }
   }, [navigate, session]);
 
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className={classes.container}>
       <h1 className={classes.title}>Вход в систему</h1>
@@ -54,6 +57,8 @@ export function LoginPage() {
             type="text"
             id="username"
             autoComplete="username"
+            placeholder="Введите логин"
+            destructive={!!errors.username}
             {...register('username', { required: 'Введите логин' })}
           />
 
@@ -68,9 +73,13 @@ export function LoginPage() {
           </label>
 
           <Input
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             id="password"
             autoComplete="current-password"
+            placeholder="Введите пароль"
+            destructive={!!errors.password}
+            trailingIcon={showPassword ? <EyeOff /> : <Eye />}
+            onTrailingIconClick={() => setShowPassword(!showPassword)}
             {...register('password', { required: 'Введите пароль' })}
           />
 
