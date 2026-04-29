@@ -1,9 +1,11 @@
 .wrapper {
   display: flex;
   align-items: center;
-  border: 2px solid var(--c-gray-200);
   box-sizing: border-box;
+  border: 1px solid var(--c-gray-300);
+  border-radius: 8px;
   height: 48px;
+  overflow: hidden;
 }
 
 .icon {
@@ -11,15 +13,32 @@
   align-items: center;
   justify-content: center;
   color: var(--c-gray-200);
-  margin-left: 16px;
+  margin-left: 14px;
+}
+
+.trailingIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-gray-200);
+  margin-right: 14px;
+}
+
+.destructiveIcon {
+  color: var(--c-red-500);
 }
 
 .input {
   width: 100%;
   font-size: 16px;
-  padding: 0 14px;
+  padding: 10px 14px;
   border: none;
+  color: var(--c-gray-900);
 }
 .input:focus {
   outline: none;
+}
+
+.destructive {
+  border-color: var(--c-red-500);
 }

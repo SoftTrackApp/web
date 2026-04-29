@@ -28,6 +28,8 @@
 .errorMessage {
   display: block;
   margin: 8px 0;
+  font-size: 14px;
+  color: var(--c-red-500);
 }
 
 .loginField {
