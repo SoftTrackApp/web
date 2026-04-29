@@ -9,4 +9,18 @@
   color: var(--c-white);
   border: none;
   cursor: pointer;
+  transition: background-color 200ms;
+}
+
+.button:hover {
+  background-color: var(--c-purple-600);
+}
+
+.button:active {
+  background-color: var(--c-purple-700);
+}
+
+.button:focus {
+  background-color: var(--c-purple-500);
+  outline: 2px solid var(--c-purple-600);
 }
