@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { SkillCard } from './skill-card';
 import type { Comment, Skill } from '../model/skill';
 import { SkillSidebar } from './skill-sidebar';
-import { ArrowUpDown } from 'lucide-react';
+import { ArrowUpDown, UserSearch } from 'lucide-react';
 
 type Sort = 'alpha' | 'high-score' | 'low-score';
 
@@ -112,17 +112,31 @@ export function DashboardPage() {
           </Select>
         </div>
 
-        <div className={classes.skills}>
-          {sortedSkills.map((skill) => (
-            <SkillCard
-              key={skill.id}
-              skill={skill}
-              maxRates={15}
-              selected={skillIds.includes(skill.id)}
-              onClick={switchSkill}
-            />
-          ))}
-        </div>
+        {selectedUser ? (
+          <div className={classes.skills}>
+            {sortedSkills.map((skill) => (
+              <SkillCard
+                key={skill.id}
+                skill={skill}
+                maxRates={15}
+                selected={skillIds.includes(skill.id)}
+                onClick={switchSkill}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className={classes.unselected}>
+            <div className={classes.unselectedIcon}>
+              <UserSearch size={48} />
+            </div>
+
+            <h2 className={classes.unselectedTitle}>Ученик не выбран</h2>
+            <span className={classes.unselectedText}>
+              Чтобы посмотреть статистику по навыкам и прогрессу,
+              <br /> выберите ученика из выпадающего списка выше
+            </span>
+          </div>
+        )}
       </div>
 
       <div className={classes.sidebars}>

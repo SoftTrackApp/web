@@ -32,9 +32,38 @@
   flex-direction: column;
   padding-left: 120px;
   padding-top: 16px;
+  width: 100%;
 }
 
 .sidebars {
   display: flex;
   margin-left: auto;
+}
+
+.unselected {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  color: var(--c-gray-800);
+}
+
+.unselectedIcon {
+  padding: 24px;
+  border-radius: 48px;
+  margin-bottom: 32px;
+  background-color: var(--c-purple-50);
+  color: var(--c-purple-500);
+}
+
+.unselectedTitle {
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.unselectedText {
+  line-height: 24px;
 }
