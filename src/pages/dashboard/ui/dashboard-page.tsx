@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { SkillCard } from './skill-card';
 import type { Comment, Skill } from '../model/skill';
 import { SkillSidebar } from './skill-sidebar';
+import { ArrowUpDown } from 'lucide-react';
 
 type Sort = 'alpha' | 'high-score' | 'low-score';
 
@@ -36,7 +37,7 @@ export function DashboardPage() {
   const [skillIds, setSkillIds] = useState<number[]>([]);
   const [sort, setSort] = useState<Sort>('alpha');
 
-  const selectedUser = users.find((u) => u.id === userId) || users[0] || null;
+  const selectedUser = users.find((u) => u.id === userId) || null;
 
   const sortedSkills = useMemo(() => {
     const copy = [...skills];
@@ -90,6 +91,8 @@ export function DashboardPage() {
 
         <div className={classes.filters}>
           <Select className={classes.select} onChange={(e) => setUserId(Number(e.target.value))}>
+            <option value="0">Выберите ученика</option>
+
             {users.map((user) => (
               <option key={user.id} value={user.id}>
                 {user.surname} {user.name}
@@ -101,16 +104,13 @@ export function DashboardPage() {
             className={classes.select}
             value={sort}
             onChange={(e) => setSort(e.target.value as Sort)}
+            icon={<ArrowUpDown />}
           >
             <option value="alpha">По названию (А-Я)</option>
-            <option value="high-score">Сначала высокие баллы</option>
-            <option value="low-score">Сначала низкие баллы</option>
+            <option value="high-score">По возрастанию баллов</option>
+            <option value="low-score">По убыванию баллов</option>
           </Select>
         </div>
-
-        <span>
-          Выбранный пользователь: {selectedUser.surname} {selectedUser.name}
-        </span>
 
         <div className={classes.skills}>
           {sortedSkills.map((skill) => (

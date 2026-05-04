@@ -5,13 +5,16 @@
 }
 
 .title {
+  color: var(--c-gray-700);
   font-weight: 600;
   font-size: 24px;
+  margin-bottom: 16px;
 }
 
 .filters {
   display: flex;
-  gap: 24px;
+  gap: 16px;
+  margin-bottom: 24px;
 }
 
 .select {
@@ -27,9 +30,8 @@
 .content {
   display: flex;
   flex-direction: column;
-  gap: 32px;
   padding-left: 120px;
-  padding-top: 48px;
+  padding-top: 16px;
 }
 
 .sidebars {
