@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   height: 50px;
-  padding: 0 121px;
+  padding: 0 80px;
   border-bottom: 1px solid var(--c-gray-100);
 }
 
@@ -28,7 +28,7 @@
 }
 
 .logOut {
-  color: var(--c-gray-200);
+  color: var(--c-gray-600);
   cursor: pointer;
 }
 

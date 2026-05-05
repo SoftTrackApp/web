@@ -21,10 +21,16 @@ export function SkillCard({ skill, maxRates, selected = false, onClick }: SkillC
       <h1 className={classes.title}>{skill.title}</h1>
 
       <div className={classes.rates}>
-        <span className={classes.ratesCount}>{skill.rates}</span> отметок
+        <span>
+          <span className={classes.ratesCount}>{skill.rates}</span> отметок
+        </span>
+
+        <span className={classes.ratesPerentage}>{barWidth}%</span>
       </div>
 
-      <div className={classes.bar} style={{ width: `${barWidth}%` }} />
+      <div className={classes.barWrapper}>
+        <div className={classes.bar} style={{ width: `${barWidth}%` }} />
+      </div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { SkillCard } from './skill-card';
 import type { Comment, Skill } from '../model/skill';
 import { SkillSidebar } from './skill-sidebar';
+import { ArrowUpDown, UserSearch } from 'lucide-react';
 
 type Sort = 'alpha' | 'high-score' | 'low-score';
 
@@ -36,7 +37,7 @@ export function DashboardPage() {
   const [skillIds, setSkillIds] = useState<number[]>([]);
   const [sort, setSort] = useState<Sort>('alpha');
 
-  const selectedUser = users.find((u) => u.id === userId) || users[0] || null;
+  const selectedUser = users.find((u) => u.id === userId) || null;
 
   const sortedSkills = useMemo(() => {
     const copy = [...skills];
@@ -84,55 +85,77 @@ export function DashboardPage() {
   if (users.length === 0) return null;
 
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.content}>
-        <h1 className={classes.title}>Статистика</h1>
+    <>
+      <h1 className={classes.title}>Статистика</h1>
 
-        <div className={classes.filters}>
-          <Select className={classes.select} onChange={(e) => setUserId(Number(e.target.value))}>
-            {users.map((user) => (
-              <option key={user.id} value={user.id}>
-                {user.surname} {user.name}
-              </option>
-            ))}
-          </Select>
+      <div className={classes.wrapper}>
+        <div className={classes.content}>
+          <div className={classes.filters}>
+            <Select className={classes.select} onChange={(e) => setUserId(Number(e.target.value))}>
+              <option value="0">Выберите ученика</option>
 
-          <Select
-            className={classes.select}
-            value={sort}
-            onChange={(e) => setSort(e.target.value as Sort)}
-          >
-            <option value="alpha">По названию (А-Я)</option>
-            <option value="high-score">Сначала высокие баллы</option>
-            <option value="low-score">Сначала низкие баллы</option>
-          </Select>
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.surname} {user.name}
+                </option>
+              ))}
+            </Select>
+
+            <Select
+              className={classes.select}
+              value={sort}
+              onChange={(e) => setSort(e.target.value as Sort)}
+              icon={<ArrowUpDown />}
+            >
+              <option value="alpha">По названию (А-Я)</option>
+              <option value="high-score">По возрастанию баллов</option>
+              <option value="low-score">По убыванию баллов</option>
+            </Select>
+          </div>
+
+          {selectedUser ? (
+            <div className={classes.skills}>
+              {sortedSkills.map((skill) => (
+                <SkillCard
+                  key={skill.id}
+                  skill={skill}
+                  maxRates={15}
+                  selected={skillIds.includes(skill.id)}
+                  onClick={switchSkill}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className={classes.unselected}>
+              <div className={classes.unselectedIcon}>
+                <UserSearch size={48} />
+              </div>
+
+              <h2 className={classes.unselectedTitle}>Ученик не выбран</h2>
+              <span className={classes.unselectedText}>
+                Чтобы посмотреть статистику по навыкам и прогрессу,
+                <br /> выберите ученика из выпадающего списка выше
+              </span>
+            </div>
+          )}
         </div>
 
-        <span>
-          Выбранный пользователь: {selectedUser.surname} {selectedUser.name}
-        </span>
+        <div className={classes.sidebars}>
+          {skillIds.map((id) => {
+            const skill = skills.find((s) => s.id === id);
+            if (!skill) return;
 
-        <div className={classes.skills}>
-          {sortedSkills.map((skill) => (
-            <SkillCard
-              key={skill.id}
-              skill={skill}
-              maxRates={15}
-              selected={skillIds.includes(skill.id)}
-              onClick={switchSkill}
-            />
-          ))}
+            return (
+              <SkillSidebar
+                key={id}
+                skill={skill}
+                roundedBorder={skillIds[0] === id}
+                onClose={() => closeSkill(skill.id)}
+              />
+            );
+          })}
         </div>
       </div>
-
-      <div className={classes.sidebars}>
-        {skillIds.map((id) => {
-          const skill = skills.find((s) => s.id === id);
-          if (!skill) return;
-
-          return <SkillSidebar key={id} skill={skill} onClose={() => closeSkill(skill.id)} />;
-        })}
-      </div>
-    </div>
+    </>
   );
 }

@@ -1,43 +1,57 @@
 .skillCard {
   display: flex;
   flex-direction: column;
-  padding: 16px 24px;
+  padding: 20px 24px;
   border: 1px solid var(--c-gray-200);
-  min-width: 282px;
-  min-height: 196px;
-  box-sizing: border-box;
+  min-width: 350px;
   cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px 0 var(--c-shadow);
+  transition: background-color 200ms;
 }
 .skillCard:hover,
 .selected {
-  border-color: var(--c-gray-500);
+  background-color: var(--c-purple-25);
 }
 
 .label {
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: 4px;
 }
 
 .title {
-  font-size: 20px;
-  font-weight: 500;
-  margin-bottom: auto;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--c-gray-800);
 }
 
 .rates {
-  font-size: 12px;
-  color: var(--c-gray-500);
-  margin-bottom: 16px;
+  display: flex;
+  align-items: flex-end;
+  font-size: 14px;
+  color: var(--c-gray-800);
+  margin-bottom: 10px;
 }
 
 .ratesCount {
-  font-size: 48px;
-  font-weight: 600;
-  margin-right: 4px;
+  font-size: 64px;
+  font-weight: 700;
+  margin-right: 2px;
   color: var(--c-black);
+}
+
+.barWrapper {
+  background-color: var(--c-purple-50);
+  border-radius: 24px;
 }
 
 .bar {
   height: 8px;
-  background-color: var(--c-gray-100);
+  background-color: var(--c-purple-300);
+  border-radius: 24px;
+}
+
+.ratesPerentage {
+  margin-left: auto;
 }
