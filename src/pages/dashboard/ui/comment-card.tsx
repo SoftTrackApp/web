@@ -9,7 +9,7 @@ export function CommentCard({ comment }: { comment: Comment }) {
         <span className={classes.date}>{new Date(comment.createdAt).toLocaleDateString()}</span>
       </div>
 
-      <span className={classes.content}>{comment.content}</span>
+      <span>{comment.content}</span>
     </div>
   );
 }

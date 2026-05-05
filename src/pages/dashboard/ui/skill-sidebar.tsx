@@ -1,22 +1,23 @@
 import classes from './skill-sidebar.module.css';
 import { useState } from 'react';
-import { X } from 'lucide-react';
+import { ChartBarBig, MessageCircle, X } from 'lucide-react';
 import type { Skill } from '../model/skill';
 import { CommentCard } from './comment-card';
 import clsx from 'clsx';
 
 interface SkillSidebarProps {
   skill: Skill;
+  roundedBorder?: boolean;
   onClose?: () => void;
 }
 
 type Tab = 'rates' | 'comments';
 
-export function SkillSidebar({ skill, onClose }: SkillSidebarProps) {
+export function SkillSidebar({ skill, roundedBorder = true, onClose }: SkillSidebarProps) {
   const [tab, setTab] = useState<Tab>('rates');
 
   return (
-    <div className={classes.sidebar}>
+    <div className={clsx(classes.sidebar, roundedBorder && classes.roundedBorder)}>
       <div className={classes.header}>
         <h1 className={classes.title}>{skill.title}</h1>
         <X className={classes.close} onClick={onClose} />
@@ -31,12 +32,15 @@ export function SkillSidebar({ skill, onClose }: SkillSidebarProps) {
           className={clsx(classes.switchButton, tab === 'rates' && classes.selectedButton)}
           onClick={() => setTab('rates')}
         >
+          <ChartBarBig />
           Показатели
         </div>
+
         <div
           className={clsx(classes.switchButton, tab === 'comments' && classes.selectedButton)}
           onClick={() => setTab('comments')}
         >
+          <MessageCircle />
           Комментарии
         </div>
       </div>
@@ -44,7 +48,7 @@ export function SkillSidebar({ skill, onClose }: SkillSidebarProps) {
       <div className={classes.data}>
         {tab === 'rates' ? (
           <>
-            <h2 className={classes.subtitle}>Распределение поведений</h2>
+            <h3 className={classes.subtitle}>Распределение поведений</h3>
 
             <div className={classes.behavior}>
               <div className={classes.behaviorHeader}>
@@ -52,7 +56,9 @@ export function SkillSidebar({ skill, onClose }: SkillSidebarProps) {
                 <span>15</span>
               </div>
 
-              <div className={classes.bar} style={{ width: '100%' }} />
+              <div className={classes.barWrapper}>
+                <div className={classes.bar} style={{ width: '100%' }} />
+              </div>
             </div>
 
             <div className={classes.behavior}>
@@ -61,12 +67,14 @@ export function SkillSidebar({ skill, onClose }: SkillSidebarProps) {
                 <span>10</span>
               </div>
 
-              <div className={classes.bar} style={{ width: '80%' }} />
+              <div className={classes.barWrapper}>
+                <div className={classes.bar} style={{ width: '80%' }} />
+              </div>
             </div>
           </>
         ) : (
           <>
-            <h2 className={classes.subtitle}>Комментарии к навыкам</h2>
+            <h3 className={classes.subtitle}>Комментарии</h3>
 
             {skill.comments.map((comment) => (
               <CommentCard key={comment.id} comment={comment} />

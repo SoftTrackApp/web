@@ -8,7 +8,7 @@
   color: var(--c-gray-700);
   font-weight: 600;
   font-size: 24px;
-  margin-bottom: 16px;
+  margin: 16px 80px;
 }
 
 .filters {
@@ -30,8 +30,7 @@
 .content {
   display: flex;
   flex-direction: column;
-  padding-left: 120px;
-  padding-top: 16px;
+  margin-left: 80px;
   width: 100%;
 }
 

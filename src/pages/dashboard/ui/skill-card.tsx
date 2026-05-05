@@ -28,7 +28,9 @@ export function SkillCard({ skill, maxRates, selected = false, onClick }: SkillC
         <span className={classes.ratesPerentage}>{barWidth}%</span>
       </div>
 
-      <div className={classes.bar} style={{ width: `${barWidth}%` }} />
+      <div className={classes.barWrapper}>
+        <div className={classes.bar} style={{ width: `${barWidth}%` }} />
+      </div>
     </div>
   );
 }
