@@ -1,9 +1,10 @@
+import classes from './layout.module.css';
+import clsx from 'clsx';
 import { useEffect } from 'react';
 import { Link, Navigate, Outlet, useLocation, type LinkProps } from '@tanstack/react-router';
 import { SessionFeature } from '@/features/session';
-import classes from './layout.module.css';
-import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
+import { Button } from './button';
 
 function NavBarLink(props: LinkProps) {
   const { pathname } = useLocation();
@@ -19,6 +20,8 @@ function NavBarLink(props: LinkProps) {
 export function Layout() {
   const dispatch = useDispatch();
   const { session, loading } = useSelector(SessionFeature.selectors.selectSession);
+
+  const { pathname } = useLocation();
 
   useEffect(() => {
     dispatch(SessionFeature.actions.fetchSession());
@@ -42,7 +45,21 @@ export function Layout() {
           <NavBarLink to="/manage/users">Пользователи</NavBarLink>
         </nav>
 
-        <span className={classes.logOut} onClick={handleLogOut}>Выйти</span>
+        <div className={classes.right}>
+          {pathname === '/board' && (
+            <>
+              <Button variant="secondary" size="sm">
+                Сохранить доску
+              </Button>
+
+              <div className={classes.verticalDivider}>&nbsp;</div>
+            </>
+          )}
+
+          <span className={classes.logOut} onClick={handleLogOut}>
+            Выйти
+          </span>
+        </div>
       </header>
 
       <Outlet />

@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50px;
+  height: 64px;
   padding: 0 80px;
   border-bottom: 1px solid var(--c-gray-100);
 }
@@ -35,5 +35,17 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  height: 100%;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.verticalDivider {
+  width: 1px;
+  background-color: var(--c-gray-300);
   height: 100%;
 }
