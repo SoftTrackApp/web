@@ -56,6 +56,7 @@ export function CreateBoard() {
             className={classes.input}
             type="text"
             id="name"
+            placeholder="Введите название"
             {...register('name', { required: 'Введите название' })}
           />
 
@@ -68,6 +69,10 @@ export function CreateBoard() {
           </label>
 
           <Select id="group" {...register('group', { required: 'Выберите группу' })}>
+            <option value="" disabled selected>
+              Выберите группу
+            </option>
+
             {groupsState.groups.map((group) => (
               <option key={group.id} value={group.name}>
                 {group.name}
@@ -87,6 +92,10 @@ export function CreateBoard() {
             id="behavior-set"
             {...register('behaviorSetId', { required: 'Выберите набор поведений' })}
           >
+            <option value="" disabled selected>
+              Выберите набор поведений
+            </option>
+
             {behaviorSetsState.behaviorSets.map((behaviorSet) => (
               <option key={behaviorSet.id} value={behaviorSet.id}>
                 {behaviorSet.name}

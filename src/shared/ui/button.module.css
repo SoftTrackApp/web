@@ -1,26 +1,50 @@
 .button {
-  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   font-weight: 500;
-  width: 100%;
-  height: 48px;
-  padding: 12px 24px;
   border-radius: 8px;
-  background-color: var(--c-purple-500);
+  width: 100%;
   color: var(--c-white);
   border: none;
   cursor: pointer;
   transition: background-color 200ms;
 }
 
-.button:hover {
+.primary {
+  background-color: var(--c-purple-500);
+}
+.primary:hover {
   background-color: var(--c-purple-600);
 }
-
-.button:active {
+.primary:active {
   background-color: var(--c-purple-700);
 }
-
-.button:focus {
+.primary:focus {
   background-color: var(--c-purple-500);
   outline: 2px solid var(--c-purple-600);
+}
+
+.outline {
+  background-color: transparent;
+  border: 1px solid var(--c-gray-100);
+  color: var(--c-gray-700);
+}
+.outline:hover {
+  background-color: var(--c-gray-50);
+}
+.outline:focus {
+  background-color: var(--c-gray-100);
+}
+
+.md {
+  padding: 10px 20px;
+  font-size: 14px;
+  height: 40px;
+}
+.sm {
+  padding: 8px 16px;
+  font-size: 12px;
+  height: 32px;
 }

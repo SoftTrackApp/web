@@ -11,10 +11,14 @@
   display: flex;
   flex-direction: column;
   width: 282px;
-  border: 2px solid var(--c-gray-200);
+  border: 1px solid var(--c-gray-200);
+  border-radius: 12px;
 }
 
 .search {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   padding: 16px 12px;
   border-bottom: 1px solid var(--c-gray-100);
 }
@@ -22,35 +26,36 @@
 .userList {
   flex: 1;
   overflow-y: auto;
+  margin: 16px;
 }
 
 .userCard {
   padding: 14px 20px;
-  border-bottom: 1px solid var(--c-gray-100);
   cursor: pointer;
+  transition:
+    background-color 200ms,
+    color 200ms;
 }
 .userCard:hover,
 .selectedUser {
-  background-color: var(--c-gray-100);
+  background-color: var(--c-purple-50);
+  color: var(--c-purple-700);
 }
 
 .behaviorsHeader {
-  padding: 14px;
+  margin-top: 16px;
   text-align: center;
-  border-bottom: 1px solid var(--c-gray-100);
 }
 
 .behaviorsTitle {
   font-size: 12px;
   font-weight: 400;
   margin-bottom: 8px;
-  margin-top: 0;
 }
 
 .behaviorsName {
   font-size: 16px;
   font-weight: 400;
-  margin-bottom: 0;
 }
 
 .behaviorList {
@@ -65,39 +70,38 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--c-gray-100);
-  min-height: 64px;
+  border: 1px solid var(--c-gray-200);
   text-align: center;
-  padding: 0 8px;
+  padding: 12px 16px;
   cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 200ms;
 }
 .behaviorCard:hover {
-  background-color: var(--c-gray-100);
+  background-color: var(--c-purple-50);
 }
 
 .overviewSection {
   display: flex;
   flex: 1;
   flex-direction: column;
-  border: 2px solid var(--c-gray-200);
+  border: 1px solid var(--c-gray-200);
+  border-radius: 12px;
 }
 
 .overviewHeader {
   display: flex;
   flex-direction: column;
-  padding: 34px;
-  text-align: center;
-  border-bottom: 1px solid var(--c-gray-100);
+  border: 1px solid var(--c-gray-100);
+  border-radius: 16px;
+  margin: 16px;
+  padding: 16px 24px;
 }
 
 .name {
-  margin-bottom: 8px;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 20px;
-}
-
-.description {
-  font-size: 12px;
+  line-height: 28px;
 }
 
 .overviewBehaviors {
@@ -106,26 +110,23 @@
   flex-direction: column;
   overflow-y: auto;
   gap: 16px;
-  margin: 32px;
+  margin: 16px;
 }
 
 .overviewBehaviorCard {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  border: 1px solid var(--c-gray-200);
+  padding: 12px 24px;
+  border: 1px solid var(--c-gray-100);
+  border-radius: 8px;
 }
 
 .commentButton {
   display: flex;
-  align-items: center;
-  justify-content: center;
   border: none;
-  background-color: var(--c-gray-100);
-  border-radius: 50px;
-  width: 32px;
-  height: 32px;
+  background-color: transparent;
+  color: var(--c-gray-600);
   cursor: pointer;
 }
 

@@ -8,6 +8,7 @@ body,
   --c-white: hsla(0, 0%, 100%, 1);
   --c-black: hsla(0, 0%, 0%, 1);
 
+  --c-gray-50: hsla(263, 33%, 96%, 1);
   --c-gray-100: hsla(0, 0%, 85%, 1);
   --c-gray-200: hsla(0, 0%, 73%, 1);
   --c-gray-300: hsla(263, 4%, 74%, 1);
