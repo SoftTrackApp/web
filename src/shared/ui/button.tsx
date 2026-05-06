@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import classes from './button.module.css';
 
-type ButtonVariant = 'primary' | 'outline';
+type ButtonVariant = 'primary' | 'secondary' | 'outline';
 type ButtonSize = 'md' | 'sm';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
