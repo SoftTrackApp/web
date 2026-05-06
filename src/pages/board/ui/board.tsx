@@ -1,13 +1,14 @@
 import classes from './board.module.css';
+import clsx from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo, useState } from 'react';
-import { ChevronUp, Search } from 'lucide-react';
+import { ChevronLeft, ChevronUp, Search } from 'lucide-react';
 import { Input, Dialog, Button } from '@/shared/ui';
 import { UserFeature } from '@/features/user';
 import { BoardFeature } from '@/features/board';
 import { BehaviorSetFeature } from '@/features/behavior-set';
 import { MessageCircle } from 'lucide-react';
-import clsx from 'clsx';
+import { Link } from '@tanstack/react-router';
 
 export function Board() {
   const [searchText, setSearchText] = useState('');
@@ -65,9 +66,15 @@ export function Board() {
     <div className={classes.container}>
       <section className={classes.section}>
         <div className={classes.search}>
+          <Link to="/">
+            <Button variant="outline" size="sm">
+              <ChevronLeft size={16} /> Вернуться на Главную
+            </Button>
+          </Link>
+
           <Input
             type="text"
-            placeholder="Найти..."
+            placeholder="Найти"
             role="search"
             icon={<Search size={16} />}
             value={searchText}
@@ -120,7 +127,7 @@ export function Board() {
                     description={record.behaviorName}
                     trigger={
                       <button className={classes.commentButton}>
-                        <MessageCircle color="white" />
+                        <MessageCircle size={18} />
                       </button>
                     }
                   >
