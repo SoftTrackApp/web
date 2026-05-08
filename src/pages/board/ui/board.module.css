@@ -66,21 +66,6 @@
   overflow-y: auto;
 }
 
-.behaviorCard {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--c-gray-200);
-  text-align: center;
-  padding: 12px 16px;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: background-color 200ms;
-}
-.behaviorCard:hover {
-  background-color: var(--c-purple-50);
-}
-
 .overviewSection {
   display: flex;
   flex: 1;

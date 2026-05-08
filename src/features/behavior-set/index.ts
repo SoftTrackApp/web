@@ -8,3 +8,5 @@ export const BehaviorSetFeature = {
   reducer,
   selectors,
 };
+
+export type { Behavior } from './model/types';
