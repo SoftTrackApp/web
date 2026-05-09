@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Outlet } from '@tanstack/react-router';
 import { SessionFeature } from '@/features/session';
 
-export function Layout() {
+export function MainLayout() {
   const dispatch = useDispatch();
   const session = useSelector(SessionFeature.selectors.selectSession);
 
