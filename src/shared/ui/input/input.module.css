@@ -29,7 +29,16 @@
   outline: none;
 }
 
+.icon {
+  display: flex;
+  margin-right: 14px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-500);
+}
+
 .errorIcon {
   color: var(--red-500);
-  margin: 0 14px;
+  margin-right: 14px;
 }

@@ -8,8 +8,9 @@ import { ErrorMessage } from '@/shared/ui/error-message';
 import { Field } from '@/shared/ui/field';
 import { useDispatch, useSelector } from 'react-redux';
 import { SessionFeature } from '@/features/session';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { Eye, EyeOff } from 'lucide-react';
 
 type Inputs = {
   username: string;
@@ -28,6 +29,8 @@ export function SigninPage() {
 
   const dispatch = useDispatch();
   const session = useSelector(SessionFeature.selectors.selectSession);
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     dispatch(SessionFeature.actions.logIn(data));
@@ -69,10 +72,12 @@ export function SigninPage() {
           <Label htmlFor="password">Пароль</Label>
           <Input
             variant={errors.password ? 'error' : 'default'}
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             placeholder="Введите пароль"
             id="password"
             autoComplete="current-password"
+            icon={showPassword ? <EyeOff /> : <Eye />}
+            onIconClick={() => setShowPassword(!showPassword)}
             {...register('password', { required: 'Введите пароль' })}
           />
           {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
