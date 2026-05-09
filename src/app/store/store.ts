@@ -1,7 +1,7 @@
 import { SessionFeature } from '@/features/session';
 import { configureStore } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
 import { rootSaga } from './root-saga';
+import createSagaMiddleware from 'redux-saga';
 
 const sagaMiddleware = createSagaMiddleware();
 

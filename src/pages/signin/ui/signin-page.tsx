@@ -9,7 +9,7 @@ import { Field } from '@/shared/ui/field';
 import { useDispatch, useSelector } from 'react-redux';
 import { SessionFeature } from '@/features/session';
 import { useEffect } from 'react';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate } from 'react-router';
 
 type Inputs = {
   username: string;
@@ -41,7 +41,7 @@ export function SigninPage() {
 
   useEffect(() => {
     if (session.data) {
-      navigate({ to: '/' });
+      navigate('/');
     }
   }, [session.data, navigate]);
 

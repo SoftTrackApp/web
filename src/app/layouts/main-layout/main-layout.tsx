@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, Outlet } from '@tanstack/react-router';
 import { SessionFeature } from '@/features/session';
+import { Navigate, Outlet } from 'react-router';
 
 export function MainLayout() {
   const dispatch = useDispatch();
