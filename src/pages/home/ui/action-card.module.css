@@ -16,18 +16,24 @@
   background-color: var(--purple-50);
 }
 
+.title {
+  transition: color 200ms;
+}
 .card:hover .title {
   color: var(--purple-700);
 }
 
+.description {
+  transition: color 200ms;
+}
 .card:hover .description {
   color: var(--purple-500);
 }
 
 .icon {
   color: var(--gray-400);
+  transition: color 200ms;
 }
-
 .card:hover .icon {
   color: var(--purple-200);
 }

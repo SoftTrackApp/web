@@ -2,19 +2,7 @@ import classes from './home-page.module.css';
 import { ChartBarBig, ClipboardCheck } from 'lucide-react';
 import { ActionCard } from './action-card';
 import { Typography } from '@/shared/ui/typography';
-
-const actions = [
-  {
-    title: 'Доска оценивания',
-    description: 'Оценивайте soft skills учеников в реальном времени',
-    icon: <ClipboardCheck size={64} />,
-  },
-  {
-    title: 'Статистика',
-    description: 'Отслеживайте динамику и успеваемость групп',
-    icon: <ChartBarBig size={64} />,
-  },
-];
+import { Link } from 'react-router';
 
 export function HomePage() {
   return (
@@ -24,14 +12,19 @@ export function HomePage() {
       </Typography>
 
       <div className={classes.cards}>
-        {actions.map((action) => (
+        <ActionCard
+          title="Доска оценивания"
+          description="Оценивайте soft skills учеников в реальном времени"
+          icon={<ClipboardCheck size={64} />}
+        />
+
+        <Link to="/dashboard">
           <ActionCard
-            key={action.title}
-            title={action.title}
-            description={action.description}
-            icon={action.icon}
+            title="Статистика"
+            description="Отслеживайте динамику и успеваемость групп"
+            icon={<ChartBarBig size={64} />}
           />
-        ))}
+        </Link>
       </div>
     </div>
   );

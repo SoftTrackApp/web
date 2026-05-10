@@ -12,14 +12,8 @@
 }
 
 .cards {
-  display: grid;
+  display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  grid-template-columns: 1fr 1fr;
   gap: 20px;
-}
-
-@media screen and (max-width: 1300px) {
-  .cards {
-    grid-template-columns: 1fr;
-  }
 }
