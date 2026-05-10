@@ -12,8 +12,15 @@
 }
 
 .cards {
-  display: flex;
+  display: grid;
   justify-content: center;
-  flex-wrap: wrap;
+  grid-template-columns: repeat(2, 630px);
+  width: 100%;
   gap: 20px;
+}
+
+@media screen and (max-width: 1300px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
 }

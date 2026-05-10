@@ -5,7 +5,6 @@ import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { ErrorMessage } from '@/shared/ui/error-message';
-import { Field } from '@/shared/ui/field';
 import { useDispatch, useSelector } from 'react-redux';
 import { SessionFeature } from '@/features/session';
 import { useEffect, useState } from 'react';
@@ -55,7 +54,7 @@ export function SigninPage() {
       </Typography>
 
       <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
-        <Field className={classes.usernameField}>
+        <div className={classes.field}>
           <Label htmlFor="login">Логин</Label>
           <Input
             variant={errors.username ? 'error' : 'default'}
@@ -66,9 +65,9 @@ export function SigninPage() {
             {...register('username', { required: 'Введите логин' })}
           />
           {errors.username && <ErrorMessage>{errors.username.message}</ErrorMessage>}
-        </Field>
+        </div>
 
-        <Field className={classes.passwordField}>
+        <div className={classes.field}>
           <Label htmlFor="password">Пароль</Label>
           <Input
             variant={errors.password ? 'error' : 'default'}
@@ -81,7 +80,7 @@ export function SigninPage() {
             {...register('password', { required: 'Введите пароль' })}
           />
           {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
-        </Field>
+        </div>
 
         <Button type="submit" size="lg">
           Войти

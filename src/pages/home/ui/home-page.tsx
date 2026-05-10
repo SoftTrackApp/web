@@ -1,10 +1,14 @@
 import classes from './home-page.module.css';
-import { ChartBarBig, ClipboardCheck } from 'lucide-react';
-import { ActionCard } from './action-card';
-import { Typography } from '@/shared/ui/typography';
+import { useState } from 'react';
 import { Link } from 'react-router';
+import { ChartBarBig, ClipboardCheck } from 'lucide-react';
+import { Typography } from '@/shared/ui/typography';
+import { CreateBoardDialog } from '@/features/board';
+import { ActionCard } from './action-card';
 
 export function HomePage() {
+  const [showBoardDialog, setShowBoardDialog] = useState(false);
+
   return (
     <div className={classes.wrapper}>
       <Typography variant="h1" className={classes.title}>
@@ -16,6 +20,7 @@ export function HomePage() {
           title="Доска оценивания"
           description="Оценивайте soft skills учеников в реальном времени"
           icon={<ClipboardCheck size={64} />}
+          onClick={() => setShowBoardDialog(true)}
         />
 
         <Link to="/dashboard">
@@ -26,6 +31,8 @@ export function HomePage() {
           />
         </Link>
       </div>
+
+      {showBoardDialog && <CreateBoardDialog onClose={() => setShowBoardDialog(false)} />}
     </div>
   );
 }

@@ -61,7 +61,7 @@ export function Header() {
       )}
 
       <div className={classes.headerButton}>
-        <Button variant="outline" iconOnly onClick={() => setOpen((open) => !open)}>
+        <Button variant="icon" size="sm" onClick={() => setOpen((open) => !open)}>
           <Menu />
         </Button>
       </div>

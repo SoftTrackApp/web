@@ -13,7 +13,7 @@
   font-size: 16px;
   padding: 12px 24px;
 }
-.lg.iconOnly {
+.lg.icon {
   padding: 12px;
 }
 
@@ -21,7 +21,7 @@
   font-size: 14px;
   padding: 10px 20px;
 }
-.md.iconOnly {
+.md.icon {
   padding: 10px;
 }
 
@@ -29,7 +29,7 @@
   font-size: 12px;
   padding: 8px 16px;
 }
-.sm.iconOnly {
+.sm.icon {
   padding: 8px;
 }
 
@@ -85,6 +85,16 @@
   border: none;
 }
 
-.outline.iconOnly {
-  border: none;
+.icon {
+  background-color: var(--white);
+  color: var(--gray-400);
+}
+.icon:hover {
+  background-color: var(--gray-50);
+}
+.icon:active {
+  background-color: var(--gray-100);
+}
+.icon:disabled {
+  color: var(--gray-400);
 }

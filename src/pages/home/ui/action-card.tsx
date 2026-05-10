@@ -5,11 +5,12 @@ interface ActionCardProps {
   icon: React.ReactNode;
   title: string;
   description: string;
+  onClick?: () => void;
 }
 
-export function ActionCard({ icon, title, description }: ActionCardProps) {
+export function ActionCard({ icon, title, description, onClick }: ActionCardProps) {
   return (
-    <div className={classes.card}>
+    <div className={classes.card} onClick={onClick}>
       <div className={classes.icon}>{icon}</div>
 
       <div>
