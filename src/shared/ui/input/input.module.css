@@ -1,9 +1,7 @@
 .wrapper {
-  width: 100%;
+  position: relative;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  transition: outline-color 200ms;
 }
 
 .default {
@@ -29,9 +27,16 @@
   outline: none;
 }
 
+.withIcon {
+  padding-right: 52px;
+}
+
 .icon {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
-  margin-right: 14px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -39,6 +44,6 @@
 }
 
 .errorIcon {
+  cursor: default;
   color: var(--red-500);
-  margin-right: 14px;
 }

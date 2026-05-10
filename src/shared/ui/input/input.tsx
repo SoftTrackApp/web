@@ -9,17 +9,19 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 }
 
 export function Input({ className, variant = 'default', icon, onIconClick, ...props }: InputProps) {
+  const hasIcon = Boolean(icon || variant === 'error');
+
   return (
-    <label className={clsx(className, classes.wrapper, classes[variant])}>
-      <input className={classes.input} {...props} />
+    <div className={clsx(className, classes.wrapper, classes[variant])}>
+      <input className={clsx(classes.input, hasIcon && classes.withIcon)} {...props} />
 
       {icon ? (
         <button type="button" className={classes.icon} onClick={onIconClick}>
           {icon}
         </button>
       ) : variant === 'error' ? (
-        <CircleAlert className={classes.errorIcon} />
+        <CircleAlert className={clsx(classes.icon, classes.errorIcon)} />
       ) : null}
-    </label>
+    </div>
   );
 }

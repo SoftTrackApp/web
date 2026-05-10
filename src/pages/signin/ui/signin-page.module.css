@@ -8,6 +8,7 @@
 }
 
 .heading {
+  color: var(--gray-900);
   margin-bottom: 20px;
 }
 

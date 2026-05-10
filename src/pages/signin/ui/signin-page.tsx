@@ -83,7 +83,9 @@ export function SigninPage() {
           {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
         </Field>
 
-        <Button type="submit">Войти</Button>
+        <Button type="submit" size="lg">
+          Войти
+        </Button>
       </form>
     </div>
   );

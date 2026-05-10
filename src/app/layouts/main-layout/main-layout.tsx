@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { SessionFeature } from '@/features/session';
 import { Navigate, Outlet } from 'react-router';
+import { SessionFeature } from '@/features/session';
+import { Header } from '@/widgets/header';
 
 export function MainLayout() {
   const dispatch = useDispatch();
@@ -14,5 +15,10 @@ export function MainLayout() {
   if (session.isLoading) return <span>Загрузка...</span>;
   if (!session.data) return <Navigate to="/signin" replace />;
 
-  return <Outlet />;
+  return (
+    <>
+      <Header />
+      <Outlet />
+    </>
+  );
 }

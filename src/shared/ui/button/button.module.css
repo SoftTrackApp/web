@@ -1,22 +1,90 @@
 .button {
-  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: 500;
-  padding: 12px 24px;
-  background-color: var(--purple-500);
-  color: var(--white);
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  transition: background-color 200ms;
 }
 
-.button:hover {
+.lg {
+  font-size: 16px;
+  padding: 12px 24px;
+}
+.lg.iconOnly {
+  padding: 12px;
+}
+
+.md {
+  font-size: 14px;
+  padding: 10px 20px;
+}
+.md.iconOnly {
+  padding: 10px;
+}
+
+.sm {
+  font-size: 12px;
+  padding: 8px 16px;
+}
+.sm.iconOnly {
+  padding: 8px;
+}
+
+.primary {
+  background-color: var(--purple-500);
+  color: var(--white);
+}
+.primary:hover {
   background-color: var(--purple-600);
 }
-
-.button:active {
+.primary:active {
   background-color: var(--purple-700);
 }
-
-.button:focus {
+.primary:focus {
+  background-color: var(--purple-500);
   outline: 2px solid var(--purple-600);
+}
+.primary:disabled {
+  background-color: var(--purple-100);
+}
+
+.secondary {
+  background-color: var(--purple-50);
+  color: var(--purple-500);
+}
+.secondary:hover {
+  background-color: var(--purple-100);
+}
+.secondary:active {
+  background-color: var(--purple-50);
+  outline: 2px solid var(--purple-200);
+}
+.secondary:focus {
+  outline: 2px solid var(--purple-200);
+}
+.secondary:disabled {
+  background-color: var(--purple-25);
+}
+
+.outline {
+  background-color: var(--white);
+  color: var(--gray-700);
+  border: 1px solid var(--gray-100);
+}
+.outline:hover {
+  background-color: var(--gray-50);
+}
+.outline:active {
+  background-color: var(--gray-100);
+}
+.outline:disabled {
+  color: var(--gray-400);
+  border: none;
+}
+
+.outline.iconOnly {
+  border: none;
 }

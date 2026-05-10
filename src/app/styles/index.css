@@ -1,9 +1,18 @@
 :root {
   --white: hsla(0, 0%, 100%, 1);
 
+  --gray-50: hsla(263, 33%, 96%, 1);
+  --gray-100: hsla(263, 15%, 91%, 1);
   --gray-300: hsla(263, 4%, 74%, 1);
   --gray-500: hsla(263, 2%, 54%, 1);
+  --gray-600: hsla(263, 2%, 44%, 1);
+  --gray-700: hsla(263, 2%, 34%, 1);
+  --gray-900: hsla(263, 2%, 15%, 1);
 
+  --purple-25: hsla(277, 100%, 99%, 1);
+  --purple-50: hsla(275, 100%, 95%, 1);
+  --purple-100: hsla(272, 80%, 85%, 1);
+  --purple-200: hsla(270, 70%, 74%, 1);
   --purple-500: hsla(263, 60%, 50%, 1);
   --purple-600: hsla(261, 67%, 42%, 1);
   --purple-700: hsla(260, 74%, 35%, 1);
@@ -23,4 +32,8 @@ body,
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+a {
+  text-decoration: none;
 }
