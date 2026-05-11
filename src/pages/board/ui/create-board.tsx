@@ -1,24 +1,30 @@
 import classes from './create-board.module.css';
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { Button, Input, Select } from '@/shared/ui';
 import { BoardFeature } from '@/features/board';
 import { GroupFeature } from '@/features/group';
 import { BehaviorSetFeature } from '@/features/behavior-set';
 import { useDispatch, useSelector } from 'react-redux';
 
-const defaultValues = {
-  name: '',
-  group: '',
-  behaviorSetId: '',
+type Option = {
+  label: string;
+  value: string;
+};
+
+type Inputs = {
+  name: string;
+  group: Option;
+  behaviorSetId: Option;
 };
 
 export function CreateBoard() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
-  } = useForm({ defaultValues });
+  } = useForm<Inputs>();
 
   const dispatch = useDispatch();
   const groupsState = useSelector(GroupFeature.selectors.selectGroups);
@@ -32,8 +38,9 @@ export function CreateBoard() {
   const onSubmit = handleSubmit((data) => {
     dispatch(
       BoardFeature.actions.setBoard({
-        ...data,
-        behaviorSetId: Number(data.behaviorSetId),
+        name: data.name,
+        group: data.group.value,
+        behaviorSetId: Number(data.behaviorSetId.value),
         selectedUserId: 0,
       }),
     );
@@ -68,17 +75,23 @@ export function CreateBoard() {
             Группа
           </label>
 
-          <Select id="group" {...register('group', { required: 'Выберите группу' })}>
-            <option value="" disabled selected>
-              Выберите группу
-            </option>
-
-            {groupsState.groups.map((group) => (
-              <option key={group.id} value={group.name}>
-                {group.name}
-              </option>
-            ))}
-          </Select>
+          <Controller
+            name="group"
+            control={control}
+            rules={{ required: 'Выберите группу' }}
+            render={({ field }) => (
+              <Select
+                id="group"
+                placeholder="Выберите группу"
+                value={field.value}
+                onChange={field.onChange}
+                options={groupsState.groups?.map((group) => ({
+                  label: group.name,
+                  value: group.id,
+                }))}
+              />
+            )}
+          />
 
           {errors.group && <span className={classes.errorMessage}>{errors.group.message}</span>}
         </div>
@@ -88,20 +101,23 @@ export function CreateBoard() {
             Набор поведений
           </label>
 
-          <Select
-            id="behavior-set"
-            {...register('behaviorSetId', { required: 'Выберите набор поведений' })}
-          >
-            <option value="" disabled selected>
-              Выберите набор поведений
-            </option>
-
-            {behaviorSetsState.behaviorSets.map((behaviorSet) => (
-              <option key={behaviorSet.id} value={behaviorSet.id}>
-                {behaviorSet.name}
-              </option>
-            ))}
-          </Select>
+          <Controller
+            name="behaviorSetId"
+            control={control}
+            rules={{ required: 'Выберите набор поведений' }}
+            render={({ field }) => (
+              <Select
+                id="behavior-set"
+                placeholder="Выберите набор поведений"
+                value={field.value}
+                onChange={field.onChange}
+                options={behaviorSetsState.behaviorSets?.map((bs) => ({
+                  label: bs.name,
+                  value: bs.id,
+                }))}
+              />
+            )}
+          />
 
           {errors.behaviorSetId && (
             <span className={classes.errorMessage}>{errors.behaviorSetId.message}</span>

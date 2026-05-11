@@ -1,17 +1,21 @@
-import clsx from 'clsx';
-import classes from './select.module.css';
-import { ChevronDown } from 'lucide-react';
+import ReactSelect, { type Props } from 'react-select';
 
-interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  icon?: React.ReactNode;
-}
-
-export function Select({ icon, className, ...props }: SelectProps) {
+export function Select(props: Props) {
   return (
-    <div className={clsx(classes.wrapper, className)}>
-      {icon}
-      <select className={classes.input} {...props} />
-      <ChevronDown className={classes.chevron} />
-    </div>
+    <ReactSelect
+      styles={{
+        control: (baseStyles, state) => ({
+          ...baseStyles,
+          borderRadius: 8,
+          borderColor: state.isFocused ? 'hsla(263, 60%, 50%, 1)' : 'hsla(263, 4%, 74%, 1)',
+          boxShadow: state.isFocused ? '0 0 0 1px #7c3aed' : 'none',
+          '&:hover': {
+            borderColor: 'hsla(263, 60%, 50%, 1)',
+          },
+        }),
+      }}
+      noOptionsMessage={() => 'Ничего не найдено'}
+      {...props}
+    />
   );
 }
