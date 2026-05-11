@@ -57,10 +57,10 @@ export function SigninPage() {
         <div className={classes.field}>
           <Label htmlFor="login">Логин</Label>
           <Input
-            variant={errors.username ? 'error' : 'default'}
             placeholder="Введите логин"
             id="login"
             autoComplete="username"
+            error={errors.username !== undefined}
             autoFocus
             {...register('username', { required: 'Введите логин' })}
           />
@@ -70,13 +70,13 @@ export function SigninPage() {
         <div className={classes.field}>
           <Label htmlFor="password">Пароль</Label>
           <Input
-            variant={errors.password ? 'error' : 'default'}
             type={showPassword ? 'text' : 'password'}
             placeholder="Введите пароль"
             id="password"
             autoComplete="current-password"
             icon={showPassword ? <EyeOff /> : <Eye />}
             onIconClick={() => setShowPassword(!showPassword)}
+            error={errors.password !== undefined}
             {...register('password', { required: 'Введите пароль' })}
           />
           {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}

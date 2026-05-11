@@ -2,12 +2,9 @@
   position: relative;
   border-radius: 8px;
   transition: outline-color 200ms;
-}
-
-.default {
   outline: 1px solid var(--gray-300);
 }
-.default:focus-within {
+.wrapper:not(.error):focus-within {
   outline: 2px solid var(--purple-500);
 }
 
@@ -46,4 +43,5 @@
 .errorIcon {
   cursor: default;
   color: var(--red-500);
+  pointer-events: none;
 }

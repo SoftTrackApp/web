@@ -1,11 +1,10 @@
-import { name } from './slice';
 import type { SessionState } from './types';
 
-interface State {
-  [name]: SessionState;
+interface RootState {
+  session: SessionState;
 }
 
-const selectSession = (state: State) => state[name];
+const selectSession = (state: RootState) => state.session;
 
 export const selectors = {
   selectSession,

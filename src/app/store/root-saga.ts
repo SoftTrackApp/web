@@ -1,6 +1,8 @@
+import { BehaviorSetEntity } from '@/entities/behavior-set';
+import { GroupEntity } from '@/entities/group';
 import { SessionFeature } from '@/features/session';
 import { all, fork } from 'redux-saga/effects';
 
 export function* rootSaga() {
-  yield all([fork(SessionFeature.saga)]);
+  yield all([fork(SessionFeature.saga), fork(BehaviorSetEntity.saga), fork(GroupEntity.saga)]);
 }
