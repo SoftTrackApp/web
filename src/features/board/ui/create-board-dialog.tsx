@@ -1,7 +1,7 @@
 import classes from './create-model-dialog.module.css';
 import { useEffect } from 'react';
 import { X } from 'lucide-react';
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 import { Dialog } from '@/shared/ui/dialog';
 import { Typography } from '@/shared/ui/typography';
 import { Button } from '@/shared/ui/button';
@@ -27,6 +27,7 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<Inputs>();
 
@@ -65,20 +66,50 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
 
         <div className={classes.field}>
           <Label htmlFor="group">Группа</Label>
-          <Select id="group" {...register('group', { required: true })}>
-            {groups.data.map((group) => (
-              <option key={group.id}>{group.name}</option>
-            ))}
-          </Select>
+
+          <Controller
+            name="group"
+            control={control}
+            rules={{ required: 'Выберите группу' }}
+            render={({ field }) => (
+              <Select
+                id="group"
+                placeholder="Выберите группу"
+                value={field.value}
+                onChange={field.onChange}
+                options={groups.data.map((group) => ({
+                  label: group.name,
+                  value: String(group.id),
+                }))}
+              />
+            )}
+          />
+
+          {errors.group && <ErrorMessage>{errors.group.message}</ErrorMessage>}
         </div>
 
         <div className={classes.field}>
           <Label htmlFor="behavior-set">Набор поведений</Label>
-          <Select id="behavior-set" {...register('behaviorSet', { required: true })}>
-            {behaviorSets.data.map((behaviorSet) => (
-              <option key={behaviorSet.id}>{behaviorSet.name}</option>
-            ))}
-          </Select>
+
+          <Controller
+            name="behaviorSet"
+            control={control}
+            rules={{ required: 'Выберите набор поведений' }}
+            render={({ field }) => (
+              <Select
+                id="behavior-set"
+                placeholder="Выберите набор поведений"
+                value={field.value}
+                onChange={field.onChange}
+                options={behaviorSets.data.map((bs) => ({
+                  label: bs.name,
+                  value: String(bs.id),
+                }))}
+              />
+            )}
+          />
+
+          {errors.behaviorSet && <ErrorMessage>{errors.behaviorSet.message}</ErrorMessage>}
         </div>
 
         <Button type="submit" size="lg">
