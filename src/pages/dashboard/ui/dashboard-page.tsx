@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { SkillCard } from './skill-card';
 import type { Comment, Skill } from '../model/skill';
 import { SkillSidebar } from './skill-sidebar';
-import { ArrowUpDown, UserSearch } from 'lucide-react';
+import { UserSearch } from 'lucide-react';
 
 type Sort = 'alpha' | 'high-score' | 'low-score';
 
@@ -91,26 +91,26 @@ export function DashboardPage() {
       <div className={classes.wrapper}>
         <div className={classes.content}>
           <div className={classes.filters}>
-            <Select className={classes.select} onChange={(e) => setUserId(Number(e.target.value))}>
-              <option value="0">Выберите ученика</option>
-
-              {users.map((user) => (
-                <option key={user.id} value={user.id}>
-                  {user.surname} {user.name}
-                </option>
-              ))}
-            </Select>
+            <Select
+              className={classes.select}
+              placeholder="Выберите ученика"
+              onChange={(option) => setUserId(Number(option?.value))}
+              options={users.map((user) => ({
+                label: `${user.surname} ${user.name}`,
+                value: String(user.id),
+              }))}
+            />
 
             <Select
               className={classes.select}
-              value={sort}
-              onChange={(e) => setSort(e.target.value as Sort)}
-              icon={<ArrowUpDown />}
-            >
-              <option value="alpha">По названию (А-Я)</option>
-              <option value="high-score">По возрастанию баллов</option>
-              <option value="low-score">По убыванию баллов</option>
-            </Select>
+              placeholder="Сортировать"
+              onChange={(option) => setSort((option?.value as Sort) ?? 'alpha')}
+              options={[
+                { label: 'По названию (А-Я)', value: 'alpha' },
+                { label: 'По возрастанию баллов', value: 'high-score' },
+                { label: 'По убыванию баллов', value: 'low-score' },
+              ]}
+            />
           </div>
 
           {selectedUser ? (

@@ -87,7 +87,7 @@ export function CreateBoard() {
                 onChange={field.onChange}
                 options={groupsState.groups?.map((group) => ({
                   label: group.name,
-                  value: group.id,
+                  value: String(group.id),
                 }))}
               />
             )}
@@ -113,7 +113,7 @@ export function CreateBoard() {
                 onChange={field.onChange}
                 options={behaviorSetsState.behaviorSets?.map((bs) => ({
                   label: bs.name,
-                  value: bs.id,
+                  value: String(bs.id),
                 }))}
               />
             )}

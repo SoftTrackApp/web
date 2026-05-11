@@ -1,6 +1,11 @@
 import ReactSelect, { type Props } from 'react-select';
 
-export function Select(props: Props) {
+type Option = {
+  label: string;
+  value: string;
+};
+
+export function Select(props: Props<Option, false>) {
   return (
     <ReactSelect
       styles={{
