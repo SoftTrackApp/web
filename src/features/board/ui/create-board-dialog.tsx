@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BehaviorSetEntity } from '@/entities/behavior-set';
 import { GroupEntity } from '@/entities/group';
 import { BoardEntity } from '@/entities/board';
+import { UserEntity } from '@/entities/user';
 
 interface CreateBoardDialogProps {
   onClose?: () => void;
@@ -22,11 +23,11 @@ type Inputs = {
   name: string;
   group: {
     label: string;
-    value: number;
+    value: string;
   };
   subgroup?: {
     label: string;
-    value: number;
+    value: string;
   };
   behaviorSet: {
     label: string;
@@ -54,9 +55,15 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     dispatch(
+      UserEntity.actions.fetchUsers({
+        name1: data.group.value,
+        name2: data.subgroup?.value,
+      }),
+    );
+
+    dispatch(
       BoardEntity.actions.setBoard({
         name: data.name,
-        group: data.group.value,
         behaviorSetId: data.behaviorSet.value,
       }),
     );

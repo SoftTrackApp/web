@@ -1,6 +1,5 @@
 export interface Board {
   name: string;
-  group: number;
   behaviorSetId: number;
 }
 
