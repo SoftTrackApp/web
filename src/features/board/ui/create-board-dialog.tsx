@@ -12,6 +12,7 @@ import { Select } from '@/shared/ui/select';
 import { useDispatch, useSelector } from 'react-redux';
 import { BehaviorSetEntity } from '@/entities/behavior-set';
 import { GroupEntity } from '@/entities/group';
+import { BoardEntity } from '@/entities/board';
 
 interface CreateBoardDialogProps {
   onClose?: () => void;
@@ -19,8 +20,18 @@ interface CreateBoardDialogProps {
 
 type Inputs = {
   name: string;
-  group: string;
-  behaviorSet: string;
+  group: {
+    label: string;
+    value: number;
+  };
+  subgroup?: {
+    label: string;
+    value: number;
+  };
+  behaviorSet: {
+    label: string;
+    value: number;
+  };
 };
 
 export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
@@ -41,7 +52,15 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
     dispatch(GroupEntity.actions.fetchGroups());
   }, [dispatch]);
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
+    dispatch(
+      BoardEntity.actions.setBoard({
+        name: data.name,
+        group: data.group.value,
+        behaviorSetId: data.behaviorSet.value,
+      }),
+    );
+  };
 
   return (
     <Dialog onClose={onClose}>
@@ -77,15 +96,39 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
                 placeholder="Выберите группу"
                 value={field.value}
                 onChange={field.onChange}
-                options={groups.data.map((group) => ({
+                options={groups.academicGroups.map((group) => ({
                   label: group.name,
-                  value: String(group.id),
+                  value: group.name,
                 }))}
               />
             )}
           />
 
           {errors.group && <ErrorMessage>{errors.group.message}</ErrorMessage>}
+        </div>
+
+        <div className={classes.field}>
+          <Label htmlFor="subgroup">Подгруппа</Label>
+
+          <Controller
+            name="subgroup"
+            control={control}
+            render={({ field }) => (
+              <Select
+                id="subgroup"
+                placeholder="Выберите группу"
+                value={field.value}
+                onChange={field.onChange}
+                options={groups.otherGroups.map((group) => ({
+                  label: group.name,
+                  value: group.name,
+                }))}
+                isClearable
+              />
+            )}
+          />
+
+          {errors.subgroup && <ErrorMessage>{errors.subgroup.message}</ErrorMessage>}
         </div>
 
         <div className={classes.field}>
@@ -103,7 +146,7 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
                 onChange={field.onChange}
                 options={behaviorSets.data.map((bs) => ({
                   label: bs.name,
-                  value: String(bs.id),
+                  value: bs.id,
                 }))}
               />
             )}

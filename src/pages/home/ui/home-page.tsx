@@ -16,12 +16,13 @@ export function HomePage() {
       </Typography>
 
       <div className={classes.cards}>
-        <ActionCard
-          title="Доска оценивания"
-          description="Оценивайте soft skills учеников в реальном времени"
-          icon={<ClipboardCheck size={64} />}
-          onClick={() => setShowBoardDialog(true)}
-        />
+        <Link to="/board">
+          <ActionCard
+            title="Доска оценивания"
+            description="Оценивайте soft skills учеников в реальном времени"
+            icon={<ClipboardCheck size={64} />}
+          />
+        </Link>
 
         <Link to="/dashboard">
           <ActionCard

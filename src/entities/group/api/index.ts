@@ -1,12 +1,22 @@
 import type { Group } from '../model/types';
 
-const groups: Group[] = [
-  { id: 1, name: '24-11' },
-  { id: 2, name: '24-12' },
-  { id: 3, name: '24-13' },
-  { id: 4, name: '24-14' },
+const academicGroups: Group[] = [
+  { name: '24-11', description: '' },
+  { name: '24-12', description: '' },
+  { name: '24-13', description: '' },
+  { name: '24-14', description: '' },
+];
+
+const otherGroups: Group[] = [
+  { name: 'A0', description: '' },
+  { name: 'A1', description: '' },
+  { name: 'A2', description: '' },
+  { name: 'B1', description: '' },
+  { name: 'B2', description: '' },
+  { name: 'C1', description: '' },
 ];
 
 export const GroupApi = {
-  fetchGroups: async (): Promise<Group[]> => groups,
+  fetchAcademicGroups: async (): Promise<Group[]> => academicGroups,
+  fetchOtherGroups: async (): Promise<Group[]> => otherGroups,
 };

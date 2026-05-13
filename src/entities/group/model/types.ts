@@ -1,10 +1,11 @@
 export interface Group {
-  id: number;
   name: string;
+  description: string;
 }
 
 export interface GroupState {
-  data: Group[];
+  academicGroups: Group[];
+  otherGroups: Group[];
   isLoading: boolean;
   error: string | null;
 }

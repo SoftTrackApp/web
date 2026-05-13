@@ -1,0 +1,19 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 32px 60px;
+  gap: 24px;
+}
+
+.sideSection {
+  padding: 20px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+}
+
+.middleSection {
+  grid-column: span 2;
+  padding: 20px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+}

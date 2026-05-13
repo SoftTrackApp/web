@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 const navLinks = [
   { name: 'Главная', to: '/' },
-  { name: 'Доска оценивания', to: '/rate' },
+  { name: 'Доска оценивания', to: '/board' },
   { name: 'Статистика', to: '/dashboard' },
 ];
 
