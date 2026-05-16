@@ -12,7 +12,7 @@ export function MainLayout() {
     dispatch(SessionFeature.actions.fetchSession());
   }, [dispatch]);
 
-  if (session.isLoading) return <span>Загрузка...</span>;
+  if (session.isLoading) return null;
   if (!session.data) return <Navigate to="/signin" replace />;
 
   return (

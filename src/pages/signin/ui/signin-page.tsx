@@ -10,6 +10,7 @@ import { SessionFeature } from '@/features/session';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Eye, EyeOff } from 'lucide-react';
+import { mapErrorCode } from '@/shared/api';
 
 type Inputs = {
   login: string;
@@ -85,6 +86,10 @@ export function SigninPage() {
         <Button type="submit" size="lg">
           Войти
         </Button>
+
+        <span className={classes.error}>
+          {errors.root && <ErrorMessage>{mapErrorCode(errors.root.message)}</ErrorMessage>}
+        </span>
       </form>
     </div>
   );

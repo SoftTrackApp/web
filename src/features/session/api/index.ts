@@ -1,5 +1,6 @@
 import { client } from '@/shared/api';
 import type { Credentials, Session } from '../model/types';
+import { isAxiosError } from 'axios';
 
 export const SessionApi = {
   fetchSession: async (): Promise<Session> => {
@@ -14,7 +15,11 @@ export const SessionApi = {
   logIn: async (credentials: Credentials) => {
     try {
       await client.post('/session', credentials);
-    } catch {
+    } catch (err) {
+      if (isAxiosError(err) && err.response?.status === 401) {
+        throw new Error('INVALID_CREDENTIALS');
+      }
+
       throw new Error('UNKNOWN_ERROR');
     }
   },
