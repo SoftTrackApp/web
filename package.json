@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource-variable/rubik": "^5.2.8",
     "@reduxjs/toolkit": "^2.11.2",
+    "axios": "^1.16.1",
     "clsx": "^2.1.1",
     "lucide-react": "^1.14.0",
     "react": "^19.2.6",

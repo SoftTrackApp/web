@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router';
 import { Eye, EyeOff } from 'lucide-react';
 
 type Inputs = {
-  username: string;
+  login: string;
   password: string;
 };
 
@@ -60,11 +60,11 @@ export function SigninPage() {
             placeholder="Введите логин"
             id="login"
             autoComplete="username"
-            error={errors.username !== undefined}
+            error={errors.login !== undefined}
             autoFocus
-            {...register('username', { required: 'Введите логин' })}
+            {...register('login', { required: 'Введите логин' })}
           />
-          {errors.username && <ErrorMessage>{errors.username.message}</ErrorMessage>}
+          {errors.login && <ErrorMessage>{errors.login.message}</ErrorMessage>}
         </div>
 
         <div className={classes.field}>

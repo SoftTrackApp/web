@@ -16,8 +16,8 @@ function* fetchSession() {
 
 function* logIn(action: PayloadAction<Credentials>) {
   try {
-    const session: Session = yield call(SessionApi.logIn, action.payload);
-    yield put(actions.setSession(session));
+    yield call(SessionApi.logIn, action.payload);
+    yield fetchSession();
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Произошла ошибка!';
     yield put(actions.setError(message));

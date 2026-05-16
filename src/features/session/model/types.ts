@@ -12,6 +12,6 @@ export interface SessionState {
 }
 
 export interface Credentials {
-  username: string;
+  login: string;
   password: string;
 }
