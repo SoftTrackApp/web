@@ -42,10 +42,6 @@
 }
 
 @media screen and (max-width: 600px) {
-  .header {
-    border: none;
-  }
-
   .nav {
     display: none;
   }

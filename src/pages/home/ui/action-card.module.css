@@ -37,3 +37,13 @@
 .card:hover .icon {
   color: var(--purple-200);
 }
+
+@media screen and (max-width: 600px) {
+  .card {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+}
