@@ -8,9 +8,8 @@ function* fetchSession() {
   try {
     const session: Session = yield call(SessionApi.fetchSession);
     yield put(actions.setSession(session));
-  } catch (err) {
-    const message = err instanceof Error ? err.message : 'Произошла ошибка!';
-    yield put(actions.setError(message));
+  } catch {
+    yield put(actions.setLoading(false));
   }
 }
 
