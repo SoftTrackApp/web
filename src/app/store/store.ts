@@ -5,6 +5,7 @@ import { rootSaga } from './root-saga';
 import { BehaviorSetEntity } from '@/entities/behavior-set';
 import { GroupEntity } from '@/entities/group';
 import { BoardEntity } from '@/entities/board';
+import { UserEntity } from '@/entities/user';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -14,6 +15,7 @@ export const store = configureStore({
     behaviorSets: BehaviorSetEntity.reducer,
     groups: GroupEntity.reducer,
     board: BoardEntity.reducer,
+    users: UserEntity.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });

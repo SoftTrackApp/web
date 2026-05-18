@@ -4,7 +4,8 @@ export interface User {
   lName: string;
 }
 
-export interface FetchUsersRequest {
-  name1: string;
-  name2?: string;
+export interface UsersState {
+  data: User[];
+  isLoading: boolean;
+  error: string | null;
 }

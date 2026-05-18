@@ -3,6 +3,7 @@ import { MainLayout } from '../layouts/main-layout';
 import { SigninPage } from '@/pages/signin';
 import { HomePage } from '@/pages/home';
 import { BoardPage } from '@/pages/board';
+import { DashboardPage } from '@/pages/dashboard';
 
 export const router = createBrowserRouter([
   { path: 'signin', element: <SigninPage /> },
@@ -12,6 +13,7 @@ export const router = createBrowserRouter([
     children: [
       { path: '', element: <HomePage /> },
       { path: 'board', element: <BoardPage /> },
+      { path: 'dashboard', element: <DashboardPage /> },
     ],
   },
 ]);

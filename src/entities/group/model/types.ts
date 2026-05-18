@@ -9,3 +9,8 @@ export interface GroupState {
   isLoading: boolean;
   error: string | null;
 }
+
+export interface IntersectionRequest {
+  name1: string;
+  name2?: string;
+}
