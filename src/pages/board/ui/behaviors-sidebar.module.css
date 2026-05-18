@@ -1,0 +1,22 @@
+.sideSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+  height: 100%;
+}
+
+.behaviorsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.behaviorItem {
+  padding: 12px 16px;
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  cursor: pointer;
+}

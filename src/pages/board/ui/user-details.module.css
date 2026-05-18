@@ -1,0 +1,44 @@
+.middleSection {
+  display: flex;
+  flex-direction: column;
+  grid-column: span 2;
+  padding: 20px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--gray-200);
+  height: 100%;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-radius: 16px;
+  border: 1px solid var(--gray-100);
+}
+
+.bigIcon {
+  display: flex;
+  border-radius: 64px;
+  background-color: var(--purple-50);
+  color: var(--purple-500);
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.suggestion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex: 1;
+}
+
+.suggestionText {
+  margin-bottom: 16px;
+}
+
+.suggestionTitle {
+  max-width: 440px;
+}
