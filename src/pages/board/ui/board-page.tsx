@@ -1,21 +1,31 @@
 import classes from './board-page.module.css';
+import clsx from 'clsx';
 import { BoardEntity } from '@/entities/board';
 import type { User } from '@/entities/user';
 import { CreateBoardDialog } from '@/features/board';
 import { Input } from '@/shared/ui/input';
+import { Select } from '@/shared/ui/select';
 import { Tag } from '@/shared/ui/tag';
 import { Typography } from '@/shared/ui/typography';
-import clsx from 'clsx';
 import { ArrowLeft, ChevronLeft, ClipboardCheck } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router';
+import { BehaviorSetEntity } from '@/entities/behavior-set';
 
 export function BoardPage() {
   const board = useSelector(BoardEntity.selectors.selectBoard);
+  const behaviorSets = useSelector(BehaviorSetEntity.selectors.selectBehaviorSets);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
+
+  const behaviorSet = behaviorSets.data.find((bs) => bs.id === board?.behaviorSetId);
+
+  const behaviorSetOptions = behaviorSets.data.map((bs) => ({
+    label: bs.name,
+    value: bs.id,
+  }));
 
   const users = useMemo(() => {
     if (!board) return [];
@@ -109,7 +119,9 @@ export function BoardPage() {
         </section>
       )}
 
-      <section className={classes.sideSection}></section>
+      <section className={classes.sideSection}>
+        <Select defaultValue={behaviorSet?.id} options={behaviorSetOptions} />
+      </section>
     </div>
   );
 }
