@@ -3,6 +3,7 @@ import { Select } from '@/shared/ui/select';
 import { BoardEntity, type Board } from '@/entities/board';
 import { useDispatch, useSelector } from 'react-redux';
 import { BehaviorSetEntity } from '@/entities/behavior-set';
+import { BehaviorItem } from './behavior-item';
 
 interface BehaviorsSidebar {
   board: Board;
@@ -41,9 +42,7 @@ export function BehaviorsSidebar({ board }: BehaviorsSidebar) {
 
       <div className={classes.behaviorsList} role="list">
         {behaviorSet?.behaviors.map((b) => (
-          <div key={b.id} className={classes.behaviorItem} role="listitem">
-            {b.name}
-          </div>
+          <BehaviorItem key={b.id} behavior={b} />
         ))}
       </div>
     </section>

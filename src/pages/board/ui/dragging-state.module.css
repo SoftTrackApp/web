@@ -1,21 +1,11 @@
 .middleSection {
   display: flex;
   flex-direction: column;
-  gap: 32px;
   grid-column: span 2;
   padding: 20px 16px;
   border-radius: 12px;
   border: 1px solid var(--gray-200);
   height: 100%;
-}
-
-.userInfo {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  border-radius: 16px;
-  border: 1px solid var(--gray-100);
 }
 
 .bigIcon {
@@ -34,22 +24,4 @@
   justify-content: center;
   text-align: center;
   flex: 1;
-  border: 1px dotted transparent;
-  border-radius: 12px;
-  transition:
-    background-color 200ms,
-    border-color 200ms;
-}
-
-.suggestionText {
-  margin-bottom: 16px;
-}
-
-.suggestionTitle {
-  max-width: 440px;
-}
-
-.dragging {
-  background-color: var(--purple-25);
-  border-color: var(--purple-400);
 }

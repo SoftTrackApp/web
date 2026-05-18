@@ -4,13 +4,15 @@ import { ClipboardCheck } from 'lucide-react';
 import { Tag } from '@/shared/ui/tag';
 import type { Board } from '@/entities/board';
 import type { User } from '@/entities/user';
+import clsx from 'clsx';
 
 interface UserDetailsProps {
   board: Board;
   user: User;
+  dragging: boolean;
 }
 
-export function UserDetails({ board, user }: UserDetailsProps) {
+export function UserDetails({ board, user, dragging }: UserDetailsProps) {
   return (
     <section className={classes.middleSection}>
       <div className={classes.userInfo}>
@@ -27,7 +29,7 @@ export function UserDetails({ board, user }: UserDetailsProps) {
         <Tag>0 поведений</Tag>
       </div>
 
-      <div className={classes.suggestion}>
+      <div className={clsx(classes.suggestion, dragging && classes.dragging)}>
         <div className={classes.bigIcon}>
           <ClipboardCheck size={64} />
         </div>
