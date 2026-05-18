@@ -9,11 +9,18 @@ import { Tag } from '@/shared/ui/tag';
 import { Typography } from '@/shared/ui/typography';
 import { ArrowLeft, ChevronLeft, ClipboardCheck } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router';
 import { BehaviorSetEntity } from '@/entities/behavior-set';
 
+type Option = {
+  label: string;
+  value: number;
+};
+
 export function BoardPage() {
+  const dispatch = useDispatch();
+
   const board = useSelector(BoardEntity.selectors.selectBoard);
   const behaviorSets = useSelector(BehaviorSetEntity.selectors.selectBehaviorSets);
 
@@ -27,6 +34,8 @@ export function BoardPage() {
     value: bs.id,
   }));
 
+  const defaultBehaviorSet = behaviorSetOptions.find((bs) => bs.value === behaviorSet?.id);
+
   const users = useMemo(() => {
     if (!board) return [];
 
@@ -37,12 +46,18 @@ export function BoardPage() {
 
   const navigate = useNavigate();
 
+  const onBehaviorSetChange = (newBehaviorSet: Option) => {
+    dispatch(BoardEntity.actions.setBehaviorSetId(newBehaviorSet.value));
+  };
+
   if (!board) {
     return <CreateBoardDialog onClose={() => navigate('/')} />;
   }
 
   return (
     <div className={classes.wrapper}>
+      <title>Доска оценивания - SoftTrack</title>
+
       <section className={classes.sideSection}>
         <Link to="/" className={classes.homeLink}>
           <ChevronLeft /> Вернуться на Главную
@@ -120,7 +135,19 @@ export function BoardPage() {
       )}
 
       <section className={classes.sideSection}>
-        <Select defaultValue={behaviorSet?.id} options={behaviorSetOptions} />
+        <Select
+          onChange={(b) => onBehaviorSetChange(b as Option)}
+          defaultValue={defaultBehaviorSet}
+          options={behaviorSetOptions}
+        />
+
+        <div className={classes.behaviorsList} role="list">
+          {behaviorSet?.behaviors.map((b) => (
+            <div key={b.id} className={classes.behaviorItem} role="listitem">
+              {b.name}
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );

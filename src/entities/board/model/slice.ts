@@ -15,6 +15,12 @@ export const { reducer, actions } = createSlice({
       state.currentBoard = action.payload;
     },
 
+    setBehaviorSetId: (state, action: PayloadAction<number>) => {
+      if (state.currentBoard) {
+        state.currentBoard.behaviorSetId = action.payload;
+      }
+    },
+
     setUsers: (state, action: PayloadAction<User[]>) => {
       if (state.currentBoard) {
         state.currentBoard.users = action.payload;
