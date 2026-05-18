@@ -1,11 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { actions } from './slice';
 import type { User } from './types';
-import { UserApi } from '../api';
+import { GroupApi } from '@/entities/group/api';
 
 function* fetchUsers() {
   try {
-    const users: User[] = yield call(UserApi.fetchUsers);
+    const users: User[] = yield call(GroupApi.fetchIntersection, {});
     yield put(actions.setUsers(users));
   } catch (err) {
     const code = err instanceof Error ? err.message : 'UNKNOWN_ERROR';

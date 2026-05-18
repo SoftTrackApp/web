@@ -11,6 +11,6 @@ export interface GroupState {
 }
 
 export interface IntersectionRequest {
-  name1: string;
-  name2?: string;
+  group?: string;
+  subgroup?: string;
 }

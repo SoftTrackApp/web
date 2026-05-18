@@ -8,10 +8,10 @@ import type { Board } from './types';
 function* fetchUsers(action: PayloadAction<Board>) {
   try {
     const data: User[] = yield call(GroupApi.fetchIntersection, {
-      name1: action.payload.groupName1,
-      name2: action.payload.groupName2,
+      group: action.payload.groupName1,
+      subgroup: action.payload.groupName2,
     });
-    
+
     yield put(actions.setUsers(data));
   } catch (err) {
     const message = err instanceof Error ? err.message : 'Произошла ошибка';

@@ -25,8 +25,8 @@ export const GroupApi = {
     try {
       const res = await client.get('/groups/intersection', {
         params: {
-          group1Cn: data.name1,
-          group2Cn: data.name2,
+          group: data.group,
+          subgroup: data.subgroup,
         },
       });
 
