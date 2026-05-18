@@ -8,3 +8,5 @@ export const BoardEntity = {
   saga,
   selectors,
 };
+
+export type { Board } from './model/types';

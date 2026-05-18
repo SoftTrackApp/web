@@ -1,17 +1,16 @@
 import classes from './board-page.module.css';
-import clsx from 'clsx';
 import { BoardEntity } from '@/entities/board';
 import type { User } from '@/entities/user';
 import { CreateBoardDialog } from '@/features/board';
-import { Input } from '@/shared/ui/input';
 import { Select } from '@/shared/ui/select';
 import { Tag } from '@/shared/ui/tag';
 import { Typography } from '@/shared/ui/typography';
-import { ArrowLeft, ChevronLeft, ClipboardCheck } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { ArrowLeft, ClipboardCheck } from 'lucide-react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { BehaviorSetEntity } from '@/entities/behavior-set';
+import { UsersSidebar } from './users-sidebar';
 
 type Option = {
   label: string;
@@ -24,7 +23,6 @@ export function BoardPage() {
   const board = useSelector(BoardEntity.selectors.selectBoard);
   const behaviorSets = useSelector(BehaviorSetEntity.selectors.selectBehaviorSets);
 
-  const [searchQuery, setSearchQuery] = useState('');
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   const behaviorSet = behaviorSets.data.find((bs) => bs.id === board?.behaviorSetId);
@@ -35,14 +33,6 @@ export function BoardPage() {
   }));
 
   const defaultBehaviorSet = behaviorSetOptions.find((bs) => bs.value === behaviorSet?.id);
-
-  const users = useMemo(() => {
-    if (!board) return [];
-
-    const q = searchQuery.trim().toLowerCase();
-
-    return board.users.filter((u) => `${u.fName} ${u.lName}`.toLowerCase().includes(q));
-  }, [board, searchQuery]);
 
   const navigate = useNavigate();
 
@@ -58,33 +48,7 @@ export function BoardPage() {
     <div className={classes.wrapper}>
       <title>Доска оценивания - SoftTrack</title>
 
-      <section className={classes.sideSection}>
-        <Link to="/" className={classes.homeLink}>
-          <ChevronLeft /> Вернуться на Главную
-        </Link>
-
-        <Input
-          placeholder="Найти"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-
-        <div className={classes.usersList} role="list">
-          {users.map((u) => (
-            <div
-              key={u.id}
-              className={clsx(
-                classes.userItem,
-                u.id === selectedUser?.id && classes.userItemSelected,
-              )}
-              onClick={() => setSelectedUser(u)}
-              role="listitem"
-            >
-              {u.fName} {u.lName}
-            </div>
-          ))}
-        </div>
-      </section>
+      <UsersSidebar board={board} selectedUser={selectedUser} onUserSelect={setSelectedUser} />
 
       {selectedUser ? (
         <section className={classes.middleSection}>
