@@ -1,10 +1,11 @@
 import classes from './user-details.module.css';
+import clsx from 'clsx';
+import { useDroppable } from '@dnd-kit/react';
 import { Typography } from '@/shared/ui/typography';
 import { ClipboardCheck } from 'lucide-react';
 import { Tag } from '@/shared/ui/tag';
 import type { Board } from '@/entities/board';
 import type { User } from '@/entities/user';
-import clsx from 'clsx';
 
 interface UserDetailsProps {
   board: Board;
@@ -13,6 +14,8 @@ interface UserDetailsProps {
 }
 
 export function UserDetails({ board, user, dragging }: UserDetailsProps) {
+  const { ref } = useDroppable({ id: 'droppable' });
+
   return (
     <section className={classes.middleSection}>
       <div className={classes.userInfo}>
@@ -26,21 +29,33 @@ export function UserDetails({ board, user, dragging }: UserDetailsProps) {
           </Typography>
         </div>
 
-        <Tag>0 поведений</Tag>
+        <Tag>{user.behaviors?.length ?? '0'} поведений</Tag>
       </div>
 
-      <div className={clsx(classes.suggestion, dragging && classes.dragging)}>
-        <div className={classes.bigIcon}>
-          <ClipboardCheck size={64} />
-        </div>
+      <div className={classes.droppableWrapper} ref={ref}>
+        {user.behaviors ? (
+          <div className={classes.behaviorsList} role="list">
+            {user.behaviors.map((b) => (
+              <div key={b.id} className={classes.behaviorItem} role="listitem">
+                <span>{b.name}</span>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className={clsx(classes.suggestion, dragging && classes.dragging)}>
+            <div className={classes.bigIcon}>
+              <ClipboardCheck size={64} />
+            </div>
 
-        <Typography variant="h2" className={classes.suggestionText}>
-          Добавьте первое поведение
-        </Typography>
+            <Typography variant="h2" className={classes.suggestionText}>
+              Добавьте первое поведение
+            </Typography>
 
-        <Typography className={classes.suggestionTitle}>
-          Нажмите на карточку в правой панели или перетащите её в это поле
-        </Typography>
+            <Typography className={classes.suggestionTitle}>
+              Нажмите на карточку в правой панели или перетащите её в это поле
+            </Typography>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -3,9 +3,9 @@ import classes from './users-sidebar.module.css';
 import { ChevronLeft } from 'lucide-react';
 import { Input } from '@/shared/ui/input';
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router';
 import type { User } from '@/entities/user';
 import type { Board } from '@/entities/board';
-import { Link } from 'react-router';
 
 interface UsersSidebarProps {
   board: Board;

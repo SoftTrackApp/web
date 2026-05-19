@@ -1,5 +1,5 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import type { Board, BoardState } from './types';
+import type { AddBehaviorAction, Board, BoardState } from './types';
 import type { User } from '@/entities/user';
 
 const initialState: BoardState = {
@@ -29,6 +29,18 @@ export const { reducer, actions } = createSlice({
 
     setUsersError: (state, action: PayloadAction<string>) => {
       state.usersError = action.payload;
+    },
+
+    addUserBehavior: (state, action: PayloadAction<AddBehaviorAction>) => {
+      if (!state.currentBoard) return;
+
+      const { userId, behavior } = action.payload;
+
+      const user = state.currentBoard.users.find((u) => u.id === userId);
+      if (!user) return;
+
+      user.behaviors ??= [];
+      user.behaviors.push(behavior);
     },
   },
 });

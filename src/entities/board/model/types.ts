@@ -1,3 +1,4 @@
+import type { Behavior } from '@/entities/behavior';
 import type { User } from '@/entities/user';
 
 export interface Board {
@@ -11,4 +12,9 @@ export interface Board {
 export interface BoardState {
   currentBoard: Board | null;
   usersError: string | null;
+}
+
+export interface AddBehaviorAction {
+  userId: string;
+  behavior: Behavior;
 }
