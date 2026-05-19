@@ -60,15 +60,18 @@ export function Header() {
 
       {open && (
         <nav className={classes.mobileNav}>
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              className={({ isActive }) => clsx(classes.link, isActive && classes.active)}
-            >
-              {link.name}
-            </NavLink>
-          ))}
+          {navLinks.map(
+            (link) =>
+              (!link.restricted || session.data?.role !== 'студент') && (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={({ isActive }) => clsx(classes.link, isActive && classes.active)}
+                >
+                  {link.name}
+                </NavLink>
+              ),
+          )}
 
           <button
             onClick={() => dispatch(SessionFeature.actions.logOut())}
@@ -76,6 +79,16 @@ export function Header() {
           >
             Выйти
           </button>
+
+          {board && (
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => dispatch(BoardEntity.actions.clearBoard())}
+            >
+              Сохранить доску
+            </Button>
+          )}
         </nav>
       )}
 
