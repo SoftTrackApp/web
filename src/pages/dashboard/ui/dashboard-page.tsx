@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UserEntity } from '@/entities/user';
 import { useEffect, useMemo, useState } from 'react';
 import { EmptyUserState } from './empty-user-state';
-import { useSoftskillStats } from '@/entities/statistics';
+import { useSoftskillStats, type SoftskillStat } from '@/entities/statistics';
 import { SkillCard } from './skill-card';
+import { SkillSidebar } from './skill-sidebar';
 
 type Option = {
   label: string;
@@ -24,6 +25,8 @@ export function DashboardPage() {
 
   const [user, setUser] = useState<Option | null>(null);
   const [sort, setSort] = useState<Option>(sortOptions[0]);
+
+  const [skill, setSkill] = useState<SoftskillStat | null>(null);
 
   const softskillStats = useSoftskillStats(user?.value);
 
@@ -77,11 +80,20 @@ export function DashboardPage() {
       {softskillStats.data ? (
         <div className={classes.skills}>
           {sortedSkills.map((skill) => (
-            <SkillCard key={skill.id} skill={skill} maxRates={totalRates} />
+            <SkillCard
+              key={skill.id}
+              skill={skill}
+              maxRates={totalRates}
+              onClick={() => setSkill(skill)}
+            />
           ))}
         </div>
       ) : (
         <EmptyUserState />
+      )}
+
+      {skill && (
+        <SkillSidebar userId={user?.value || ''} skill={skill} onClose={() => setSkill(null)} />
       )}
     </div>
   );

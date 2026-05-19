@@ -31,12 +31,18 @@ export function Header() {
           </NavLink>
         ))}
 
-        <button
-          onClick={() => dispatch(SessionFeature.actions.logOut())}
-          className={classes.logOut}
-        >
-          Выйти
-        </button>
+        <div className={classes.buttons}>
+          <Button variant="secondary" size="sm">
+            Сохранить доску
+          </Button>
+
+          <button
+            onClick={() => dispatch(SessionFeature.actions.logOut())}
+            className={classes.logOut}
+          >
+            Выйти
+          </button>
+        </div>
       </nav>
 
       {open && (

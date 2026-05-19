@@ -24,7 +24,6 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  margin-left: auto;
 }
 
 .headerButton {
@@ -33,6 +32,12 @@
 
 .mobileNav {
   display: none;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
 }
 
 @media screen and (max-width: 800px) {

@@ -1,0 +1,116 @@
+.sidebar {
+  position: absolute;
+  right: 0;
+  top: 96px;
+  height: 100%;
+  width: 354px;
+  border-left: 1px solid var(--gray-200);
+  border-top: 1px solid var(--gray-200);
+  margin-left: auto;
+  padding: 24px 20px;
+  z-index: 50;
+  background-color: var(--white);
+}
+
+.roundedBorder {
+  border-top-left-radius: 12px;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--gray-600);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 10px;
+}
+
+.close {
+  color: var(--gray-200);
+  cursor: pointer;
+}
+.close:hover {
+  color: var(--gray-500);
+}
+
+.rates {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 16px;
+  color: var(--gray-800);
+}
+
+.ratesNum {
+  font-size: 64px;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.switch {
+  display: flex;
+  padding: 4px;
+  gap: 4px;
+  margin-bottom: 24px;
+  border: 1px solid var(--gray-100);
+  border-radius: 10px;
+}
+
+.switchButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  flex-grow: 1;
+  padding: 8px 24px;
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  color: var(--gray-500);
+  min-width: 0;
+}
+
+.selectedButton {
+  background-color: var(--purple-50);
+  color: var(--purple-700);
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.behavior {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 10px;
+}
+
+.behaviorHeader {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.barWrapper {
+  background-color: var(--purple-50);
+  border-radius: 6px;
+}
+
+.bar {
+  height: 8px;
+  background-color: var(--purple-300);
+  border-radius: 6px;
+}
