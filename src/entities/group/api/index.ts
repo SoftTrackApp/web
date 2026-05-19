@@ -23,7 +23,12 @@ export const GroupApi = {
 
   fetchIntersection: async (params: IntersectionRequest) => {
     try {
-      const res = await client.get<User[]>('/groups/intersection', { params });
+      const res = await client.get<User[]>(`/groups/intersection`, {
+        params: {
+          group: [params.group, params.subgroup],
+        },
+      });
+      
       return res.data;
     } catch {
       throw new Error('UNKNOWN_ERROR');

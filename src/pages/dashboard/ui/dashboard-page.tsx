@@ -8,6 +8,7 @@ import { EmptyUserState } from './empty-user-state';
 import { useSoftskillStats, type SoftskillStat } from '@/entities/statistics';
 import { SkillCard } from './skill-card';
 import { SkillSidebar } from './skill-sidebar';
+import { SessionFeature } from '@/features/session';
 
 type Option = {
   label: string;
@@ -23,7 +24,13 @@ const sortOptions: Option[] = [
 export function DashboardPage() {
   const dispatch = useDispatch();
 
-  const [user, setUser] = useState<Option | null>(null);
+  const session = useSelector(SessionFeature.selectors.selectSession);
+
+  const [user, setUser] = useState<Option | null>(
+    session.data && session.data.role === 'студент'
+      ? { label: `${session.data.lastName} ${session.data.firstName}`, value: session.data.id }
+      : null,
+  );
   const [sort, setSort] = useState<Option>(sortOptions[0]);
 
   const [skill, setSkill] = useState<SoftskillStat | null>(null);
@@ -57,8 +64,12 @@ export function DashboardPage() {
   }, [sort, softskillStats.data]);
 
   useEffect(() => {
+    if (session.data?.role === 'студент') return;
+
     dispatch(UserEntity.actions.fetchUsers());
-  }, [dispatch]);
+  }, [dispatch, session.data?.role]);
+
+  if (!session.data) return null;
 
   return (
     <div className={classes.wrapper}>
@@ -68,14 +79,16 @@ export function DashboardPage() {
         Статистика
       </Typography>
 
-      <div className={classes.filters}>
-        <Select
-          placeholder="Выберите ученика"
-          options={users.data.map((u) => ({ label: `${u.lName} ${u.fName}`, value: u.id }))}
-          onChange={(e) => setUser(e as Option)}
-        />
-        <Select value={sort} onChange={(e) => setSort(e as Option)} options={sortOptions} />
-      </div>
+      {session.data.role !== 'студент' && (
+        <div className={classes.filters}>
+          <Select
+            placeholder="Выберите ученика"
+            options={users.data.map((u) => ({ label: `${u.lName} ${u.fName}`, value: u.id }))}
+            onChange={(e) => setUser(e as Option)}
+          />
+          <Select value={sort} onChange={(e) => setSort(e as Option)} options={sortOptions} />
+        </div>
+      )}
 
       {softskillStats.data ? (
         softskillStats.data?.length === 0 ? (
@@ -97,7 +110,12 @@ export function DashboardPage() {
       )}
 
       {skill && (
-        <SkillSidebar userId={user?.value || ''} skill={skill} onClose={() => setSkill(null)} />
+        <SkillSidebar
+          userId={user?.value || ''}
+          skill={skill}
+          onClose={() => setSkill(null)}
+          isStudent={session.data.role === 'студент'}
+        />
       )}
     </div>
   );

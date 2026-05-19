@@ -10,4 +10,13 @@ export const RecordApi = {
       throw new Error('UNKNOWN_ERROR');
     }
   },
+
+  fetchMyRecords: async (receiverId: string) => {
+    try {
+      const res = await client.get<RecordsResponse>(`/records/by-receiver/${receiverId}/mine`);
+      return res.data;
+    } catch {
+      throw new Error('UNKNOWN_ERROR');
+    }
+  },
 };

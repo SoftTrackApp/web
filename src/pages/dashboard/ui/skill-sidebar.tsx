@@ -10,16 +10,23 @@ interface SkillSidebarProps {
   userId: string;
   skill: SoftskillStat;
   roundedBorder?: boolean;
+  isStudent?: boolean;
   onClose?: () => void;
 }
 
 type Tab = 'rates' | 'comments';
 
-export function SkillSidebar({ userId, skill, roundedBorder = true, onClose }: SkillSidebarProps) {
+export function SkillSidebar({
+  userId,
+  skill,
+  roundedBorder = true,
+  onClose,
+  isStudent = false,
+}: SkillSidebarProps) {
   const [tab, setTab] = useState<Tab>('rates');
 
   const behaviors = useBehaviorStats(userId, skill.id);
-  const records = useRecords(userId);
+  const records = useRecords({ receiverId: userId, isMine: isStudent });
 
   const comments = records.data?.content.map((r) => r.comment) ?? [];
 
@@ -67,7 +74,10 @@ export function SkillSidebar({ userId, skill, roundedBorder = true, onClose }: S
                 </div>
 
                 <div className={classes.barWrapper}>
-                  <div className={classes.bar} style={{ width: `${(b.count / skill.totalCount) * 100}%` }} />
+                  <div
+                    className={classes.bar}
+                    style={{ width: `${(b.count / skill.totalCount) * 100}%` }}
+                  />
                 </div>
               </div>
             ))}
