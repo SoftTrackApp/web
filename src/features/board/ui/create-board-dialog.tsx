@@ -1,5 +1,4 @@
 import classes from './create-model-dialog.module.css';
-import { useEffect } from 'react';
 import { X } from 'lucide-react';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 import { Dialog } from '@/shared/ui/dialog';
@@ -9,10 +8,10 @@ import { Label } from '@/shared/ui/label';
 import { Input } from '@/shared/ui/input';
 import { ErrorMessage } from '@/shared/ui/error-message';
 import { Select } from '@/shared/ui/select';
-import { useDispatch, useSelector } from 'react-redux';
-import { GroupEntity } from '@/entities/group';
+import { useDispatch } from 'react-redux';
 import { BoardEntity } from '@/entities/board';
 import { useBehaviorSets } from '@/entities/behavior-set';
+import { useAcademicGroups, useOtherGroups } from '@/entities/group';
 
 interface CreateBoardDialogProps {
   onClose?: () => void;
@@ -46,11 +45,8 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
 
   const behaviorSets = useBehaviorSets();
 
-  const groups = useSelector(GroupEntity.selectors.selectGroups);
-
-  useEffect(() => {
-    dispatch(GroupEntity.actions.fetchGroups());
-  }, [dispatch]);
+  const academicGroups = useAcademicGroups();
+  const otherGroups = useOtherGroups();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     dispatch(
@@ -66,6 +62,12 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
 
   if (behaviorSets.isPending) return null;
   if (behaviorSets.error) return <span>{behaviorSets.error.message}</span>;
+
+  if (academicGroups.isPending) return null;
+  if (academicGroups.error) return <span>{academicGroups.error.message}</span>;
+
+  if (otherGroups.isPending) return null;
+  if (otherGroups.error) return <span>{otherGroups.error.message}</span>;
 
   return (
     <Dialog onClose={onClose}>
@@ -101,7 +103,7 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
                 placeholder="Выберите группу"
                 value={field.value}
                 onChange={field.onChange}
-                options={groups.academicGroups.map((group) => ({
+                options={academicGroups.data.map((group) => ({
                   label: group.name,
                   value: group.name,
                 }))}
@@ -124,7 +126,7 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
                 placeholder="Выберите группу"
                 value={field.value}
                 onChange={field.onChange}
-                options={groups.otherGroups.map((group) => ({
+                options={otherGroups.data.map((group) => ({
                   label: group.name,
                   value: group.name,
                 }))}

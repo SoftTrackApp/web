@@ -1,10 +1,1 @@
-import { saga } from './model/sagas';
-import { selectors } from './model/selectors';
-import { actions, reducer } from './model/slice';
-
-export const GroupEntity = {
-  saga,
-  selectors,
-  reducer,
-  actions,
-};
+export { useAcademicGroups, useOtherGroups, useIntersection } from './model/hooks';
