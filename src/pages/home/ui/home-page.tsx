@@ -5,9 +5,13 @@ import { ChartBarBig, ClipboardCheck } from 'lucide-react';
 import { Typography } from '@/shared/ui/typography';
 import { CreateBoardDialog } from '@/features/board';
 import { ActionCard } from './action-card';
+import { useSelector } from 'react-redux';
+import { SessionFeature } from '@/features/session';
 
 export function HomePage() {
   const [showBoardDialog, setShowBoardDialog] = useState(false);
+
+  const session = useSelector(SessionFeature.selectors.selectSession);
 
   return (
     <div className={classes.wrapper}>
@@ -16,13 +20,15 @@ export function HomePage() {
       </Typography>
 
       <div className={classes.cards}>
-        <Link to="/board">
-          <ActionCard
-            title="Доска оценивания"
-            description="Оценивайте soft skills учеников в реальном времени"
-            icon={<ClipboardCheck size={64} />}
-          />
-        </Link>
+        {session.data?.role !== 'студент' && (
+          <Link to="/board">
+            <ActionCard
+              title="Доска оценивания"
+              description="Оценивайте soft skills учеников в реальном времени"
+              icon={<ClipboardCheck size={64} />}
+            />
+          </Link>
+        )}
 
         <Link to="/dashboard">
           <ActionCard
