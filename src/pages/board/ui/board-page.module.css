@@ -1,7 +1,16 @@
 .wrapper {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  padding: 32px 60px;
   gap: 24px;
+  padding: 32px 60px;
   height: calc(100% - 52px);
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    padding: 16px;
+    gap: 16px;
+    height: auto;
+  }
 }
