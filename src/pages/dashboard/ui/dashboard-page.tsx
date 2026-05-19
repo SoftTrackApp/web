@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { UserEntity } from '@/entities/user';
 import { useEffect, useMemo, useState } from 'react';
 import { EmptyUserState } from './empty-user-state';
-import { useSoftskillStats } from '@/features/statistics';
+import { useSoftskillStats } from '@/entities/statistics';
 import { SkillCard } from './skill-card';
 
 type Option = {
