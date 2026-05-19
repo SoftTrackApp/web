@@ -12,7 +12,7 @@ export function useSoftskillStats(userId?: string) {
 
 export function useBehaviorStats(userId?: string, softskillId?: number) {
   return useQuery({
-    queryKey: ['softskillStats', userId],
+    queryKey: ['behaviorStats', userId],
     queryFn: () => StatisticsApi.fetchBehaviorStats(userId ?? '', softskillId ?? 0),
     placeholderData: keepPreviousData,
     enabled: !!userId && !!softskillId,

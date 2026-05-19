@@ -1,8 +1,10 @@
+type Role = 'студент' | 'аудитор' | 'методист' | 'администратор';
+
 export interface Session {
   id: string;
   firstName: string;
   lastName: string;
-  role: string;
+  role: Role;
 }
 
 export interface SessionState {

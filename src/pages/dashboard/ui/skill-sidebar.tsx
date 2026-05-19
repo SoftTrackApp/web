@@ -67,7 +67,7 @@ export function SkillSidebar({ userId, skill, roundedBorder = true, onClose }: S
                 </div>
 
                 <div className={classes.barWrapper}>
-                  <div className={classes.bar} style={{ width: '100%' }} />
+                  <div className={classes.bar} style={{ width: `${(b.count / skill.totalCount) * 100}%` }} />
                 </div>
               </div>
             ))}
