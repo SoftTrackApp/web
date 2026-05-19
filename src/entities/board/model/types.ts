@@ -1,4 +1,4 @@
-import type { Behavior } from '@/entities/behavior';
+import type { Behavior } from '@/entities/behavior-set';
 import type { User } from '@/entities/user';
 
 export interface Board {

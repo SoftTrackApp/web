@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import classes from './skill-card.module.css';
-import type { SoftskillStat } from '@/features/statistics/model/types';
+import type { SoftskillStat } from '@/entities/statistics';
 
 interface SkillCardProps {
   skill: SoftskillStat;

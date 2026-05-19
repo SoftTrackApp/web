@@ -1,4 +1,4 @@
-import type { Behavior } from '@/entities/behavior';
+import type { Behavior } from '@/entities/behavior-set';
 import { useDraggable } from '@dnd-kit/react';
 import classes from './behavior-item.module.css';
 
