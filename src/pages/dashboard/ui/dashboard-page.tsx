@@ -3,8 +3,10 @@ import { Typography } from '@/shared/ui/typography';
 import { Select } from '@/shared/ui/select';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserEntity } from '@/entities/user';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { EmptyUserState } from './empty-user-state';
+import { useSoftskillStats } from '@/features/statistics';
+import { SkillCard } from './skill-card';
 
 type Option = {
   label: string;
@@ -23,7 +25,33 @@ export function DashboardPage() {
   const [user, setUser] = useState<Option | null>(null);
   const [sort, setSort] = useState<Option>(sortOptions[0]);
 
+  const softskillStats = useSoftskillStats(user?.value);
+
+  const totalRates = softskillStats.data?.reduce((sum, s) => sum + s.totalCount, 0) ?? 0;
+
   const users = useSelector(UserEntity.selectors.selectUsers);
+
+  const sortedSkills = useMemo(() => {
+    if (!softskillStats.data) return [];
+
+    const copy = [...softskillStats.data];
+
+    switch (sort) {
+      case sortOptions[0]:
+        copy.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+
+      case sortOptions[1]:
+        copy.sort((a, b) => b.totalCount - a.totalCount);
+        break;
+
+      case sortOptions[2]:
+        copy.sort((a, b) => a.totalCount - b.totalCount);
+        break;
+    }
+
+    return copy;
+  }, [sort, softskillStats.data]);
 
   useEffect(() => {
     dispatch(UserEntity.actions.fetchUsers());
@@ -31,6 +59,8 @@ export function DashboardPage() {
 
   return (
     <div className={classes.wrapper}>
+      <title>Статистика - SoftTrack</title>
+
       <Typography variant="h2" className={classes.title}>
         Статистика
       </Typography>
@@ -44,7 +74,15 @@ export function DashboardPage() {
         <Select value={sort} onChange={(e) => setSort(e as Option)} options={sortOptions} />
       </div>
 
-      {user ? <div></div> : <EmptyUserState />}
+      {softskillStats.data ? (
+        <div className={classes.skills}>
+          {sortedSkills.map((skill) => (
+            <SkillCard key={skill.id} skill={skill} maxRates={totalRates} />
+          ))}
+        </div>
+      ) : (
+        <EmptyUserState />
+      )}
     </div>
   );
 }

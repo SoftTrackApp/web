@@ -10,4 +10,11 @@
 .filters {
   display: flex;
   gap: 16px;
+  margin-bottom: 24px;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
 }

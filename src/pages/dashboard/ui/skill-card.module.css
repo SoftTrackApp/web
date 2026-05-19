@@ -1,0 +1,57 @@
+.skillCard {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+  border: 1px solid var(--gray-200);
+  min-width: 350px;
+  cursor: pointer;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px 0 var(--shadow);
+  transition: background-color 200ms;
+}
+.skillCard:hover,
+.selected {
+  background-color: var(--purple-25);
+}
+
+.label {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--gray-800);
+}
+
+.rates {
+  display: flex;
+  align-items: flex-end;
+  font-size: 14px;
+  color: var(--gray-800);
+  margin-bottom: 10px;
+}
+
+.ratesCount {
+  font-size: 64px;
+  font-weight: 700;
+  margin-right: 2px;
+  color: var(--black);
+}
+
+.barWrapper {
+  background-color: var(--purple-50);
+  border-radius: 24px;
+}
+
+.bar {
+  height: 8px;
+  background-color: var(--purple-300);
+  border-radius: 24px;
+}
+
+.ratesPerentage {
+  margin-left: auto;
+}
