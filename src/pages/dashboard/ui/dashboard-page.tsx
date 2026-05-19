@@ -45,11 +45,11 @@ export function DashboardPage() {
         break;
 
       case sortOptions[1]:
-        copy.sort((a, b) => b.totalCount - a.totalCount);
+        copy.sort((a, b) => a.totalCount - b.totalCount);
         break;
 
       case sortOptions[2]:
-        copy.sort((a, b) => a.totalCount - b.totalCount);
+        copy.sort((a, b) => b.totalCount - a.totalCount);
         break;
     }
 
@@ -78,16 +78,20 @@ export function DashboardPage() {
       </div>
 
       {softskillStats.data ? (
-        <div className={classes.skills}>
-          {sortedSkills.map((skill) => (
-            <SkillCard
-              key={skill.id}
-              skill={skill}
-              maxRates={totalRates}
-              onClick={() => setSkill(skill)}
-            />
-          ))}
-        </div>
+        softskillStats.data?.length === 0 ? (
+          <span>Нет данных для отображения</span>
+        ) : (
+          <div className={classes.skills}>
+            {sortedSkills.map((skill) => (
+              <SkillCard
+                key={skill.id}
+                skill={skill}
+                maxRates={totalRates}
+                onClick={() => setSkill(skill)}
+              />
+            ))}
+          </div>
+        )
       ) : (
         <EmptyUserState />
       )}

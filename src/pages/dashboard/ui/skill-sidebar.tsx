@@ -23,7 +23,7 @@ export function SkillSidebar({ userId, skill, roundedBorder = true, onClose }: S
 
   const comments = records.data?.content.map((r) => r.comment) ?? [];
 
-  if (!behaviors.data || !records.data) return null;
+  if (!records.data) return null;
 
   return (
     <div className={clsx(classes.sidebar, roundedBorder && classes.roundedBorder)}>
@@ -59,7 +59,7 @@ export function SkillSidebar({ userId, skill, roundedBorder = true, onClose }: S
           <>
             <h3 className={classes.subtitle}>Распределение поведений</h3>
 
-            {behaviors.data.map((b) => (
+            {behaviors.data?.map((b) => (
               <div key={b.id} className={classes.behavior}>
                 <div className={classes.behaviorHeader}>
                   <span>{b.name}</span>

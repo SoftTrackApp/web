@@ -13,10 +13,10 @@ export const StatisticsApi = {
     }
   },
 
-  fetchBehaviorStats: async (userId: string, softSkillId: number) => {
+  fetchBehaviorStats: async (userId: string, softskillId: number) => {
     try {
       const res = await client.get<BehaviorStat[]>('/statistics/behaviors', {
-        params: { userId, softSkillId },
+        params: { userId, softskillId },
       });
       return res.data;
     } catch {
