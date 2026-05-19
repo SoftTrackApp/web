@@ -34,7 +34,7 @@ export function BoardPage() {
 
     setDragging(false);
 
-    if (!selectedUser) return;
+    if (!selectedUser || !board) return;
 
     const behaviorId = Number(e.operation.source?.id.toString().replace('behavior-', ''));
     const behavior = behaviors.find((b) => b.id === behaviorId);
@@ -43,6 +43,7 @@ export function BoardPage() {
     if (e.operation.target?.id === 'droppable') {
       dispatch(
         BoardEntity.actions.addUserBehavior({
+          title: board.name,
           userId: selectedUser.id,
           behavior: behavior,
         }),

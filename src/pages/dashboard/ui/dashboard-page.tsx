@@ -4,6 +4,7 @@ import { Select } from '@/shared/ui/select';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserEntity } from '@/entities/user';
 import { useEffect, useState } from 'react';
+import { EmptyUserState } from './empty-user-state';
 
 type Option = {
   label: string;
@@ -19,7 +20,7 @@ const sortOptions: Option[] = [
 export function DashboardPage() {
   const dispatch = useDispatch();
 
-  const [user, setUser] = useState<Option>();
+  const [user, setUser] = useState<Option | null>(null);
   const [sort, setSort] = useState<Option>(sortOptions[0]);
 
   const users = useSelector(UserEntity.selectors.selectUsers);
@@ -42,6 +43,8 @@ export function DashboardPage() {
         />
         <Select value={sort} onChange={(e) => setSort(e as Option)} options={sortOptions} />
       </div>
+
+      {user ? <div></div> : <EmptyUserState />}
     </div>
   );
 }
