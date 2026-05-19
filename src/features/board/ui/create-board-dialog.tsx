@@ -10,9 +10,9 @@ import { Input } from '@/shared/ui/input';
 import { ErrorMessage } from '@/shared/ui/error-message';
 import { Select } from '@/shared/ui/select';
 import { useDispatch, useSelector } from 'react-redux';
-import { BehaviorSetEntity } from '@/entities/behavior-set';
 import { GroupEntity } from '@/entities/group';
 import { BoardEntity } from '@/entities/board';
+import { useBehaviorSets } from '@/entities/behavior-set';
 
 interface CreateBoardDialogProps {
   onClose?: () => void;
@@ -44,11 +44,11 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
 
   const dispatch = useDispatch();
 
-  const behaviorSets = useSelector(BehaviorSetEntity.selectors.selectBehaviorSets);
+  const behaviorSets = useBehaviorSets();
+
   const groups = useSelector(GroupEntity.selectors.selectGroups);
 
   useEffect(() => {
-    dispatch(BehaviorSetEntity.actions.fetchBehaviorSets());
     dispatch(GroupEntity.actions.fetchGroups());
   }, [dispatch]);
 
@@ -63,6 +63,9 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
       }),
     );
   };
+
+  if (behaviorSets.isPending) return null;
+  if (behaviorSets.error) return <span>{behaviorSets.error.message}</span>;
 
   return (
     <Dialog onClose={onClose}>

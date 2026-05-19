@@ -35,8 +35,8 @@ export function UserDetails({ board, user, dragging }: UserDetailsProps) {
       <div className={clsx(classes.droppableWrapper, dragging && classes.dragging)} ref={ref}>
         {user.behaviors ? (
           <div className={classes.behaviorsList} role="list">
-            {user.behaviors.map((b) => (
-              <div key={b.id} className={classes.behaviorItem} role="listitem">
+            {user.behaviors.map((b, i) => (
+              <div key={i} className={classes.behaviorItem} role="listitem">
                 <span>{b.name}</span>
               </div>
             ))}

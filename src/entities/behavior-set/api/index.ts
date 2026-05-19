@@ -2,7 +2,7 @@ import type { BehaviorSet } from '../model/types';
 import { client } from '@/shared/api';
 
 export const BehaviorSetApi = {
-  fetchBehaviorSets: async (): Promise<BehaviorSet[]> => {
+  fetchBehaviorSets: async () => {
     try {
       const res = await client.get<BehaviorSet[]>('/behavior-sets');
       return res.data;

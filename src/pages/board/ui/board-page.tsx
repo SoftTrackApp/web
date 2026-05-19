@@ -9,17 +9,17 @@ import { EmptyUserState } from './empty-user-state';
 import { UserDetails } from './user-details';
 import { BehaviorsSidebar } from './behaviors-sidebar';
 import { DragDropProvider, type DragEndEvent } from '@dnd-kit/react';
-import { BehaviorSetEntity } from '@/entities/behavior-set';
+import { useBehaviorSets } from '@/entities/behavior-set';
 
 export function BoardPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const board = useSelector(BoardEntity.selectors.selectBoard);
-  const behaviorSets = useSelector(BehaviorSetEntity.selectors.selectBehaviorSets);
 
-  // TODO: make separate behaviors slice
-  const behaviors = behaviorSets.data.map((bs) => bs.behaviors).flat();
+  const behaviorSets = useBehaviorSets();
+  
+  const behaviors = behaviorSets.data?.map((bs) => bs.behaviors).flat() ?? [];
 
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [dragging, setDragging] = useState(false);

@@ -1,13 +1,10 @@
-import type { Behavior } from '@/entities/behavior';
+export interface Behavior {
+  id: number;
+  name: string;
+}
 
 export interface BehaviorSet {
   id: number;
   name: string;
   behaviors: Behavior[];
-}
-
-export interface BehaviorSetState {
-  data: BehaviorSet[];
-  isLoading: boolean;
-  error: string | null;
 }
