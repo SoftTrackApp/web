@@ -7,6 +7,7 @@
   border-radius: 12px;
   border: 1px solid var(--gray-200);
   height: 100%;
+  min-height: 0;
 }
 
 .userInfo {
@@ -34,11 +35,6 @@
   justify-content: center;
   text-align: center;
   height: 100%;
-  border: 1px dotted transparent;
-  border-radius: 12px;
-  transition:
-    background-color 200ms,
-    border-color 200ms;
 }
 
 .suggestionText {
@@ -49,26 +45,32 @@
   max-width: 440px;
 }
 
-.dragging {
-  background-color: var(--purple-25);
-  border-color: var(--purple-400);
-}
-
 .behaviorsList {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  /* height: 100%; */
-  overflow-y: auto;
 }
 
 .behaviorItem {
   padding: 12px 24px;
   border: 1px solid var(--gray-100);
+  background-color: var(--white);
   border-radius: 8px;
 }
 
 .droppableWrapper {
   height: 100%;
   flex: 1;
+  overflow-y: auto;
+  border: 1px dotted transparent;
+  border-radius: 12px;
+  padding: 8px;
+  transition:
+    background-color 200ms,
+    border-color 200ms;
+}
+
+.dragging {
+  background-color: var(--purple-25);
+  border-color: var(--purple-400);
 }

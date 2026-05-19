@@ -32,7 +32,7 @@ export function UserDetails({ board, user, dragging }: UserDetailsProps) {
         <Tag>{user.behaviors?.length ?? '0'} поведений</Tag>
       </div>
 
-      <div className={classes.droppableWrapper} ref={ref}>
+      <div className={clsx(classes.droppableWrapper, dragging && classes.dragging)} ref={ref}>
         {user.behaviors ? (
           <div className={classes.behaviorsList} role="list">
             {user.behaviors.map((b) => (
@@ -42,7 +42,7 @@ export function UserDetails({ board, user, dragging }: UserDetailsProps) {
             ))}
           </div>
         ) : (
-          <div className={clsx(classes.suggestion, dragging && classes.dragging)}>
+          <div className={classes.suggestion}>
             <div className={classes.bigIcon}>
               <ClipboardCheck size={64} />
             </div>
@@ -52,7 +52,7 @@ export function UserDetails({ board, user, dragging }: UserDetailsProps) {
             </Typography>
 
             <Typography className={classes.suggestionTitle}>
-              Нажмите на карточку в правой панели или перетащите её в это поле
+              Перетащите карточку из правой панели в это поле
             </Typography>
           </div>
         )}
