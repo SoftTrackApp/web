@@ -42,5 +42,9 @@ export const { reducer, actions } = createSlice({
       user.behaviors ??= [];
       user.behaviors.push(behavior);
     },
+
+    clearBoard: (state) => {
+      state.currentBoard = null;
+    },
   },
 });

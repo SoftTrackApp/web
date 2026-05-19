@@ -1,11 +1,12 @@
 import classes from './header.module.css';
 import clsx from 'clsx';
 import { NavLink } from 'react-router';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SessionFeature } from '@/features/session';
 import { Button } from '@/shared/ui/button';
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
+import { BoardEntity } from '@/entities/board';
 
 const navLinks = [
   { name: 'Главная', to: '/' },
@@ -15,6 +16,8 @@ const navLinks = [
 
 export function Header() {
   const dispatch = useDispatch();
+
+  const board = useSelector(BoardEntity.selectors.selectBoard);
 
   const [open, setOpen] = useState(false);
 
@@ -32,9 +35,15 @@ export function Header() {
         ))}
 
         <div className={classes.buttons}>
-          <Button variant="secondary" size="sm">
-            Сохранить доску
-          </Button>
+          {board && (
+            <Button
+              variant="secondary"
+              size="sm"
+              onClick={() => dispatch(BoardEntity.actions.clearBoard())}
+            >
+              Сохранить доску
+            </Button>
+          )}
 
           <button
             onClick={() => dispatch(SessionFeature.actions.logOut())}

@@ -71,17 +71,6 @@ export function SkillSidebar({ userId, skill, roundedBorder = true, onClose }: S
                 </div>
               </div>
             ))}
-
-            <div className={classes.behavior}>
-              <div className={classes.behaviorHeader}>
-                <span>Активно обсуждал</span>
-                <span>10</span>
-              </div>
-
-              <div className={classes.barWrapper}>
-                <div className={classes.bar} style={{ width: '80%' }} />
-              </div>
-            </div>
           </>
         ) : (
           <>
