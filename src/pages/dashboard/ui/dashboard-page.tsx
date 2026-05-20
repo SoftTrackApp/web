@@ -85,6 +85,7 @@ export function DashboardPage() {
             placeholder="Выберите ученика"
             options={users.data.map((u) => ({ label: `${u.lName} ${u.fName}`, value: u.id }))}
             onChange={(e) => setUser(e as Option)}
+            className={classes.selectStudent}
           />
           <Select value={sort} onChange={(e) => setSort(e as Option)} options={sortOptions} />
         </div>

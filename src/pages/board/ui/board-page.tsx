@@ -18,7 +18,7 @@ export function BoardPage() {
   const board = useSelector(BoardEntity.selectors.selectBoard);
 
   const behaviorSets = useBehaviorSets();
-  
+
   const behaviors = behaviorSets.data?.map((bs) => bs.behaviors).flat() ?? [];
 
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
@@ -34,21 +34,26 @@ export function BoardPage() {
 
     setDragging(false);
 
+    if (e.operation.target?.id !== 'droppable') return;
     if (!selectedUser || !board) return;
 
     const behaviorId = Number(e.operation.source?.id.toString().replace('behavior-', ''));
+    addBehaviorToUser(behaviorId);
+  };
+
+  const addBehaviorToUser = (behaviorId: number) => {
+    if (!selectedUser || !board) return;
+
     const behavior = behaviors.find((b) => b.id === behaviorId);
     if (!behavior) return;
 
-    if (e.operation.target?.id === 'droppable') {
-      dispatch(
-        BoardEntity.actions.addUserBehavior({
-          title: board.name,
-          userId: selectedUser.id,
-          behavior: behavior,
-        }),
-      );
-    }
+    dispatch(
+      BoardEntity.actions.addUserBehavior({
+        title: board.name,
+        userId: selectedUser.id,
+        behavior: behavior,
+      }),
+    );
   };
 
   if (!board) {
@@ -72,7 +77,7 @@ export function BoardPage() {
           <EmptyUserState />
         )}
 
-        <BehaviorsSidebar board={board} />
+        <BehaviorsSidebar board={board} onBehaviorClick={addBehaviorToUser} />
       </div>
     </DragDropProvider>
   );

@@ -11,12 +11,17 @@
   display: flex;
   gap: 16px;
   margin-bottom: 24px;
+  flex-wrap: wrap;
 }
 
 .skills {
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
+}
+
+.selectStudent {
+  min-width: 300px;
 }
 
 @media screen and (max-width: 800px) {

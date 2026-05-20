@@ -7,6 +7,7 @@ import { useBehaviorSets } from '@/entities/behavior-set';
 
 interface BehaviorsSidebar {
   board: Board;
+  onBehaviorClick: (behaviorId: number) => void;
 }
 
 type Option = {
@@ -14,7 +15,7 @@ type Option = {
   value: number;
 };
 
-export function BehaviorsSidebar({ board }: BehaviorsSidebar) {
+export function BehaviorsSidebar({ board, onBehaviorClick }: BehaviorsSidebar) {
   const dispatch = useDispatch();
 
   const behaviorSets = useBehaviorSets();
@@ -45,7 +46,7 @@ export function BehaviorsSidebar({ board }: BehaviorsSidebar) {
 
       <div className={classes.behaviorsList} role="list">
         {behaviorSet?.behaviors.map((b) => (
-          <BehaviorItem key={b.id} behavior={b} />
+          <BehaviorItem key={b.id} behavior={b} onClick={() => onBehaviorClick(b.id)} />
         ))}
       </div>
     </section>

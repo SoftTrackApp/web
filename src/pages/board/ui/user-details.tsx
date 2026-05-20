@@ -52,7 +52,7 @@ export function UserDetails({ board, user, dragging }: UserDetailsProps) {
             </Typography>
 
             <Typography className={classes.suggestionTitle}>
-              Перетащите карточку из правой панели в это поле
+              Нажмите на карточку в правой панели или перетащите её в это поле
             </Typography>
           </div>
         )}
