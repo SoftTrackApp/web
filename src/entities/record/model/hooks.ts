@@ -8,7 +8,7 @@ interface UseRecordsProps {
 
 export function useRecords({ receiverId, isMine = false }: UseRecordsProps) {
   return useQuery({
-    queryKey: ['records'],
+    queryKey: ['records', receiverId],
     queryFn: () =>
       isMine ? RecordApi.fetchMyRecords(receiverId) : RecordApi.fetchRecords(receiverId),
   });
