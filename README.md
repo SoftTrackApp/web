@@ -16,7 +16,7 @@
 
 ```sh
 $ bun install
-$ bun build
+$ bun run build
 ```
 
 ## Запуск в режиме разработки
