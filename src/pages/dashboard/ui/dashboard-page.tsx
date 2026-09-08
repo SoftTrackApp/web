@@ -1,14 +1,14 @@
 import classes from './dashboard-page.module.css';
 import { Typography } from '@/shared/ui/typography/typography';
 import { Select } from '@/shared/ui/select/select';
-import { useDispatch, useSelector } from 'react-redux';
-import { UserEntity } from '@/entities/user';
-import { useEffect, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useMemo, useState } from 'react';
 import { EmptyUserState } from './empty-user-state';
 import { useSoftskillStats, type SoftskillStat } from '@/entities/statistics';
 import { SkillCard } from './skill-card';
 import { SkillSidebar } from './skill-sidebar';
 import { SessionFeature } from '@/features/session';
+import { useUsers } from '@/entities/user';
 
 type Option = {
   label: string;
@@ -22,8 +22,6 @@ const sortOptions: Option[] = [
 ];
 
 export function DashboardPage() {
-  const dispatch = useDispatch();
-
   const session = useSelector(SessionFeature.selectors.selectSession);
 
   const [user, setUser] = useState<Option | null>(
@@ -43,7 +41,7 @@ export function DashboardPage() {
   const totalRates =
     softskillStats.data?.reduce((sum, s) => sum + s.totalCount, 0) ?? 0;
 
-  const users = useSelector(UserEntity.selectors.selectUsers);
+  const users = useUsers();
 
   const sortedSkills = useMemo(() => {
     if (!softskillStats.data) return [];
@@ -67,12 +65,6 @@ export function DashboardPage() {
     return copy;
   }, [sort, softskillStats.data]);
 
-  useEffect(() => {
-    if (session.data?.role === 'студент') return;
-
-    dispatch(UserEntity.actions.fetchUsers());
-  }, [dispatch, session.data?.role]);
-
   if (!session.data) return null;
 
   return (
@@ -87,7 +79,7 @@ export function DashboardPage() {
         <div className={classes.filters}>
           <Select
             placeholder="Выберите ученика"
-            options={users.data.map((u) => ({
+            options={users.data?.map((u) => ({
               label: `${u.lName} ${u.fName}`,
               value: u.id,
             }))}

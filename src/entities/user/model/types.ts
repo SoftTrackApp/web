@@ -6,9 +6,3 @@ export interface User {
   lName: string;
   behaviors?: Behavior[];
 }
-
-export interface UsersState {
-  data: User[];
-  isLoading: boolean;
-  error: string | null;
-}
