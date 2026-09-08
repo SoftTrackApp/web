@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [react(), babel({ presets: [reactCompilerPreset()] })],
   resolve: {
     alias: {
-      '@': path.join(__dirname, './src'),
+      '@': path.join(import.meta.dirname, './src'),
     },
   },
 });
