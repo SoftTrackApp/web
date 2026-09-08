@@ -88,7 +88,9 @@ export function SigninPage() {
         </Button>
 
         <span className={classes.error}>
-          {errors.root && <ErrorMessage>{mapErrorCode(errors.root.message)}</ErrorMessage>}
+          {errors.root && (
+            <ErrorMessage>{mapErrorCode(errors.root.message)}</ErrorMessage>
+          )}
         </span>
       </form>
     </div>

@@ -45,7 +45,10 @@ export function SkillSidebar({
 
       <div className={classes.switch}>
         <div
-          className={clsx(classes.switchButton, tab === 'rates' && classes.selectedButton)}
+          className={clsx(
+            classes.switchButton,
+            tab === 'rates' && classes.selectedButton,
+          )}
           onClick={() => setTab('rates')}
         >
           <ChartBarBig />
@@ -53,7 +56,10 @@ export function SkillSidebar({
         </div>
 
         <div
-          className={clsx(classes.switchButton, tab === 'comments' && classes.selectedButton)}
+          className={clsx(
+            classes.switchButton,
+            tab === 'comments' && classes.selectedButton,
+          )}
           onClick={() => setTab('comments')}
         >
           <MessageCircle />

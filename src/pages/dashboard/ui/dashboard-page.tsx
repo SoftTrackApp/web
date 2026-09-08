@@ -28,7 +28,10 @@ export function DashboardPage() {
 
   const [user, setUser] = useState<Option | null>(
     session.data && session.data.role === 'студент'
-      ? { label: `${session.data.lastName} ${session.data.firstName}`, value: session.data.id }
+      ? {
+          label: `${session.data.lastName} ${session.data.firstName}`,
+          value: session.data.id,
+        }
       : null,
   );
   const [sort, setSort] = useState<Option>(sortOptions[0]);
@@ -83,11 +86,18 @@ export function DashboardPage() {
         <div className={classes.filters}>
           <Select
             placeholder="Выберите ученика"
-            options={users.data.map((u) => ({ label: `${u.lName} ${u.fName}`, value: u.id }))}
+            options={users.data.map((u) => ({
+              label: `${u.lName} ${u.fName}`,
+              value: u.id,
+            }))}
             onChange={(e) => setUser(e as Option)}
             className={classes.selectStudent}
           />
-          <Select value={sort} onChange={(e) => setSort(e as Option)} options={sortOptions} />
+          <Select
+            value={sort}
+            onChange={(e) => setSort(e as Option)}
+            options={sortOptions}
+          />
         </div>
       )}
 

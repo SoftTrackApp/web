@@ -30,7 +30,9 @@ export function BehaviorsSidebar({ board, onBehaviorClick }: BehaviorsSidebar) {
     value: bs.id,
   }));
 
-  const defaultBehaviorSet = behaviorSetOptions?.find((bs) => bs.value === behaviorSet?.id);
+  const defaultBehaviorSet = behaviorSetOptions?.find(
+    (bs) => bs.value === behaviorSet?.id,
+  );
 
   const onBehaviorSetChange = (newBehaviorSet: Option) => {
     dispatch(BoardEntity.actions.setBehaviorSetId(newBehaviorSet.value));

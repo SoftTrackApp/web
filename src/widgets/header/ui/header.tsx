@@ -31,7 +31,9 @@ export function Header() {
               <NavLink
                 key={link.to}
                 to={link.to}
-                className={({ isActive }) => clsx(classes.link, isActive && classes.active)}
+                className={({ isActive }) =>
+                  clsx(classes.link, isActive && classes.active)
+                }
               >
                 {link.name}
               </NavLink>
@@ -66,7 +68,9 @@ export function Header() {
                 <NavLink
                   key={link.to}
                   to={link.to}
-                  className={({ isActive }) => clsx(classes.link, isActive && classes.active)}
+                  className={({ isActive }) =>
+                    clsx(classes.link, isActive && classes.active)
+                  }
                 >
                   {link.name}
                 </NavLink>

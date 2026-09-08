@@ -32,7 +32,10 @@ export function UserDetails({ board, user, dragging }: UserDetailsProps) {
         <Tag>{user.behaviors?.length ?? '0'} поведений</Tag>
       </div>
 
-      <div className={clsx(classes.droppableWrapper, dragging && classes.dragging)} ref={ref}>
+      <div
+        className={clsx(classes.droppableWrapper, dragging && classes.dragging)}
+        ref={ref}
+      >
         {user.behaviors ? (
           <div className={classes.behaviorsList} role="list">
             {user.behaviors.map((b, i) => (

@@ -9,7 +9,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
 }
 
-export function Button({ className, variant = 'primary', size = 'md', ...props }: ButtonProps) {
+export function Button({
+  className,
+  variant = 'primary',
+  size = 'md',
+  ...props
+}: ButtonProps) {
   return (
     <button
       className={clsx(classes.button, classes[variant], classes[size], className)}

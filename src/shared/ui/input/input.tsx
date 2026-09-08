@@ -8,7 +8,13 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   onIconClick?: () => void;
 }
 
-export function Input({ className, error = false, icon, onIconClick, ...props }: InputProps) {
+export function Input({
+  className,
+  error = false,
+  icon,
+  onIconClick,
+  ...props
+}: InputProps) {
   const hasIcon = Boolean(icon || error);
 
   return (

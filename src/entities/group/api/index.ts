@@ -28,7 +28,7 @@ export const GroupApi = {
           group: [params.group, params.subgroup],
         },
       });
-      
+
       return res.data;
     } catch {
       throw new Error('UNKNOWN_ERROR');

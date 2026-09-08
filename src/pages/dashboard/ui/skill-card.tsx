@@ -9,7 +9,12 @@ interface SkillCardProps {
   onClick?: (skillId: number) => void;
 }
 
-export function SkillCard({ skill, maxRates, selected = false, onClick }: SkillCardProps) {
+export function SkillCard({
+  skill,
+  maxRates,
+  selected = false,
+  onClick,
+}: SkillCardProps) {
   const barWidth = maxRates ? Math.floor((skill.totalCount / maxRates) * 100) : 0;
 
   return (

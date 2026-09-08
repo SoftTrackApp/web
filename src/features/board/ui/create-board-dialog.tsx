@@ -159,7 +159,9 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
             )}
           />
 
-          {errors.behaviorSet && <ErrorMessage>{errors.behaviorSet.message}</ErrorMessage>}
+          {errors.behaviorSet && (
+            <ErrorMessage>{errors.behaviorSet.message}</ErrorMessage>
+          )}
         </div>
 
         <Button type="submit" size="lg">

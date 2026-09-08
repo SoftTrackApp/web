@@ -14,8 +14,8 @@ export function EmptyUserState() {
       </Typography>
 
       <Typography className={classes.suggestionText}>
-        Чтобы посмотреть статистику по навыкам и прогрессу, выберите ученика из выпадающего списка
-        выше
+        Чтобы посмотреть статистику по навыкам и прогрессу, выберите ученика из
+        выпадающего списка выше
       </Typography>
     </div>
   );
