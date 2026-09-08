@@ -11,7 +11,12 @@ export function BehaviorItem({ behavior, onClick }: BehaviorItemProps) {
   const { ref } = useDraggable({ id: `behavior-${behavior.id}` });
 
   return (
-    <div className={classes.behaviorItem} ref={ref} role="listitem" onClick={onClick}>
+    <div
+      className={classes.behaviorItem}
+      ref={ref}
+      role="listitem"
+      onClick={onClick}
+    >
       {behavior.name}
     </div>
   );

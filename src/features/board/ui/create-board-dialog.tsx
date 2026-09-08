@@ -1,13 +1,13 @@
 import classes from './create-model-dialog.module.css';
 import { X } from 'lucide-react';
 import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
-import { Dialog } from '@/shared/ui/dialog';
-import { Typography } from '@/shared/ui/typography';
-import { Button } from '@/shared/ui/button';
-import { Label } from '@/shared/ui/label';
-import { Input } from '@/shared/ui/input';
-import { ErrorMessage } from '@/shared/ui/error-message';
-import { Select } from '@/shared/ui/select';
+import { Dialog } from '@/shared/ui/dialog/dialog';
+import { Typography } from '@/shared/ui/typography/typography';
+import { Button } from '@/shared/ui/button/button';
+import { Label } from '@/shared/ui/label/label';
+import { Input } from '@/shared/ui/input/input';
+import { ErrorMessage } from '@/shared/ui/error-message/error-message';
+import { Select } from '@/shared/ui/select/select';
 import { useDispatch } from 'react-redux';
 import { BoardEntity } from '@/entities/board';
 import { useBehaviorSets } from '@/entities/behavior-set';
@@ -135,7 +135,9 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
             )}
           />
 
-          {errors.subgroup && <ErrorMessage>{errors.subgroup.message}</ErrorMessage>}
+          {errors.subgroup && (
+            <ErrorMessage>{errors.subgroup.message}</ErrorMessage>
+          )}
         </div>
 
         <div className={classes.field}>

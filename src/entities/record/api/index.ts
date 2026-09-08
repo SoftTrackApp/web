@@ -1,10 +1,12 @@
-import { client } from '@/shared/api';
+import { client } from '@/shared/api/client';
 import type { RecordsResponse } from '../model/types';
 
 export const RecordApi = {
   fetchRecords: async (receiverId: string) => {
     try {
-      const res = await client.get<RecordsResponse>(`/records/by-receiver/${receiverId}`);
+      const res = await client.get<RecordsResponse>(
+        `/records/by-receiver/${receiverId}`,
+      );
       return res.data;
     } catch {
       throw new Error('UNKNOWN_ERROR');

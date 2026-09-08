@@ -1,4 +1,4 @@
-import { client } from '@/shared/api';
+import { client } from '@/shared/api/client';
 import type { Credentials, Session } from '../model/types';
 import { isAxiosError } from 'axios';
 

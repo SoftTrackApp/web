@@ -1,4 +1,4 @@
-import { Typography } from '@/shared/ui/typography';
+import { Typography } from '@/shared/ui/typography/typography';
 import classes from './action-card.module.css';
 
 interface ActionCardProps {
@@ -8,7 +8,12 @@ interface ActionCardProps {
   onClick?: () => void;
 }
 
-export function ActionCard({ icon, title, description, onClick }: ActionCardProps) {
+export function ActionCard({
+  icon,
+  title,
+  description,
+  onClick,
+}: ActionCardProps) {
   return (
     <div className={classes.card} onClick={onClick}>
       <div className={classes.icon}>{icon}</div>

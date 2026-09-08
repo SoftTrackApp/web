@@ -17,7 +17,12 @@ export function Button({
 }: ButtonProps) {
   return (
     <button
-      className={clsx(classes.button, classes[variant], classes[size], className)}
+      className={clsx(
+        classes.button,
+        classes[variant],
+        classes[size],
+        className,
+      )}
       {...props}
     />
   );

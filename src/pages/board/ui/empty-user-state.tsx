@@ -1,5 +1,5 @@
 import classes from './empty-user-state.module.css';
-import { Typography } from '@/shared/ui/typography';
+import { Typography } from '@/shared/ui/typography/typography';
 import { ArrowLeft } from 'lucide-react';
 
 export function EmptyUserState() {
@@ -15,7 +15,8 @@ export function EmptyUserState() {
         </Typography>
 
         <Typography className={classes.suggestionText}>
-          Выберите имя из списка слева, чтобы открыть профиль и начать процесс оценивания
+          Выберите имя из списка слева, чтобы открыть профиль и начать процесс
+          оценивания
         </Typography>
       </div>
     </section>

@@ -1,5 +1,5 @@
+import { client } from '@/shared/api/client';
 import type { BehaviorSet } from '../model/types';
-import { client } from '@/shared/api';
 
 export const BehaviorSetApi = {
   fetchBehaviorSets: async () => {

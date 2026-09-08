@@ -7,7 +7,11 @@ interface TypographyProps {
   children?: React.ReactNode;
 }
 
-export function Typography({ variant = 'body', className, children }: TypographyProps) {
+export function Typography({
+  variant = 'body',
+  className,
+  children,
+}: TypographyProps) {
   const Tag = variant === 'body' ? 'p' : variant;
 
   return <Tag className={clsx(className, classes[variant])}>{children}</Tag>;

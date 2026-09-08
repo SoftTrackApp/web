@@ -13,7 +13,8 @@ export const store = configureStore({
     board: BoardEntity.reducer,
     users: UserEntity.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(sagaMiddleware),
 });
 
 sagaMiddleware.run(rootSaga);

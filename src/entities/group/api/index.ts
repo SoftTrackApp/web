@@ -1,4 +1,4 @@
-import { client } from '@/shared/api';
+import { client } from '@/shared/api/client';
 import type { Group, IntersectionRequest } from '../model/types';
 import type { User } from '@/entities/user';
 

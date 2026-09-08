@@ -1,6 +1,6 @@
 import classes from './dashboard-page.module.css';
-import { Typography } from '@/shared/ui/typography';
-import { Select } from '@/shared/ui/select';
+import { Typography } from '@/shared/ui/typography/typography';
+import { Select } from '@/shared/ui/select/select';
 import { useDispatch, useSelector } from 'react-redux';
 import { UserEntity } from '@/entities/user';
 import { useEffect, useMemo, useState } from 'react';
@@ -40,7 +40,8 @@ export function DashboardPage() {
 
   const softskillStats = useSoftskillStats(user?.value);
 
-  const totalRates = softskillStats.data?.reduce((sum, s) => sum + s.totalCount, 0) ?? 0;
+  const totalRates =
+    softskillStats.data?.reduce((sum, s) => sum + s.totalCount, 0) ?? 0;
 
   const users = useSelector(UserEntity.selectors.selectUsers);
 

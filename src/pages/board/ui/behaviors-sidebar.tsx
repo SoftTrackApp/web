@@ -1,5 +1,5 @@
 import classes from './behaviors-sidebar.module.css';
-import { Select } from '@/shared/ui/select';
+import { Select } from '@/shared/ui/select/select';
 import { BoardEntity, type Board } from '@/entities/board';
 import { useDispatch } from 'react-redux';
 import { BehaviorItem } from './behavior-item';
@@ -23,7 +23,9 @@ export function BehaviorsSidebar({ board, onBehaviorClick }: BehaviorsSidebar) {
   if (behaviorSets.isPending) return null;
   if (behaviorSets.error) return <span>{behaviorSets.error.message}</span>;
 
-  const behaviorSet = behaviorSets.data?.find((bs) => bs.id === board.behaviorSetId);
+  const behaviorSet = behaviorSets.data?.find(
+    (bs) => bs.id === board.behaviorSetId,
+  );
 
   const behaviorSetOptions = behaviorSets.data?.map((bs) => ({
     label: bs.name,
@@ -48,7 +50,11 @@ export function BehaviorsSidebar({ board, onBehaviorClick }: BehaviorsSidebar) {
 
       <div className={classes.behaviorsList} role="list">
         {behaviorSet?.behaviors.map((b) => (
-          <BehaviorItem key={b.id} behavior={b} onClick={() => onBehaviorClick(b.id)} />
+          <BehaviorItem
+            key={b.id}
+            behavior={b}
+            onClick={() => onBehaviorClick(b.id)}
+          />
         ))}
       </div>
     </section>

@@ -10,6 +10,8 @@ export function useRecords({ receiverId, isMine = false }: UseRecordsProps) {
   return useQuery({
     queryKey: ['records', receiverId],
     queryFn: () =>
-      isMine ? RecordApi.fetchMyRecords(receiverId) : RecordApi.fetchRecords(receiverId),
+      isMine
+        ? RecordApi.fetchMyRecords(receiverId)
+        : RecordApi.fetchRecords(receiverId),
   });
 }

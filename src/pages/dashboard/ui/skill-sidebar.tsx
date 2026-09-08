@@ -33,7 +33,9 @@ export function SkillSidebar({
   if (!records.data) return null;
 
   return (
-    <div className={clsx(classes.sidebar, roundedBorder && classes.roundedBorder)}>
+    <div
+      className={clsx(classes.sidebar, roundedBorder && classes.roundedBorder)}
+    >
       <div className={classes.header}>
         <h1 className={classes.title}>{skill.name}</h1>
         <X className={classes.close} onClick={onClose} />

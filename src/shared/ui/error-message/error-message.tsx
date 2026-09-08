@@ -7,5 +7,7 @@ interface ErrorMessageProps {
 }
 
 export function ErrorMessage({ children, className }: ErrorMessageProps) {
-  return <span className={clsx(className, classes.errorMessage)}>{children}</span>;
+  return (
+    <span className={clsx(className, classes.errorMessage)}>{children}</span>
+  );
 }

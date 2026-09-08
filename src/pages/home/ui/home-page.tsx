@@ -2,7 +2,7 @@ import classes from './home-page.module.css';
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { ChartBarBig, ClipboardCheck } from 'lucide-react';
-import { Typography } from '@/shared/ui/typography';
+import { Typography } from '@/shared/ui/typography/typography';
 import { CreateBoardDialog } from '@/features/board';
 import { ActionCard } from './action-card';
 import { useSelector } from 'react-redux';
@@ -39,7 +39,9 @@ export function HomePage() {
         </Link>
       </div>
 
-      {showBoardDialog && <CreateBoardDialog onClose={() => setShowBoardDialog(false)} />}
+      {showBoardDialog && (
+        <CreateBoardDialog onClose={() => setShowBoardDialog(false)} />
+      )}
     </div>
   );
 }

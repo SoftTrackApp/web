@@ -1,5 +1,5 @@
+import { client } from '@/shared/api/client';
 import type { User } from '../model/types';
-import { client } from '@/shared/api';
 
 export const UserApi = {
   fetchUsers: async () => {

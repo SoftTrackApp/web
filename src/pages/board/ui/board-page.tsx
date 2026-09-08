@@ -37,7 +37,9 @@ export function BoardPage() {
     if (e.operation.target?.id !== 'droppable') return;
     if (!selectedUser || !board) return;
 
-    const behaviorId = Number(e.operation.source?.id.toString().replace('behavior-', ''));
+    const behaviorId = Number(
+      e.operation.source?.id.toString().replace('behavior-', ''),
+    );
     addBehaviorToUser(behaviorId);
   };
 
@@ -61,7 +63,10 @@ export function BoardPage() {
   }
 
   return (
-    <DragDropProvider onDragStart={() => setDragging(true)} onDragEnd={onDragEnd}>
+    <DragDropProvider
+      onDragStart={() => setDragging(true)}
+      onDragEnd={onDragEnd}
+    >
       <div className={classes.wrapper}>
         <title>Доска оценивания - SoftTrack</title>
 

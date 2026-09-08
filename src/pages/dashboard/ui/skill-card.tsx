@@ -15,7 +15,9 @@ export function SkillCard({
   selected = false,
   onClick,
 }: SkillCardProps) {
-  const barWidth = maxRates ? Math.floor((skill.totalCount / maxRates) * 100) : 0;
+  const barWidth = maxRates
+    ? Math.floor((skill.totalCount / maxRates) * 100)
+    : 0;
 
   return (
     <div

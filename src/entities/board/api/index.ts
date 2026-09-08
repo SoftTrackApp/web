@@ -1,4 +1,4 @@
-import { client } from '@/shared/api';
+import { client } from '@/shared/api/client';
 import type { RecordCreate } from '../model/types';
 
 export const BoardApi = {

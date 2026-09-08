@@ -1,9 +1,9 @@
 import classes from './user-details.module.css';
 import clsx from 'clsx';
 import { useDroppable } from '@dnd-kit/react';
-import { Typography } from '@/shared/ui/typography';
+import { Typography } from '@/shared/ui/typography/typography';
 import { ClipboardCheck } from 'lucide-react';
-import { Tag } from '@/shared/ui/tag';
+import { Tag } from '@/shared/ui/tag/tag';
 import type { Board } from '@/entities/board';
 import type { User } from '@/entities/user';
 

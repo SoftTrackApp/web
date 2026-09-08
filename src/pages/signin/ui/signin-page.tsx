@@ -1,16 +1,16 @@
 import classes from './signin-page.module.css';
-import { Typography } from '@/shared/ui/typography';
-import { Label } from '@/shared/ui/label';
-import { Input } from '@/shared/ui/input';
-import { Button } from '@/shared/ui/button';
+import { Typography } from '@/shared/ui/typography/typography';
+import { Label } from '@/shared/ui/label/label';
+import { Input } from '@/shared/ui/input/input';
+import { Button } from '@/shared/ui/button/button';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import { ErrorMessage } from '@/shared/ui/error-message';
+import { ErrorMessage } from '@/shared/ui/error-message/error-message';
 import { useDispatch, useSelector } from 'react-redux';
 import { SessionFeature } from '@/features/session';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Eye, EyeOff } from 'lucide-react';
-import { mapErrorCode } from '@/shared/api';
+import { mapErrorCode } from '@/shared/api/errors';
 
 type Inputs = {
   login: string;
@@ -80,7 +80,9 @@ export function SigninPage() {
             error={errors.password !== undefined}
             {...register('password', { required: 'Введите пароль' })}
           />
-          {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+          {errors.password && (
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
+          )}
         </div>
 
         <Button type="submit" size="lg">

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import classes from './users-sidebar.module.css';
 import { ChevronLeft } from 'lucide-react';
-import { Input } from '@/shared/ui/input';
+import { Input } from '@/shared/ui/input/input';
 import { useMemo, useState } from 'react';
 import { Link } from 'react-router';
 import type { User } from '@/entities/user';
@@ -13,7 +13,11 @@ interface UsersSidebarProps {
   onUserSelect: (u: User) => void;
 }
 
-export function UsersSidebar({ board, selectedUser, onUserSelect }: UsersSidebarProps) {
+export function UsersSidebar({
+  board,
+  selectedUser,
+  onUserSelect,
+}: UsersSidebarProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const users = useMemo(() => {
@@ -21,7 +25,9 @@ export function UsersSidebar({ board, selectedUser, onUserSelect }: UsersSidebar
 
     const q = searchQuery.trim().toLowerCase();
 
-    return board.users.filter((u) => `${u.fName} ${u.lName}`.toLowerCase().includes(q));
+    return board.users.filter((u) =>
+      `${u.fName} ${u.lName}`.toLowerCase().includes(q),
+    );
   }, [board, searchQuery]);
 
   return (

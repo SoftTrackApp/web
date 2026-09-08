@@ -1,5 +1,5 @@
 import classes from './empty-user-state.module.css';
-import { Typography } from '@/shared/ui/typography';
+import { Typography } from '@/shared/ui/typography/typography';
 import { UserSearch } from 'lucide-react';
 
 export function EmptyUserState() {

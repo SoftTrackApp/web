@@ -19,7 +19,10 @@ export function Input({
 
   return (
     <div className={clsx(className, classes.wrapper, error && classes.error)}>
-      <input className={clsx(classes.input, hasIcon && classes.withIcon)} {...props} />
+      <input
+        className={clsx(classes.input, hasIcon && classes.withIcon)}
+        {...props}
+      />
 
       {icon ? (
         <button type="button" className={classes.icon} onClick={onIconClick}>

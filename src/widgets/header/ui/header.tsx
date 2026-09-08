@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { NavLink } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { SessionFeature } from '@/features/session';
-import { Button } from '@/shared/ui/button';
+import { Button } from '@/shared/ui/button/button';
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
 import { BoardEntity } from '@/entities/board';
@@ -97,7 +97,11 @@ export function Header() {
       )}
 
       <div className={classes.headerButton}>
-        <Button variant="icon" size="sm" onClick={() => setOpen((open) => !open)}>
+        <Button
+          variant="icon"
+          size="sm"
+          onClick={() => setOpen((open) => !open)}
+        >
           <Menu />
         </Button>
       </div>

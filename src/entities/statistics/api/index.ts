@@ -1,4 +1,4 @@
-import { client } from '@/shared/api';
+import { client } from '@/shared/api/client';
 import type { SoftskillStat, BehaviorStat } from '../model/types';
 
 export const StatisticsApi = {
