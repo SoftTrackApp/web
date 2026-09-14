@@ -32,12 +32,6 @@ export function SigninPage() {
   const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
-    if (session.error) {
-      setError('root', { message: session.error.message });
-    }
-  }, [session.error, setError]);
-
-  useEffect(() => {
     if (session.data) {
       navigate('/');
     }
@@ -51,7 +45,12 @@ export function SigninPage() {
 
       <form
         className={classes.form}
-        onSubmit={handleSubmit((data) => login.mutate(data))}
+        onSubmit={handleSubmit((data) =>
+          login.mutate(data, {
+            onError: () =>
+              setError('root', { message: session.error?.message }),
+          }),
+        )}
       >
         <div className={classes.field}>
           <Label htmlFor="login">Логин</Label>

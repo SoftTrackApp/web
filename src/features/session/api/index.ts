@@ -3,11 +3,15 @@ import type { Credentials, Session } from '../model/types';
 import { isAxiosError } from 'axios';
 
 export const SessionApi = {
-  fetchSession: async (): Promise<Session> => {
+  fetchSession: async (): Promise<Session | null> => {
     try {
       const res = await client.get<Session>('/session');
       return res.data;
-    } catch {
+    } catch (err) {
+      if (isAxiosError(err) && err.response?.status === 403) {
+        return null;
+      }
+
       throw new Error('UNKNOWN_ERROR');
     }
   },
