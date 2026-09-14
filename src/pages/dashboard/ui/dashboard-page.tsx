@@ -2,7 +2,7 @@ import classes from './dashboard-page.module.css';
 import { Typography } from '@/shared/ui/typography/typography';
 import { Select } from '@/shared/ui/select/select';
 import { useSelector } from 'react-redux';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { EmptyUserState } from './empty-user-state';
 import { useSoftskillStats, type SoftskillStat } from '@/entities/statistics';
 import { SkillCard } from './skill-card';
@@ -64,6 +64,10 @@ export function DashboardPage() {
 
     return copy;
   }, [sort, softskillStats.data]);
+
+  useEffect(() => {
+    setSkill(null);
+  }, [user]);
 
   if (!session.data) return null;
 
