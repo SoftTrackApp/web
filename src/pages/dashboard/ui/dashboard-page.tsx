@@ -1,14 +1,13 @@
 import classes from './dashboard-page.module.css';
 import { Typography } from '@/shared/ui/typography/typography';
 import { Select } from '@/shared/ui/select/select';
-import { useSelector } from 'react-redux';
 import { useEffect, useMemo, useState } from 'react';
 import { EmptyUserState } from './empty-user-state';
 import { useSoftskillStats, type SoftskillStat } from '@/entities/statistics';
 import { SkillCard } from './skill-card';
 import { SkillSidebar } from './skill-sidebar';
-import { SessionFeature } from '@/features/session';
 import { useUsers } from '@/entities/user';
+import { useSession } from '@/features/session';
 
 type Option = {
   label: string;
@@ -22,7 +21,7 @@ const sortOptions: Option[] = [
 ];
 
 export function DashboardPage() {
-  const session = useSelector(SessionFeature.selectors.selectSession);
+  const session = useSession();
 
   const [user, setUser] = useState<Option | null>(
     session.data && session.data.role === 'студент'

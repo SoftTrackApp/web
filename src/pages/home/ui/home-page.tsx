@@ -5,13 +5,12 @@ import { ChartBarBig, ClipboardCheck } from 'lucide-react';
 import { Typography } from '@/shared/ui/typography/typography';
 import { CreateBoardDialog } from '@/features/board';
 import { ActionCard } from './action-card';
-import { useSelector } from 'react-redux';
-import { SessionFeature } from '@/features/session';
+import { useSession } from '@/features/session';
 
 export function HomePage() {
   const [showBoardDialog, setShowBoardDialog] = useState(false);
 
-  const session = useSelector(SessionFeature.selectors.selectSession);
+  const session = useSession();
 
   return (
     <div className={classes.wrapper}>

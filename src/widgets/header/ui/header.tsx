@@ -2,11 +2,11 @@ import classes from './header.module.css';
 import clsx from 'clsx';
 import { NavLink } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
-import { SessionFeature } from '@/features/session';
 import { Button } from '@/shared/ui/button/button';
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
 import { BoardEntity } from '@/entities/board';
+import { useSession, useLogout } from '@/features/session';
 
 const navLinks = [
   { name: 'Главная', to: '/', restricted: false },
@@ -18,7 +18,9 @@ export function Header() {
   const dispatch = useDispatch();
 
   const board = useSelector(BoardEntity.selectors.selectBoard);
-  const session = useSelector(SessionFeature.selectors.selectSession);
+  const session = useSession();
+
+  const logout = useLogout();
 
   const [open, setOpen] = useState(false);
 
@@ -51,10 +53,7 @@ export function Header() {
             </Button>
           )}
 
-          <button
-            onClick={() => dispatch(SessionFeature.actions.logOut())}
-            className={classes.logOut}
-          >
+          <button onClick={() => logout.mutate()} className={classes.logOut}>
             Выйти
           </button>
         </div>
@@ -78,7 +77,7 @@ export function Header() {
           )}
 
           <button
-            onClick={() => dispatch(SessionFeature.actions.logOut())}
+            onClick={() => logout.mutate()}
             className={classes.mobileLogOut}
           >
             Выйти

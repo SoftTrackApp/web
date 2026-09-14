@@ -3,14 +3,13 @@ import { Typography } from '@/shared/ui/typography/typography';
 import { Label } from '@/shared/ui/label/label';
 import { Input } from '@/shared/ui/input/input';
 import { Button } from '@/shared/ui/button/button';
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@/shared/ui/error-message/error-message';
-import { useDispatch, useSelector } from 'react-redux';
-import { SessionFeature } from '@/features/session';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { Eye, EyeOff } from 'lucide-react';
 import { mapErrorCode } from '@/shared/api/errors';
+import { useLogin, useSession } from '@/features/session';
 
 type Inputs = {
   login: string;
@@ -27,18 +26,14 @@ export function SigninPage() {
 
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-  const session = useSelector(SessionFeature.selectors.selectSession);
+  const session = useSession();
+  const login = useLogin();
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    dispatch(SessionFeature.actions.logIn(data));
-  };
-
   useEffect(() => {
     if (session.error) {
-      setError('root', { message: session.error });
+      setError('root', { message: session.error.message });
     }
   }, [session.error, setError]);
 
@@ -54,7 +49,10 @@ export function SigninPage() {
         Вход в систему
       </Typography>
 
-      <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className={classes.form}
+        onSubmit={handleSubmit((data) => login.mutate(data))}
+      >
         <div className={classes.field}>
           <Label htmlFor="login">Логин</Label>
           <Input

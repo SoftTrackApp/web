@@ -7,12 +7,6 @@ export interface Session {
   role: Role;
 }
 
-export interface SessionState {
-  isLoading: boolean;
-  data: Session | null;
-  error: string | null;
-}
-
 export interface Credentials {
   login: string;
   password: string;

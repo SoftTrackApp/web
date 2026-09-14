@@ -1,16 +1,9 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router';
-import { SessionFeature } from '@/features/session';
 import { Header } from '@/widgets/header';
+import { useSession } from '@/features/session';
 
 export function MainLayout() {
-  const dispatch = useDispatch();
-  const session = useSelector(SessionFeature.selectors.selectSession);
-
-  useEffect(() => {
-    dispatch(SessionFeature.actions.fetchSession());
-  }, [dispatch]);
+  const session = useSession();
 
   if (session.isLoading) return null;
   if (!session.data) return <Navigate to="/signin" replace />;
