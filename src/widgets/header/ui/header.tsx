@@ -82,21 +82,22 @@ export function Header() {
           >
             Выйти
           </button>
-
-          {board && (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => dispatch(BoardEntity.actions.clearBoard())}
-            >
-              Сохранить доску
-            </Button>
-          )}
         </nav>
       )}
 
-      <div className={classes.headerButton}>
+      <div className={classes.headerMobile}>
+        {board && !open && (
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => dispatch(BoardEntity.actions.clearBoard())}
+          >
+            Сохранить доску
+          </Button>
+        )}
+
         <Button
+          className={classes.menuButton}
           variant="icon"
           size="sm"
           onClick={() => setOpen((open) => !open)}

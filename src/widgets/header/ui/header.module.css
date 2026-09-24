@@ -26,7 +26,7 @@
   cursor: pointer;
 }
 
-.headerButton {
+.headerMobile {
   display: none;
 }
 
@@ -37,6 +37,10 @@
 .buttons {
   display: flex;
   gap: 16px;
+  margin-left: auto;
+}
+
+.menuButton {
   margin-left: auto;
 }
 
@@ -51,9 +55,10 @@
     display: none;
   }
 
-  .headerButton {
-    display: block;
-    margin-left: auto;
+  .headerMobile {
+    display: flex;
+    align-items: center;
+    width: 100%;
   }
 
   .mobileNav {
