@@ -33,3 +33,9 @@
 .suggestionTitle {
   max-width: 440px;
 }
+
+@media screen and (max-width: 768px) {
+  .middleSection {
+    grid-column: span 1;
+  }
+}
