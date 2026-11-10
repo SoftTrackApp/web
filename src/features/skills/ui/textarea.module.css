@@ -1,0 +1,36 @@
+.wrapper {
+  position: relative;
+  border-radius: 8px;
+  transition: outline-color 200ms;
+  outline: 1px solid var(--gray-300);
+}
+
+.wrapper:focus-within {
+  outline: 2px solid var(--purple-500);
+}
+
+.error {
+  outline: 1px solid var(--red-300);
+}
+.error:focus-within {
+  outline-width: 2px;
+}
+
+.textarea {
+  padding: 10px 14px;
+  font-size: 16px;
+  font-family: inherit;
+  border-radius: 8px;
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: vertical;
+}
+
+.errorIcon {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  color: var(--red-500);
+  pointer-events: none;
+}

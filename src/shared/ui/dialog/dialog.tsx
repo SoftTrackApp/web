@@ -16,7 +16,7 @@ export function Dialog({ children, onClose }: DialogProps) {
     };
 
     document.addEventListener('keydown', onKeyDown);
-    return () => document.removeEventListener('keypress', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
   }, [onClose]);
 
   return createPortal(

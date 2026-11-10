@@ -1,0 +1,221 @@
+.wrapper {
+  min-height: calc(100vh - 50px);
+  padding: 31px 121px 60px;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #000;
+}
+
+.loading,
+.error {
+  display: block;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #515151;
+}
+
+.error {
+  color: #d32f2f;
+}
+
+.tabsRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 37px;
+}
+
+.tab {
+  width: 180px;
+  height: 32px;
+  border: none;
+  border-radius: 0;
+  background: #d9d9d9;
+  color: #515151;
+  font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.tabActive {
+  background: #2c2c2c;
+  color: #fff;
+}
+
+.tabPlus {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #d9d9d9;
+  color: #515151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.library {
+  width: 180px;
+  height: 32px;
+  margin-left: auto;
+  border: 1px solid #b9b9b9;
+  background: #fff;
+  color: #515151;
+  font-size: 12px;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+.libraryDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #b9b9b9;
+  flex-shrink: 0;
+}
+
+.cardsRow {
+  display: flex;
+  gap: 26px;
+  margin-top: 33px;
+}
+
+.card {
+  width: 280px;
+  height: 200px;
+  border: 2px solid #b9b9b9;
+  background: #fff;
+  box-sizing: border-box;
+  padding: 20px 11px 0 11px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardName {
+  font-size: 15px;
+  color: #2c2c2c;
+}
+
+.addSkill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 0 12px;
+  border: none;
+  background: none;
+  padding: 0;
+  color: #515151;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.row {
+  width: 100%;
+  height: 49px;
+  border: 1px solid #b9b9b9;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px 0 18px;
+}
+
+.rowName {
+  font-size: 12px;
+  color: #2c2c2c;
+}
+
+.dotsWrap {
+  position: relative;
+}
+
+.dots {
+  border: none;
+  background: none;
+  padding: 4px;
+  color: #b9b9b9;
+  display: flex;
+  cursor: pointer;
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 10;
+  min-width: 140px;
+  background: #fff;
+  border: 1px solid #b9b9b9;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu button {
+  border: none;
+  background: none;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 13px;
+  font-family: inherit;
+  color: #2c2c2c;
+  cursor: pointer;
+}
+
+.menu button:hover {
+  background: #d9d9d9;
+}
+
+.menuDanger {
+  color: #d32f2f;
+}
+
+.createCard {
+  width: 280px;
+  height: 200px;
+  border: 2px solid #b9b9b9;
+  background: #fff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.createCard:hover {
+  background: #fafafa;
+}
+
+.createCardText {
+  font-size: 15px;
+  color: #b9b9b9;
+}
+
+.createCardPlus {
+  color: #d9d9d9;
+}
