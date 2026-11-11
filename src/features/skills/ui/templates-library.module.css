@@ -1,0 +1,123 @@
+.body {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.searchWrap {
+  position: relative;
+  margin-bottom: 6px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b9b9b9;
+}
+
+.search {
+  width: 100%;
+  height: 32px;
+  box-sizing: border-box;
+  border: 1px solid #b9b9b9;
+  padding: 0 10px 0 30px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #2c2c2c;
+}
+
+.search:focus {
+  outline: none;
+  border-color: #2c2c2c;
+}
+
+.item,
+.itemActive {
+  border: 1px solid #b9b9b9;
+  background: #fff;
+  padding: 10px 12px;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.itemActive {
+  border: 2px solid #2c2c2c;
+  padding: 9px 11px;
+}
+
+.itemName {
+  font-size: 14px;
+  color: #2c2c2c;
+}
+
+.itemCount {
+  font-size: 11px;
+  color: #767676;
+}
+
+.empty {
+  font-size: 13px;
+  color: #767676;
+  padding: 10px 0;
+}
+
+.preview {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.previewName {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c2c2c;
+}
+
+.previewDescription {
+  font-size: 13px;
+  color: #767676;
+}
+
+.previewTitle {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c2c2c;
+}
+
+.previewRows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.previewRow {
+  border: 1px solid #b9b9b9;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #2c2c2c;
+}
+
+.addButton {
+  margin-top: 10px;
+}
