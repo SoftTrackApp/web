@@ -1,12 +1,11 @@
-import { saga } from './model/sagas';
-import { selectors } from './model/selectors';
-import { actions, reducer } from './model/slice';
+import { useAddUserBehavior, useBoard, useClearBoard, useSetBehaviorSetId, useSetBoard } from './model/hooks';
 
 export const BoardEntity = {
-  reducer,
-  actions,
-  saga,
-  selectors,
+  useBoard,
+  useSetBoard,
+  useSetBehaviorSetId,
+  useAddUserBehavior,
+  useClearBoard,
 };
 
-export type { Board } from './model/types';
+export type { Board, AddBehaviorAction, RecordCreate } from './model/types';

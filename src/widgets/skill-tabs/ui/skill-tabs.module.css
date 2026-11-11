@@ -1,0 +1,59 @@
+.tabsRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 37px;
+}
+
+.tab {
+  width: 180px;
+  height: 32px;
+  border: none;
+  border-radius: 0;
+  background: #d9d9d9;
+  color: #515151;
+  font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.tabActive {
+  background: #2c2c2c;
+  color: #fff;
+}
+
+.tabPlus {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #d9d9d9;
+  color: #515151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.library {
+  width: 180px;
+  height: 32px;
+  margin-left: auto;
+  border: 1px solid #b9b9b9;
+  background: #fff;
+  color: #515151;
+  font-size: 12px;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+.libraryDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #b9b9b9;
+  flex-shrink: 0;
+}
