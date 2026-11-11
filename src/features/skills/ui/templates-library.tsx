@@ -1,9 +1,7 @@
 import classes from './templates-library.module.css';
-import { X, Plus, Search } from 'lucide-react';
+import { X, Search, Pencil, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { Dialog } from '@/shared/ui/dialog/dialog';
-import { Typography } from '@/shared/ui/typography/typography';
-import { Button } from '@/shared/ui/button/button';
 
 const templates = [
   {
@@ -34,22 +32,32 @@ export function TemplatesLibrary({ onClose }: TemplatesLibraryProps) {
   const [selected, setSelected] = useState(templates[0]);
   const [added, setAdded] = useState<number[]>([]);
   const [query, setQuery] = useState('');
+  const [newSkill, setNewSkill] = useState('');
 
   const filtered = templates.filter((t) =>
     t.name.toLowerCase().includes(query.toLowerCase()),
   );
 
   return (
-    <Dialog onClose={onClose}>
-      <div className={classes.top}>
-        <Typography variant="h3">Библиотека шаблонов</Typography>
-        <Button variant="icon" size="sm" onClick={onClose}>
-          <X />
-        </Button>
-      </div>
+    <Dialog onClose={onClose} wide>
+      <div className={classes.window}>
+        <div className={classes.left}>
+          <div className={classes.header}>
+            <span className={classes.title}>Библиотека шаблонов</span>
+          </div>
 
-      <div className={classes.body}>
-        <div className={classes.list}>
+          <div className={classes.createBlock}>
+            <span className={classes.createLabel}>
+              Создать свой софт скилл
+            </span>
+            <input
+              className={classes.createInput}
+              placeholder="Название софт скилла"
+              value={newSkill}
+              onChange={(e) => setNewSkill(e.target.value)}
+            />
+          </div>
+
           <div className={classes.searchWrap}>
             <Search size={14} className={classes.searchIcon} />
             <input
@@ -60,48 +68,65 @@ export function TemplatesLibrary({ onClose }: TemplatesLibraryProps) {
             />
           </div>
 
-          {filtered.map((template) => (
-            <button
-              key={template.id}
-              className={
-                selected.id === template.id ? classes.itemActive : classes.item
-              }
-              onClick={() => setSelected(template)}
-            >
-              <span className={classes.itemName}>{template.name}</span>
-              <span className={classes.itemCount}>
-                {template.behaviors.length} поведений
-              </span>
-            </button>
-          ))}
-
-          {filtered.length === 0 && (
-            <span className={classes.empty}>Ничего не найдено</span>
-          )}
-        </div>
-
-        <div className={classes.preview}>
-          <span className={classes.previewName}>{selected.name}</span>
-          <span className={classes.previewDescription}>
-            {selected.description}
-          </span>
-
-          <span className={classes.previewTitle}>Состав:</span>
-          <div className={classes.previewRows}>
-            {selected.behaviors.map((behavior) => (
-              <div key={behavior} className={classes.previewRow}>
-                {behavior}
-              </div>
+          <div className={classes.list}>
+            {filtered.map((template) => (
+              <button
+                key={template.id}
+                className={
+                  selected.id === template.id ? classes.itemActive : classes.item
+                }
+                onClick={() => setSelected(template)}
+              >
+                <span className={classes.itemName}>{template.name}</span>
+                <span className={classes.itemCount}>
+                  {template.behaviors.length} поведений
+                </span>
+                <span className={classes.itemActions}>
+                  <Pencil size={14} className={classes.itemIcon} />
+                  <Trash2 size={14} className={classes.itemIcon} />
+                </span>
+              </button>
             ))}
+
+            {filtered.length === 0 && (
+              <span className={classes.empty}>Ничего не найдено</span>
+            )}
           </div>
 
-          <Button
-            className={classes.addButton}
-            onClick={() => setAdded((prev) => [...prev, selected.id])}
-          >
-            <Plus size={14} />
-            {added.includes(selected.id) ? 'Добавлено' : 'Добавить в доску'}
-          </Button>
+          <button className={classes.darkButton}>Создать свой софт скилл</button>
+        </div>
+
+        <div className={classes.right}>
+          <div className={classes.header}>
+            <span className={classes.title}>Состав софт скилла</span>
+            <button className={classes.closeButton} onClick={onClose}>
+              <X size={16} />
+            </button>
+          </div>
+
+          <div className={classes.preview}>
+            <span className={classes.previewName}>{selected.name}</span>
+            <span className={classes.previewDescription}>
+              {selected.description}
+            </span>
+
+            <div className={classes.previewRows}>
+              {selected.behaviors.map((behavior) => (
+                <div key={behavior} className={classes.previewRow}>
+                  {behavior}
+                </div>
+              ))}
+              <button className={classes.addRow}>+ Добавить поведение</button>
+            </div>
+
+            <button
+              className={classes.addButton}
+              onClick={() => setAdded((prev) => [...prev, selected.id])}
+            >
+              <Pencil size={12} />
+              {added.includes(selected.id) ? 'Добавлено' : 'Добавить в доску'}
+            </button>
+          </div>
         </div>
       </div>
     </Dialog>
