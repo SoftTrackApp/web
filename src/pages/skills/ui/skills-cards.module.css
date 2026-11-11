@@ -1,0 +1,33 @@
+.cardsRow {
+  display: flex;
+  gap: 26px;
+  margin-top: 33px;
+}
+
+.createCard {
+  width: 280px;
+  height: 200px;
+  border: 2px solid #b9b9b9;
+  background: #fff;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.createCard:hover {
+  background: #fafafa;
+}
+
+.createCardText {
+  font-size: 15px;
+  color: #b9b9b9;
+}
+
+.createCardPlus {
+  color: #d9d9d9;
+}

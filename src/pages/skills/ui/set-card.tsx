@@ -1,7 +1,7 @@
 import classes from './set-card.module.css';
 import clsx from 'clsx';
 import { Plus } from 'lucide-react';
-import { DotsMenu } from '@/widgets/dots-menu';
+import { DotsMenu } from './dots-menu';
 import type { Behavior } from '@/entities/behavior-set';
 
 interface SetCardProps {

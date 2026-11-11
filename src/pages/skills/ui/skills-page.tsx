@@ -6,8 +6,8 @@ import {
   CreateBehaviorDialog,
   TemplatesLibrary,
 } from '@/features/skills';
-import { SkillTabs } from '@/widgets/skill-tabs';
-import { SkillsCards } from '@/widgets/skills-cards';
+import { SkillTabs } from './skill-tabs';
+import { SkillsCards } from './skills-cards';
 
 const tabs = ['Базовый набор', 'Русский язык', 'Русский язык', 'Русский язык'];
 
