@@ -5,9 +5,10 @@ import { useEffect } from 'react';
 interface DialogProps {
   children?: React.ReactNode;
   onClose?: () => void;
+  wide?: boolean;
 }
 
-export function Dialog({ children, onClose }: DialogProps) {
+export function Dialog({ children, onClose, wide }: DialogProps) {
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -21,7 +22,10 @@ export function Dialog({ children, onClose }: DialogProps) {
 
   return createPortal(
     <div className={classes.wrapper} onClick={onClose}>
-      <div className={classes.dialog} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={`${classes.dialog} ${wide ? classes.dialogWide : ''}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         {children}
       </div>
     </div>,

@@ -2,7 +2,6 @@ import classes from './board-page.module.css';
 import { BoardEntity } from '@/entities/board';
 import { CreateBoardDialog } from '@/features/board';
 import { useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { UsersSidebar } from './users-sidebar';
 import { EmptyUserState } from './empty-user-state';
@@ -13,9 +12,11 @@ import { useBehaviorSets } from '@/entities/behavior-set';
 
 export function BoardPage() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
-  const board = useSelector(BoardEntity.selectors.selectBoard);
+  const { data } = BoardEntity.useBoard();
+  const addUserBehavior = BoardEntity.useAddUserBehavior();
+
+  const board = data?.currentBoard ?? null;
 
   const behaviorSets = useBehaviorSets();
 
@@ -49,13 +50,11 @@ export function BoardPage() {
     const behavior = behaviors.find((b) => b.id === behaviorId);
     if (!behavior) return;
 
-    dispatch(
-      BoardEntity.actions.addUserBehavior({
-        title: board.name,
-        userId: selectedUser.id,
-        behavior: behavior,
-      }),
-    );
+    addUserBehavior.mutate({
+      title: board.name,
+      userId: selectedUser.id,
+      behavior: behavior,
+    });
   };
 
   if (!board) {

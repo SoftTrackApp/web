@@ -36,7 +36,6 @@ export function CreateBehaviorDialog({
   });
 
   const onSubmit: SubmitHandler<Inputs> = () => {
-    alert('Пока не работает');
     onClose?.();
   };
 

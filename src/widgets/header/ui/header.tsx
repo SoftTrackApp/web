@@ -1,7 +1,6 @@
 import classes from './header.module.css';
 import clsx from 'clsx';
 import { NavLink } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
 import { Button } from '@/shared/ui/button/button';
 import { Menu } from 'lucide-react';
 import { useState } from 'react';
@@ -16,9 +15,9 @@ const navLinks = [
 ];
 
 export function Header() {
-  const dispatch = useDispatch();
+  const { data: board } = BoardEntity.useBoard();
+  const clearBoard = BoardEntity.useClearBoard();
 
-  const board = useSelector(BoardEntity.selectors.selectBoard);
   const session = useSession();
 
   const logout = useLogout();
@@ -44,12 +43,8 @@ export function Header() {
         )}
 
         <div className={classes.buttons}>
-          {board && (
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => dispatch(BoardEntity.actions.clearBoard())}
-            >
+          {board?.currentBoard && (
+            <Button variant="secondary" size="sm" onClick={() => clearBoard.mutate()}>
               Сохранить доску
             </Button>
           )}
@@ -87,11 +82,11 @@ export function Header() {
       )}
 
       <div className={classes.headerMobile}>
-        {board && !open && (
+        {board?.currentBoard && !open && (
           <Button
             variant="secondary"
             size="sm"
-            onClick={() => dispatch(BoardEntity.actions.clearBoard())}
+            onClick={() => clearBoard.mutate()}
           >
             Сохранить доску
           </Button>

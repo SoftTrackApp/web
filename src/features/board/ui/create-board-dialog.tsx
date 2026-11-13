@@ -8,7 +8,6 @@ import { Label } from '@/shared/ui/label/label';
 import { Input } from '@/shared/ui/input/input';
 import { ErrorMessage } from '@/shared/ui/error-message/error-message';
 import { Select } from '@/shared/ui/select/select';
-import { useDispatch } from 'react-redux';
 import { BoardEntity } from '@/entities/board';
 import { useBehaviorSets } from '@/entities/behavior-set';
 import { useAcademicGroups, useOtherGroups } from '@/entities/group';
@@ -41,7 +40,7 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const dispatch = useDispatch();
+  const setBoard = BoardEntity.useSetBoard();
 
   const behaviorSets = useBehaviorSets();
 
@@ -49,15 +48,13 @@ export function CreateBoardDialog({ onClose }: CreateBoardDialogProps) {
   const otherGroups = useOtherGroups();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    dispatch(
-      BoardEntity.actions.setBoard({
-        name: data.name,
-        users: [],
-        groupName1: data.group.value,
-        groupName2: data.subgroup?.value,
-        behaviorSetId: data.behaviorSet.value,
-      }),
-    );
+    setBoard.mutate({
+      name: data.name,
+      users: [],
+      groupName1: data.group.value,
+      groupName2: data.subgroup?.value,
+      behaviorSetId: data.behaviorSet.value,
+    });
   };
 
   if (behaviorSets.isPending) return null;

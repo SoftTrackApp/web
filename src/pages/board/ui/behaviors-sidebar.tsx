@@ -1,7 +1,6 @@
 import classes from './behaviors-sidebar.module.css';
 import { Select } from '@/shared/ui/select/select';
 import { BoardEntity, type Board } from '@/entities/board';
-import { useDispatch } from 'react-redux';
 import { BehaviorItem } from './behavior-item';
 import { useBehaviorSets } from '@/entities/behavior-set';
 
@@ -16,7 +15,7 @@ type Option = {
 };
 
 export function BehaviorsSidebar({ board, onBehaviorClick }: BehaviorsSidebar) {
-  const dispatch = useDispatch();
+  const setBehaviorSetId = BoardEntity.useSetBehaviorSetId();
 
   const behaviorSets = useBehaviorSets();
 
@@ -37,7 +36,7 @@ export function BehaviorsSidebar({ board, onBehaviorClick }: BehaviorsSidebar) {
   );
 
   const onBehaviorSetChange = (newBehaviorSet: Option) => {
-    dispatch(BoardEntity.actions.setBehaviorSetId(newBehaviorSet.value));
+    setBehaviorSetId.mutate(newBehaviorSet.value);
   };
 
   return (

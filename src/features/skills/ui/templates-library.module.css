@@ -1,25 +1,79 @@
-.body {
+.window {
   display: flex;
-  gap: 20px;
-  margin-top: 20px;
+  width: 894px;
+  height: 518px;
 }
 
-.top {
+.left {
+  width: 447px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #d9d9d9;
+  padding: 24px 20px;
+  box-sizing: border-box;
+}
+
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px;
+  box-sizing: border-box;
+}
+
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 16px;
 }
 
-.list {
-  width: 200px;
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c2c2c;
+}
+
+.closeButton {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #515151;
+  padding: 4px;
+  display: flex;
+}
+
+.createBlock {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.createLabel {
+  font-size: 13px;
+  color: #2c2c2c;
+}
+
+.createInput {
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  border: 1px solid #d9d9d9;
+  padding: 0 12px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #2c2c2c;
+}
+
+.createInput:focus {
+  outline: none;
+  border-color: #2c2c2c;
 }
 
 .searchWrap {
   position: relative;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 
 .searchIcon {
@@ -32,9 +86,9 @@
 
 .search {
   width: 100%;
-  height: 32px;
+  height: 36px;
   box-sizing: border-box;
-  border: 1px solid #b9b9b9;
+  border: 1px solid #d9d9d9;
   padding: 0 10px 0 30px;
   font-size: 13px;
   font-family: inherit;
@@ -46,22 +100,33 @@
   border-color: #2c2c2c;
 }
 
+.list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
 .item,
 .itemActive {
-  border: 1px solid #b9b9b9;
+  width: 100%;
+  height: 47px;
+  border: 1px solid #d9d9d9;
   background: #fff;
-  padding: 10px 12px;
+  padding: 0 12px;
   text-align: left;
   font-family: inherit;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  box-sizing: border-box;
 }
 
 .itemActive {
   border: 2px solid #2c2c2c;
-  padding: 9px 11px;
 }
 
 .itemName {
@@ -71,17 +136,42 @@
 
 .itemCount {
   font-size: 11px;
-  color: #767676;
+  color: #515151;
+}
+
+.itemActions {
+  display: flex;
+  gap: 6px;
+}
+
+.itemIcon {
+  color: #b9b9b9;
 }
 
 .empty {
   font-size: 13px;
-  color: #767676;
+  color: #515151;
   padding: 10px 0;
 }
 
+.darkButton {
+  width: 100%;
+  height: 40px;
+  margin-top: 12px;
+  border: none;
+  background: #2c2c2c;
+  color: #fff;
+  font-size: 13px;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.darkButton:hover {
+  background: #515151;
+}
+
 .preview {
-  width: 320px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -95,14 +185,7 @@
 
 .previewDescription {
   font-size: 13px;
-  color: #767676;
-}
-
-.previewTitle {
-  margin-top: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #2c2c2c;
+  color: #515151;
 }
 
 .previewRows {
@@ -112,12 +195,53 @@
 }
 
 .previewRow {
-  border: 1px solid #b9b9b9;
-  padding: 10px 14px;
+  width: 100%;
+  height: 39px;
+  border: 1px solid #d9d9d9;
+  padding: 0 14px;
   font-size: 13px;
   color: #2c2c2c;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.addRow {
+  width: 100%;
+  height: 39px;
+  border: 1px dashed #b9b9b9;
+  background: none;
+  padding: 0 14px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #b9b9b9;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
 .addButton {
-  margin-top: 10px;
+  min-width: 111px;
+  height: 23px;
+  margin-top: auto;
+  border: 1px solid #d9d9d9;
+  background: none;
+  padding: 0 8px;
+  font-size: 10px;
+  font-family: inherit;
+  color: #b9b9b9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  align-self: flex-end;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.addButton:hover {
+  border-color: #2c2c2c;
+  color: #2c2c2c;
 }

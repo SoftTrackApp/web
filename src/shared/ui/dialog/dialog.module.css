@@ -19,3 +19,8 @@
   width: 100%;
   max-width: 630px;
 }
+
+.dialogWide {
+  padding: 0;
+  max-width: 894px;
+}
