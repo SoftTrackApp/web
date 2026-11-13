@@ -34,7 +34,6 @@ export function CreateSkillDialog({
   });
 
   const onSubmit: SubmitHandler<Inputs> = () => {
-    alert('Пока не работает');
     onClose?.();
   };
 

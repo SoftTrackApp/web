@@ -15,7 +15,7 @@ export function SkillsPage() {
   const behaviorSets = useBehaviorSets();
 
   const [selectedTab, setSelectedTab] = useState(0);
-  const [dialog, setDialog] = useState<'skill' | 'behavior' | 'library' | null>(null);
+  const [dialog, setDialog] = useState<'skill' | 'behavior' | 'library' | null>('library');
   const [editing, setEditing] = useState<{ name: string; description?: string } | null>(null);
 
   const sets = behaviorSets.data ?? [];
