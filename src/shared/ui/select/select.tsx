@@ -1,6 +1,8 @@
 import ReactSelect, { type Props } from 'react-select';
 
-export function Select(props: Props) {
+export function Select<Option = unknown, IsMulti extends boolean = false>(
+  props: Props<Option, IsMulti>,
+) {
   return (
     <ReactSelect
       styles={{

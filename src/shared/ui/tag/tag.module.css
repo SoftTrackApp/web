@@ -1,7 +1,32 @@
 .tag {
-  background-color: var(--purple-50);
-  color: var(--purple-600);
+  display: inline-flex;
+  align-items: center;
   padding: 4px 10px;
   font-size: 12px;
   border-radius: 48px;
+}
+
+.purple {
+  background-color: var(--purple-50);
+  color: var(--purple-600);
+}
+
+.red {
+  background-color: #fee4e2;
+  color: #b32318;
+}
+
+.yellow {
+  background-color: #feefc7;
+  color: #b54708;
+}
+
+.green {
+  background-color: #d1fadf;
+  color: #027948;
+}
+
+.grey {
+  background-color: var(--gray-100);
+  color: var(--gray-700);
 }

@@ -5,6 +5,7 @@ import { HomePage } from '@/pages/home';
 import { BoardPage } from '@/pages/board';
 import { DashboardPage } from '@/pages/dashboard';
 import { SkillsPage } from '@/pages/skills';
+import { ParticipantsPage } from '@/pages/participants';
 
 export const router = createBrowserRouter([
   { path: 'signin', element: <SigninPage /> },
@@ -15,6 +16,7 @@ export const router = createBrowserRouter([
       { path: '', element: <HomePage /> },
       { path: 'board', element: <BoardPage /> },
       { path: 'skills', element: <SkillsPage /> },
+      { path: 'participants', element: <ParticipantsPage /> },
       { path: 'dashboard', element: <DashboardPage /> },
     ],
   },

@@ -1,0 +1,80 @@
+.toolbar {
+  display: flex;
+  align-items: center;
+  height: 44px;
+}
+
+.title {
+  font-size: 18px;
+  color: var(--gray-500);
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-left: auto;
+  margin-right: 8px;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 304px;
+  height: 44px;
+  padding: 0 8px;
+  border-top: 1px solid var(--gray-300);
+  border-bottom: 1px solid var(--gray-300);
+}
+
+.searchIcon {
+  flex-shrink: 0;
+  color: var(--gray-500);
+}
+
+.searchInput {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--gray-700);
+}
+
+.searchInput::placeholder {
+  color: var(--gray-500);
+}
+
+.selectRoot {
+  display: block;
+  width: 204px;
+}
+
+.selectRoot:last-child {
+  width: 194px;
+}
+
+.select {
+  justify-content: space-between;
+  width: 100%;
+  height: 44px;
+  padding: 0 4px;
+  border-top: 1px solid var(--gray-300);
+  border-bottom: 1px solid var(--gray-300);
+  background: var(--white);
+  font-size: 15px;
+  color: var(--gray-600);
+}
+
+.selectValue {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.chevron {
+  flex-shrink: 0;
+  color: var(--gray-500);
+}
