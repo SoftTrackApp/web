@@ -1,13 +1,12 @@
 import classes from './participants-page.module.css';
 import { useState } from 'react';
-import { Plus } from 'lucide-react';
 import {
   useGroupOptions,
   useParticipants,
   type Participant,
   type ParticipantRole,
 } from '@/entities/participant';
-import { AddParticipantDialog } from '@/features/participants';
+import { AddGroupDialog, AddParticipantDialog } from '@/features/participants';
 import { GroupsSidebar } from './groups-sidebar';
 import { ParticipantsToolbar } from './participants-toolbar';
 import { ParticipantsTable } from './participants-table';
@@ -24,6 +23,7 @@ export function ParticipantsPage() {
   const [group, setGroup] = useState<string | null>(null);
   const [editing, setEditing] = useState<Participant | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [groupDialogOpen, setGroupDialogOpen] = useState(false);
 
   const groups = groupOptions.data ?? [];
   const list = participants.data ?? [];
@@ -47,11 +47,6 @@ export function ParticipantsPage() {
     return true;
   });
 
-  const openAdd = () => {
-    setEditing(null);
-    setDialogOpen(true);
-  };
-
   const openEdit = (participant: Participant) => {
     setEditing(participant);
     setDialogOpen(true);
@@ -60,6 +55,14 @@ export function ParticipantsPage() {
   const closeDialog = () => {
     setEditing(null);
     setDialogOpen(false);
+  };
+
+  const openGroupDialog = () => {
+    setGroupDialogOpen(true);
+  };
+
+  const closeGroupDialog = () => {
+    setGroupDialogOpen(false);
   };
 
   return (
@@ -75,6 +78,7 @@ export function ParticipantsPage() {
           search={sidebarSearch}
           onSearchChange={setSidebarSearch}
           onSelect={setSelectedGroup}
+          onAddGroup={openGroupDialog}
         />
 
         <div className={classes.content}>
@@ -103,11 +107,6 @@ export function ParticipantsPage() {
           {participants.isError && (
             <span className={classes.error}>Не удалось загрузить участников</span>
           )}
-
-          <button className={classes.addUser} onClick={openAdd}>
-            <Plus size={16} />
-            Добавить пользователя
-          </button>
         </div>
       </div>
 
@@ -117,6 +116,16 @@ export function ParticipantsPage() {
           initialName={editing?.firstName}
           initialSurname={editing?.lastName}
           initialRole={editing?.role}
+        />
+      )}
+
+      {groupDialogOpen && (
+        <AddGroupDialog
+          onClose={closeGroupDialog}
+          onSubmit={(name) => {
+            setGroupDialogOpen(false);
+            window.alert(`Добавлена группа: ${name}`);
+          }}
         />
       )}
     </div>
