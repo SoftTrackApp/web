@@ -46,6 +46,7 @@
   font-weight: 500;
   color: var(--gray-700);
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .library .libraryButton svg {

@@ -7,6 +7,7 @@ import type { SkillTemplate } from '../model/types';
 
 interface TemplatesLibraryProps {
   templates: SkillTemplate[];
+  onChange: (list: SkillTemplate[]) => void;
   trigger: ReactNode;
   triggerClassName?: string;
   align?: 'start' | 'end';
@@ -15,13 +16,13 @@ interface TemplatesLibraryProps {
 
 export function TemplatesLibrary({
   templates,
+  onChange,
   trigger,
   triggerClassName,
   align = 'start',
   onSelect,
 }: TemplatesLibraryProps) {
   const [open, setOpen] = useState(false);
-  const [list, setList] = useState(templates);
   const [query, setQuery] = useState('');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draftName, setDraftName] = useState('');
@@ -40,7 +41,7 @@ export function TemplatesLibrary({
     return () => document.removeEventListener('mousedown', onMouseDown);
   }, [open]);
 
-  const visible = list.filter((item) =>
+  const visible = templates.filter((item) =>
     item.name.toLowerCase().includes(query.trim().toLowerCase()),
   );
 
@@ -48,9 +49,7 @@ export function TemplatesLibrary({
     const name = draftName.trim();
 
     if (editingId && name) {
-      setList((state) =>
-        state.map((item) => (item.id === editingId ? { ...item, name } : item)),
-      );
+      onChange(templates.map((item) => (item.id === editingId ? { ...item, name } : item)));
     }
 
     setEditingId(null);
@@ -58,7 +57,7 @@ export function TemplatesLibrary({
 
   const create = () => {
     const template = { id: crypto.randomUUID(), name: 'Новый soft skill' };
-    setList((state) => [...state, template]);
+    onChange([...templates, template]);
     setEditingId(template.id);
     setDraftName(template.name);
   };
@@ -74,7 +73,9 @@ export function TemplatesLibrary({
       </button>
 
       {open && (
-        <div className={clsx(classes.panel, align === 'end' ? classes.panelEnd : classes.panelStart)}>
+        <div
+          className={clsx(classes.panel, align === 'end' ? classes.panelEnd : classes.panelStart)}
+        >
           <div className={classes.head}>
             <span className={classes.title}>Шаблоны soft skills</span>
             <button type="button" className={classes.create} onClick={create}>
@@ -135,7 +136,7 @@ export function TemplatesLibrary({
                     {
                       label: 'Удалить',
                       onSelect: () =>
-                        setList((state) => state.filter((item) => item.id !== template.id)),
+                        onChange(templates.filter((item) => item.id !== template.id)),
                     },
                   ]}
                 />

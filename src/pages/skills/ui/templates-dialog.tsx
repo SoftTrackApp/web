@@ -7,32 +7,23 @@ import type { BehaviorTemplate, SkillTemplate } from '../model/types';
 
 interface TemplatesDialogProps {
   templates: BehaviorTemplate[];
+  onTemplatesChange: (list: BehaviorTemplate[]) => void;
   skillTemplates: SkillTemplate[];
-  initialTemplateId?: string;
-  initialName?: string;
-  initialSkills?: string[];
-  initialEditing?: boolean;
   onSubmit: (values: { name: string; skills: string[] }) => void;
   onClose: () => void;
 }
 
 export function TemplatesDialog({
   templates,
+  onTemplatesChange,
   skillTemplates,
-  initialTemplateId,
-  initialName,
-  initialSkills,
-  initialEditing,
   onSubmit,
   onClose,
 }: TemplatesDialogProps) {
-  const [list, setList] = useState(templates);
-  const [selectedId, setSelectedId] = useState<string | null>(
-    initialTemplateId ?? (initialName ? null : templates[0]?.id) ?? null,
-  );
-  const [editing, setEditing] = useState(initialEditing ?? false);
-  const [name, setName] = useState(initialName ?? templates[0]?.name ?? '');
-  const [skills, setSkills] = useState<string[]>(initialSkills ?? templates[0]?.skills ?? []);
+  const [selectedId, setSelectedId] = useState<string | null>(templates[0]?.id ?? null);
+  const [name, setName] = useState(templates[0]?.name ?? '');
+  const [skills, setSkills] = useState<string[]>(templates[0]?.skills ?? []);
+  const [editing, setEditing] = useState(false);
   const [query, setQuery] = useState('');
 
   useEffect(() => {
@@ -50,9 +41,14 @@ export function TemplatesDialog({
     setSkills(template.skills);
   };
 
+  const editTemplate = (template: BehaviorTemplate) => {
+    select(template);
+    setEditing(true);
+  };
+
   const removeTemplate = (id: string) => {
-    const next = list.filter((item) => item.id !== id);
-    setList(next);
+    const next = templates.filter((item) => item.id !== id);
+    onTemplatesChange(next);
 
     if (selectedId === id && next[0]) {
       select(next[0]);
@@ -61,7 +57,7 @@ export function TemplatesDialog({
 
   const createTemplate = () => {
     const template = { id: crypto.randomUUID(), name: 'Новый шаблон', skills: [] };
-    setList((state) => [...state, template]);
+    onTemplatesChange([...templates, template]);
     setSelectedId(template.id);
     setName(template.name);
     setSkills([]);
@@ -75,7 +71,21 @@ export function TemplatesDialog({
     setSkills((state) => [...state, next ? next.name : 'Новый soft skill']);
   };
 
-  const visible = list.filter((item) =>
+  const submit = () => {
+    if (editing) {
+      onTemplatesChange(
+        templates.map((item) =>
+          item.id === selectedId ? { ...item, name, skills } : item,
+        ),
+      );
+      setEditing(false);
+      return;
+    }
+
+    onSubmit({ name, skills });
+  };
+
+  const visible = templates.filter((item) =>
     item.name.toLowerCase().includes(query.trim().toLowerCase()),
   );
 
@@ -121,7 +131,16 @@ export function TemplatesDialog({
 
                 <DotsMenu
                   className={classes.dots}
-                  items={[{ label: 'Удалить', onSelect: () => removeTemplate(template.id) }]}
+                  items={[
+                    {
+                      label: 'Отредактировать',
+                      onSelect: () => editTemplate(template),
+                    },
+                    {
+                      label: 'Удалить',
+                      onSelect: () => removeTemplate(template.id),
+                    },
+                  ]}
                 />
               </div>
             ))}
@@ -168,11 +187,7 @@ export function TemplatesDialog({
             </button>
           )}
 
-          <button
-            type="button"
-            className={classes.submit}
-            onClick={() => onSubmit({ name, skills })}
-          >
+          <button type="button" className={classes.submit} onClick={submit}>
             {editing ? (
               'Сохранить изменения'
             ) : (

@@ -79,6 +79,17 @@
   white-space: nowrap;
 }
 
+.skillInput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: #3f3e40;
+}
+
 .dots {
   color: #a3a1a6;
 }

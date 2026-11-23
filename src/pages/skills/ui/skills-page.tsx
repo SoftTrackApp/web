@@ -2,12 +2,18 @@ import classes from './skills-page.module.css';
 import { useState } from 'react';
 import { Plus } from 'lucide-react';
 import { BehaviorCard } from './behavior-card';
+import { BehaviorEditor } from './behavior-editor';
 import { LibraryIcon } from './library-icon';
 import { SkillTabs } from './skill-tabs';
 import { TemplatesDialog } from './templates-dialog';
-import { TemplatesLibrary } from './templates-library';
 import { useBehaviorTemplates, useSkillSets, useSkillTemplates } from '../model/hooks';
-import type { Behavior, Skill, SkillSet } from '../model/types';
+import type {
+  Behavior,
+  BehaviorTemplate,
+  Skill,
+  SkillSet,
+  SkillTemplate,
+} from '../model/types';
 
 const toSkills = (names: string[]): Skill[] =>
   names.map((name, index) => ({ id: `${name}-${index}`, name }));
@@ -18,10 +24,16 @@ export function SkillsPage() {
   const behaviorTemplates = useBehaviorTemplates();
 
   const [sets, setSets] = useState<SkillSet[] | null>(null);
+  const [skillTemplateList, setSkillTemplateList] = useState<SkillTemplate[] | null>(null);
+  const [behaviorTemplateList, setBehaviorTemplateList] = useState<BehaviorTemplate[] | null>(
+    null,
+  );
   const [activeId, setActiveId] = useState(skillSets.data[0]?.id ?? '');
   const [editingId, setEditingId] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
+  const templates = skillTemplateList ?? skillTemplates.data;
+  const library = behaviorTemplateList ?? behaviorTemplates.data;
   const list = sets ?? skillSets.data;
   const activeSet = list.find((set) => set.id === activeId) ?? list[0];
   const editing = activeSet?.behaviors.find((behavior) => behavior.id === editingId);
@@ -57,20 +69,24 @@ export function SkillsPage() {
 
   const openBehavior = (id: string) => {
     setEditingId(id);
-    setDialogOpen(true);
   };
 
-  const submitDialog = ({ name, skills }: { name: string; skills: string[] }) => {
-    if (editing) {
-      updateBehaviors(
-        activeSet ? activeSet.behaviors.map((behavior) => (behavior.id === editing.id ? { ...behavior, skills: toSkills(skills) } : behavior)) : [],
-      );
-    } else {
-      updateBehaviors([
-        ...(activeSet?.behaviors ?? []),
-        { id: crypto.randomUUID(), name, skills: toSkills(skills) },
-      ]);
-    }
+  const submitBehavior = ({ skills }: { name: string; skills: string[] }) => {
+    if (!editing) return;
+
+    updateBehaviors(
+      activeSet?.behaviors.map((behavior) =>
+        behavior.id === editing.id ? { ...behavior, skills: toSkills(skills) } : behavior,
+      ) ?? [],
+    );
+    setEditingId(null);
+  };
+
+  const addFromLibrary = ({ name, skills }: { name: string; skills: string[] }) => {
+    updateBehaviors([
+      ...(activeSet?.behaviors ?? []),
+      { id: crypto.randomUUID(), name, skills: toSkills(skills) },
+    ]);
 
     setDialogOpen(false);
   };
@@ -91,17 +107,10 @@ export function SkillsPage() {
         />
 
         <div className={classes.library}>
-          <TemplatesLibrary
-            align="end"
-            templates={skillTemplates.data}
-            triggerClassName={classes.libraryButton}
-            trigger={
-              <>
-                <LibraryIcon />
-                Библиотека шаблонов
-              </>
-            }
-          />
+          <button type="button" className={classes.libraryButton} onClick={openTemplates}>
+            <LibraryIcon />
+            Библиотека шаблонов
+          </button>
         </div>
       </div>
 
@@ -110,9 +119,12 @@ export function SkillsPage() {
           <BehaviorCard
             key={behavior.id}
             behavior={behavior}
-            templates={skillTemplates.data}
+            templates={templates}
+            onTemplatesChange={setSkillTemplateList}
             onEdit={() => openBehavior(behavior.id)}
-            onRemove={() => updateBehaviors(activeSet.behaviors.filter((item) => item.id !== behavior.id))}
+            onRemove={() =>
+              updateBehaviors(activeSet.behaviors.filter((item) => item.id !== behavior.id))
+            }
             onSkillsChange={(skills) =>
               updateBehaviors(
                 activeSet.behaviors.map((item) =>
@@ -133,13 +145,21 @@ export function SkillsPage() {
 
       {dialogOpen && (
         <TemplatesDialog
-          templates={behaviorTemplates.data}
-          skillTemplates={skillTemplates.data}
-          initialName={editing?.name}
-          initialSkills={editing?.skills.map((skill) => skill.name)}
-          initialEditing={editingId !== null}
-          onSubmit={submitDialog}
+          templates={library}
+          onTemplatesChange={setBehaviorTemplateList}
+          skillTemplates={templates}
+          onSubmit={addFromLibrary}
           onClose={() => setDialogOpen(false)}
+        />
+      )}
+
+      {editing && (
+        <BehaviorEditor
+          behavior={editing}
+          templates={templates}
+          onTemplatesChange={setSkillTemplateList}
+          onSubmit={submitBehavior}
+          onClose={() => setEditingId(null)}
         />
       )}
     </div>
