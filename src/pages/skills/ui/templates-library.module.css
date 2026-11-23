@@ -1,0 +1,152 @@
+.root {
+  position: relative;
+  display: flex;
+}
+
+.trigger {
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 8px);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  width: 373px;
+  padding: 23px;
+  border: 1px solid var(--gray-100);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 2px 8px hsla(0, 0%, 0%, 0.1);
+}
+
+.panelStart {
+  left: 0;
+}
+
+.panelEnd {
+  right: 0;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 28px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--gray-900);
+}
+
+.create {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--gray-600);
+  cursor: pointer;
+}
+
+.create:hover {
+  color: var(--gray-700);
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  margin-top: 12px;
+  padding: 0 13px;
+  border: 1px solid var(--gray-300);
+  border-radius: 8px;
+  color: var(--gray-500);
+  cursor: text;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--gray-800);
+}
+
+.input::placeholder {
+  color: var(--gray-500);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 44px;
+  padding: 0 15px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+}
+
+.dots {
+  color: var(--gray-400);
+}
+
+.row:hover .dots {
+  color: var(--gray-700);
+}
+
+.rowName {
+  flex: 1;
+  overflow: hidden;
+  padding: 0;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--gray-800);
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+button.rowName {
+  cursor: pointer;
+}
+
+button.rowName:hover {
+  color: var(--gray-900);
+}
+
+.rowInput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--gray-800);
+}

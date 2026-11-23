@@ -1,59 +1,71 @@
-.tabsRow {
+.tabs {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 8px;
-  margin-top: 37px;
 }
 
 .tab {
-  width: 180px;
-  height: 32px;
-  border: none;
-  border-radius: 0;
-  background: #d9d9d9;
-  color: #515151;
-  font-size: 16px;
-  font-family: inherit;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 111.6px;
+  height: 40px;
+  padding: 0 9px;
+  border: 1px solid var(--gray-200);
+  border-radius: 6px 6px 0 0;
+  background: var(--white);
 }
 
 .tabActive {
-  background: #2c2c2c;
-  color: #fff;
+  border-color: var(--purple-200);
+  background: var(--purple-50);
 }
 
-.tabPlus {
-  width: 32px;
-  height: 32px;
+.tabName {
+  overflow: hidden;
+  padding: 0;
   border: none;
-  background: #d9d9d9;
-  color: #515151;
+  background: none;
+  font-family: inherit;
+  font-size: 12px;
+  color: #3f3e40;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.tabActive .tabName {
+  color: var(--purple-700);
+}
+
+.dots {
+  color: #a3a1a6;
+}
+
+.tabActive .dots {
+  color: var(--purple-200);
+}
+
+.tab:hover .dots,
+.tabActive .dots:hover {
+  color: var(--gray-700);
+}
+
+.add {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 36px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--gray-200);
+  border-radius: 6px 6px 0 0;
+  background: var(--white);
+  color: var(--gray-600);
   cursor: pointer;
 }
 
-.library {
-  width: 180px;
-  height: 32px;
-  margin-left: auto;
-  border: 1px solid #b9b9b9;
-  background: #fff;
-  color: #515151;
-  font-size: 12px;
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 12px;
-  cursor: pointer;
-}
-
-.libraryDot {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #b9b9b9;
-  flex-shrink: 0;
+.add:hover {
+  color: var(--gray-700);
 }

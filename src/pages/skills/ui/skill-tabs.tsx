@@ -1,41 +1,38 @@
 import classes from './skill-tabs.module.css';
 import clsx from 'clsx';
 import { Plus } from 'lucide-react';
+import { DotsMenu } from './dots-menu';
+import type { SkillSet } from '../model/types';
 
 interface SkillTabsProps {
-  tabs: string[];
-  selectedTab: number;
-  onSelect: (index: number) => void;
-  onAddTab: () => void;
-  onOpenLibrary: () => void;
+  sets: SkillSet[];
+  activeId: string;
+  onSelect: (id: string) => void;
+  onCreate: () => void;
+  onDelete: (id: string) => void;
 }
 
-export function SkillTabs({
-  tabs,
-  selectedTab,
-  onSelect,
-  onAddTab,
-  onOpenLibrary,
-}: SkillTabsProps) {
+export function SkillTabs({ sets, activeId, onSelect, onCreate, onDelete }: SkillTabsProps) {
   return (
-    <div className={classes.tabsRow}>
-      {tabs.map((tab, index) => (
-        <button
-          key={`${tab}-${index}`}
-          className={clsx(classes.tab, index === selectedTab && classes.tabActive)}
-          onClick={() => onSelect(index)}
+    <div className={classes.tabs}>
+      {sets.map((set) => (
+        <div
+          key={set.id}
+          className={clsx(classes.tab, set.id === activeId && classes.tabActive)}
         >
-          {tab}
-        </button>
+          <button type="button" className={classes.tabName} onClick={() => onSelect(set.id)}>
+            {set.name}
+          </button>
+
+          <DotsMenu
+            className={classes.dots}
+            items={[{ label: 'Удалить', onSelect: () => onDelete(set.id) }]}
+          />
+        </div>
       ))}
 
-      <button className={classes.tabPlus} onClick={onAddTab} aria-label="Добавить навык">
-        <Plus size={18} />
-      </button>
-
-      <button className={classes.library} onClick={onOpenLibrary}>
-        <span className={classes.libraryDot} />
-        Библиотека шаблонов
+      <button type="button" className={classes.add} onClick={onCreate} aria-label="Добавить набор">
+        <Plus size={16} />
       </button>
     </div>
   );
