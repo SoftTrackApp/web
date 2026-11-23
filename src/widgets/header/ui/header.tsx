@@ -9,6 +9,7 @@ import { useSession, useLogout } from '@/features/session';
 
 const navLinks = [
   { name: 'Главная', to: '/', restricted: false },
+  { name: 'Навыки', to: '/skills', restricted: true },
   { name: 'Участники', to: '/participants', restricted: true },
   { name: 'Доска оценивания', to: '/board', restricted: true },
   { name: 'Статистика', to: '/dashboard', restricted: false },
